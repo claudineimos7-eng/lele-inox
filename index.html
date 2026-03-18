@@ -781,7 +781,10 @@ function initFirebase() {
         setTimeout(initFirebase, 300);
     }
 }
-setTimeout(initFirebase, 500);
+// Mostrar produtos base IMEDIATAMENTE
+renderGrids();
+// Depois tenta conectar Firebase
+setTimeout(initFirebase, 800);
 
 function formatPrice(v) {
     return 'R$ ' + parseFloat(v).toFixed(2).replace('.', ',');
