@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lelê Inox Semi Joias</title>
+    <style>
+        :root {
+            --dourado: #C9A84C;
+            --dourado-claro: #E8D5A3;
+            --preto: #1a1a1a;
+            --branco: #ffffff;
+            --cinza: #f5f5f5;
+            --cinza-escuro: #666;
+            --sombra: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { overflow-x: hidden; max-width: 100%; }
+        body { font-family: 'Segoe UI', sans-serif; color: var(--preto); background: var(--branco); }
+
+        /* TOP BAR */
+        .top-bar { background: var(--preto); color: var(--dourado); padding: 9px 0; font-size: 0.82rem; letter-spacing: 1px; overflow: hidden; white-space: nowrap; width: 100%; max-width: 100vw; }
+        .top-bar-track { display: inline-flex; animation: marquee-rtl 28s linear infinite; }
+        .top-bar-track span { padding: 0 48px; }
+        @keyframes marquee-rtl {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* HEADER */
+        header { display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 1px solid #eee; position: sticky; top: 0; background: white; z-index: 100; box-shadow: var(--sombra); height: 72px; gap: 10px; width: 100%; max-width: 100vw; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+        .logo-circle { width: 44px; height: 44px; background: var(--preto); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--dourado); flex-shrink: 0; }
+        .logo-circle span { color: var(--dourado); font-size: 1.1rem; font-weight: bold; }
+        .logo-text h1 { font-size: 1.15rem; color: var(--dourado); font-weight: 700; white-space: nowrap; line-height: 1.2; }
+        .logo-text p { font-size: 0.68rem; color: var(--cinza-escuro); }
+
+        /* NAV - flat horizontal like photo 2 */
+        nav { display: flex; align-items: center; gap: 2px; flex: 1; justify-content: center; flex-wrap: nowrap; overflow: hidden; min-width: 0; }
+        nav a { text-decoration: none; color: var(--preto); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; transition: color 0.2s; padding: 5px 6px; border-radius: 5px; white-space: nowrap; flex-shrink: 0; }
+        nav a:hover { color: var(--dourado); background: #fdf8ef; }
+        nav .nav-sep { color: #ddd; font-size: 0.7rem; padding: 0 2px; user-select: none; flex-shrink: 0; }
+
+        .header-icons { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+        .cart-btn { position: relative; background: none; border: none; cursor: pointer; font-size: 1.3rem; }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: var(--dourado); color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+
+        /* HERO */
+        .hero { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%); padding: 90px 30px; text-align: center; position: relative; overflow: hidden; min-height: 380px; display: flex; align-items: center; justify-content: center; }
+        .hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, var(--dourado) 0%, transparent 70%); opacity: 0.2; }
+        .hero::after { content: ''; position: absolute; bottom: -30%; left: -5%; width: 400px; height: 400px; background: radial-gradient(circle, var(--dourado-claro) 0%, transparent 70%); opacity: 0.1; }
+        .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+        .hero h1 { font-size: 3rem; margin-bottom: 15px; color: #fff; line-height: 1.2; }
+        .hero h1 span { color: var(--dourado); }
+        .hero p { font-size: 1.1rem; color: rgba(255,255,255,0.8); margin-bottom: 30px; }
+        .btn-primary { display: inline-block; background: var(--dourado); color: white; padding: 14px 36px; border-radius: 30px; text-decoration: none; font-weight: 600; letter-spacing: 1px; transition: all 0.3s; border: none; cursor: pointer; font-size: 0.95rem; }
+        .btn-primary:hover { background: #a8893d; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,168,76,0.4); }
+
+        /* TABS */
+        .section-title { text-align: center; margin-bottom: 30px; }
+        .section-title h2 { font-size: 2rem; color: var(--preto); }
+        .section-title h2 span { color: var(--dourado); }
+        .section-title p { color: var(--cinza-escuro); margin-top: 8px; }
+        .category-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+        .tab-btn { padding: 10px 24px; border: 2px solid var(--dourado); background: none; color: var(--preto); border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.3s; }
+        .tab-btn:hover, .tab-btn.active { background: var(--dourado); color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* GRID */
+        #produtos { padding: 50px 20px 20px; }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 200px);
+            gap: 18px;
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 0 40px;
+            justify-content: center;
+        }
+        .product-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: var(--sombra); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; width: 200px; }
+        @media(max-width: 1090px) { .products-grid { grid-template-columns: repeat(4, 200px); max-width: 864px; } }
+        @media(max-width: 870px)  { .products-grid { grid-template-columns: repeat(3, 200px); max-width: 648px; } }
+        @media(max-width: 660px)  { .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 100%; } .product-card { width: 100%; } }
+        .product-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+        .product-img { width: 100%; aspect-ratio: 1; object-fit: cover; background: #f9f9f9; display: block; }
+        .product-img-placeholder { width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, #f5f5f5, #e8e8e8); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #ccc; }
+        .product-info { padding: 15px; }
+        .product-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+        .badge-new { background: #e8f5e9; color: #2e7d32; }
+        .badge-promo { background: #fff3e0; color: #e65100; }
+        .product-name { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; color: var(--preto); }
+        .product-price { display: flex; align-items: center; gap: 8px; }
+        .price-current { font-size: 1.1rem; font-weight: 700; color: var(--dourado); }
+        .price-old { font-size: 0.85rem; color: #999; text-decoration: line-through; }
+        .product-colors { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+        .color-dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #ddd; cursor: pointer; transition: transform 0.2s; }
+        .color-dot:hover { transform: scale(1.3); }
+        .color-dot.multi { background: linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #c77dff); }
+        .add-cart-btn { width: 100%; margin-top: 12px; padding: 10px; background: var(--preto); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.3s; }
+        .add-cart-btn:hover { background: var(--dourado); }
+
+        /* CART SIDEBAR */
+        .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; display: none; }
+        .cart-overlay.open { display: block; }
+        .cart-sidebar { position: fixed; right: 0; top: 0; height: 100vh; width: 380px; background: white; z-index: 201; transform: translateX(100%); transition: transform 0.3s; display: flex; flex-direction: column; }
+        .cart-sidebar.open { transform: translateX(0); }
+        .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .cart-header h3 { font-size: 1.2rem; }
+        .close-cart { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #666; }
+        .cart-items { flex: 1; overflow-y: auto; padding: 20px; }
+        .cart-empty { text-align: center; color: #999; padding: 40px 20px; }
+        .cart-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; background: #f5f5f5; }
+        .cart-item-info { flex: 1; }
+        .cart-item-name { font-size: 0.85rem; font-weight: 600; }
+        .cart-item-price { color: var(--dourado); font-weight: 700; margin-top: 4px; }
+        .cart-item-remove { background: none; border: none; color: #ff4444; cursor: pointer; font-size: 1.1rem; align-self: center; }
+        .cart-footer { padding: 20px; border-top: 1px solid #eee; }
+        .cart-total { display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; }
+        .whatsapp-btn { width: 100%; padding: 14px; background: #25D366; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.3s; }
+        .whatsapp-btn:hover { background: #128C7E; }
+
+        /* MODAL */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 300; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.open { display: flex; }
+        .modal { background: white; border-radius: 20px; max-width: 600px; width: 100%; overflow: hidden; position: relative; }
+        .modal img { width: 100%; max-height: 350px; object-fit: cover; }
+        .modal-body { padding: 25px; }
+        .modal-name { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+        .modal-price { font-size: 1.8rem; font-weight: 700; color: var(--dourado); margin-bottom: 15px; }
+        .modal-desc { color: #666; margin-bottom: 20px; line-height: 1.6; }
+        .modal-close { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.1rem; z-index: 1; }
+        .modal-add-btn { width: 100%; padding: 14px; background: var(--dourado); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: background 0.3s; }
+        .modal-add-btn:hover { background: #a8893d; }
+
+        /* WHATSAPP FLOAT */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; text-decoration: none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); z-index: 150; transition: transform 0.3s; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* FOOTER */
+        footer { background: var(--preto); color: rgba(255,255,255,0.7); text-align: center; padding: 30px; font-size: 0.85rem; }
+        footer span { color: var(--dourado); }
+
+        /* RESPONSIVE */
+        /* ===== MOBILE ===== */
+        .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; z-index: 200; flex-shrink: 0; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--preto); border-radius: 2px; transition: all 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: white; z-index: 190; flex-direction: column;
+            padding: 80px 0 30px; overflow-y: auto;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            display: block; padding: 14px 28px; color: var(--preto); font-size: 0.9rem;
+            font-weight: 700; text-decoration: none; text-transform: uppercase;
+            letter-spacing: 0.5px; border-bottom: 1px solid #f5f5f5; transition: background 0.2s;
+        }
+        .mobile-menu a:hover { background: #fdf8ef; color: var(--dourado); }
+        .mobile-menu .mob-section {
+            padding: 10px 28px 4px; font-size: 0.7rem; font-weight: 800;
+            color: var(--dourado); letter-spacing: 2px; text-transform: uppercase;
+            background: #f9f6ef; border-bottom: 1px solid #f0e8d0;
+        }
+
+        @media(max-width: 768px) {
+            header { padding: 10px 16px; height: 60px; }
+            nav { display: none !important; }
+            .hamburger { display: flex; }
+            .hero h1 { font-size: 2rem; }
+            .cart-sidebar { width: 100%; }
+            .logo-text h1 { font-size: 1rem; }
+            .logo-text p { display: none; }
+            /* Benefits banner mobile */
+            section[style*="background:#f9f6ef"] > div { grid-template-columns: 1fr !important; gap: 10px !important; padding: 0 16px !important; }
+        }
+
+        /* ===== ADMIN PANEL ===== */
+        #adminLoginOverlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9000;
+            display: none; align-items: center; justify-content: center;
+        }
+        #adminLoginOverlay.open { display: flex; }
+        .admin-login-box {
+            background: #fff; border-radius: 20px; padding: 40px; width: 360px;
+            text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .admin-login-box h2 { color: var(--dourado); font-size: 1.6rem; margin-bottom: 8px; }
+        .admin-login-box p { color: #666; font-size: 0.9rem; margin-bottom: 24px; }
+        .admin-login-box input {
+            width: 100%; padding: 12px 16px; border: 2px solid #eee; border-radius: 10px;
+            font-size: 1rem; margin-bottom: 12px; outline: none; transition: border 0.3s;
+        }
+        .admin-login-box input:focus { border-color: var(--dourado); }
+        .admin-login-btn {
+            width: 100%; padding: 13px; background: var(--preto); color: white; border: none;
+            border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.3s;
+        }
+        .admin-login-btn:hover { background: var(--dourado); }
+        .admin-login-err { color: #e53935; font-size: 0.85rem; margin-top: 10px; display: none; }
+        .admin-login-close { background: none; border: none; color: #999; cursor: pointer; font-size: 0.85rem; margin-top: 14px; }
+        #adminPanel {
+            position: fixed; inset: 0; background: #f5f5f5; z-index: 8000;
+            display: none; flex-direction: column; overflow: hidden;
+        }
+        #adminPanel.open { display: flex; }
+        .admin-topbar {
+            background: var(--preto); color: white; padding: 14px 30px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .admin-topbar h2 { color: var(--dourado); font-size: 1.2rem; }
+        .admin-topbar-actions { display: flex; gap: 10px; align-items: center; }
+        .admin-btn { padding: 8px 18px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.2s; }
+        .admin-btn-gold { background: var(--dourado); color: white; }
+        .admin-btn-gold:hover { background: #a8893d; }
+        .admin-btn-white { background: white; color: var(--preto); }
+        .admin-btn-white:hover { background: #eee; }
+        .admin-content { flex: 1; overflow-y: auto; padding: 30px; }
+        .admin-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; margin-bottom: 30px; }
+        .admin-stat-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); text-align: center; }
+        .admin-stat-card .stat-num { font-size: 2rem; font-weight: 700; color: var(--dourado); }
+        .admin-stat-card .stat-label { font-size: 0.8rem; color: #888; margin-top: 4px; }
+        .admin-section { background: white; border-radius: 16px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+        .admin-section-title { font-size: 1.1rem; font-weight: 700; color: var(--preto); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+        .admin-filters { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+        .admin-search { flex: 1; min-width: 200px; padding: 9px 14px; border: 2px solid #eee; border-radius: 8px; font-size: 0.9rem; outline: none; }
+        .admin-search:focus { border-color: var(--dourado); }
+        .admin-cat-filter { padding: 9px 14px; border: 2px solid #eee; border-radius: 8px; font-size: 0.9rem; background: white; cursor: pointer; outline: none; }
+        .admin-table { width: 100%; border-collapse: collapse; }
+        .admin-table th { text-align: left; padding: 10px 12px; background: #f9f6ef; font-size: 0.8rem; font-weight: 700; color: #888; text-transform: uppercase; }
+        .admin-table td { padding: 10px 12px; border-bottom: 1px solid #f5f5f5; font-size: 0.9rem; vertical-align: middle; }
+        .admin-table tr:hover td { background: #fffaf0; }
+        .admin-table img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }
+        .admin-inline-edit { border: 1px solid #ddd; border-radius: 6px; padding: 5px 8px; font-size: 0.88rem; width: 80px; text-align: right; }
+        .admin-inline-edit:focus { border-color: var(--dourado); outline: none; }
+        .admin-name-edit { border: 1px solid #ddd; border-radius: 6px; padding: 5px 8px; font-size: 0.88rem; width: 180px; }
+        .admin-name-edit:focus { border-color: var(--dourado); outline: none; }
+        .admin-img-edit { border: 1px solid #ddd; border-radius: 6px; padding: 5px 8px; font-size: 0.78rem; width: 200px; }
+        .admin-img-edit:focus { border-color: var(--dourado); outline: none; }
+        .badge-select { border: 1px solid #ddd; border-radius: 6px; padding: 5px 8px; font-size: 0.82rem; background: white; cursor: pointer; }
+        .admin-del-btn { background: #fff0f0; color: #e53935; border: 1px solid #ffcdd2; border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 0.82rem; }
+        .admin-del-btn:hover { background: #e53935; color: white; }
+        .admin-save-row { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 0.82rem; }
+        .admin-save-row:hover { background: #2e7d32; color: white; }
+        .admin-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .admin-form-group { display: flex; flex-direction: column; gap: 5px; }
+        .admin-form-group label { font-size: 0.8rem; font-weight: 600; color: #666; }
+        .admin-form-input { padding: 10px 14px; border: 2px solid #eee; border-radius: 8px; font-size: 0.9rem; outline: none; transition: border 0.3s; }
+        .admin-form-input:focus { border-color: var(--dourado); }
+        .admin-form-full { grid-column: 1 / -1; }
+        .admin-add-btn { grid-column: 1 / -1; padding: 13px; background: var(--dourado); color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background 0.3s; margin-top: 6px; }
+        .admin-add-btn:hover { background: #a8893d; }
+        .admin-preview-img { width: 80px; height: 80px; object-fit: cover; border-radius: 10px; border: 2px solid #eee; margin-top: 8px; display: none; }
+        .admin-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #1a1a1a; color: white; padding: 12px 24px; border-radius: 10px; font-size: 0.9rem; z-index: 9999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+        .admin-toast.show { opacity: 1; }
+        @media(max-width: 768px) { .admin-stats { grid-template-columns: repeat(2, 1fr); } .admin-form-grid { grid-template-columns: 1fr; } }
+
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-track">
+    <span>⭐ PEDIDO MÍNIMO R$ 200,00 &nbsp;|&nbsp; 🚚 FRETE GRÁTIS acima de R$ 300,00 &nbsp;|&nbsp; 💳 3X SEM JUROS no Cartão &nbsp;|&nbsp; 💰 PIX com 10% de desconto &nbsp;|&nbsp; 🛡️ Garantia Vitalícia no Metal &nbsp;|&nbsp; ✨ Aço Inoxidável Hipoalergênico</span>
+    <span>⭐ PEDIDO MÍNIMO R$ 200,00 &nbsp;|&nbsp; 🚚 FRETE GRÁTIS acima de R$ 300,00 &nbsp;|&nbsp; 💳 3X SEM JUROS no Cartão &nbsp;|&nbsp; 💰 PIX com 10% de desconto &nbsp;|&nbsp; 🛡️ Garantia Vitalícia no Metal &nbsp;|&nbsp; ✨ Aço Inoxidável Hipoalergênico</span>
+  </div>
+</div>
+
+<header>
+    <a href="#" class="logo">
+        <img src="data:image/jpeg;base64,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88888888888888sIekT82wAV88888888wkMMMYw88888888sLmwAvFM8888888wM0AIwEI4kY8888888IyEyyMc888888k0Qksxafo0MYI0888888YWDE8888888kgwIV1VtHKR0kYI088888s48U888888kkEK58s2s/OPVdWQY888888480888884YUYFTZHJ9pr3JjuocU8888888888888swcJz+jRvgdLTJKYkEo88888sMU88888UYgaxWadc988IMb/8AZBNPPPPPMPPPPPPAELUj4/qf+uH/ACg0yDBxTzzzzwzzzzzyii9P3ivzyaM1fw7RpfHxTzzzzzzzzzzyijtDcpa1sT/5XzEk617xTzzzzzzzzzzzwASlRuvbzw1l/j+aKozRTzzzzzzzzzzzxSQxZKinTy2p/rT/AE9YQc8888888888884M0xHBLn+5xNnFKPcQo8888888888888skUEaLNXJiONPJkYo0U8888888888888844cKy9VaykRsneWEk8888888888888888YYMsRuZE/wA1QMJIHPPPPPPPPFPPPPPPPPGHBEKHgTpFMJIHPPPPPPPPAFPPPPPPPPPG/XLOgEILEBPPPPPPPPPPDPPPPPPPPPPHEawUJP8AKqA7zzzzzzzzyjyTzzzzzzzzs0QUivjbwGbvzzzzzzzzzzzTzzzzzzzzxnJ/zzzwzhzzzzzzzzzzxzyazzzzzztRHXr3PzyeMJXfXPTzzzzyAbyivDzzzzZ2L+ISrzzmsj+El5Tzzzzz40LHnHTzz36+UR57rzq35Ub2VHfzzzz/AHwDpYu8/wDLHbHPPPPPLHHvPPPPPPPO8XokfPFiNgOePPPPPPPPPPPPPPPPPMue/Z3V/PLWxFXj6mc+vPPPPPPPPP8AS8H08eTtfzzzzwJzz8H94GF7zzzzyB4CH+EPzx5zzzz/xAA/EQACAQMCAwQHBQcEAQUAAAABAgMABBESIQUxURMiQWEQFDJAUnGRICOBscEGMEJicoKhFSRD0bIzNDVzov/aAAgBAgEBPwCpJEjRndgqgbk0jTz7gGKPw+Nv+qWGJTnSCep3P1NT3EFuheWQKvnVz+0LMStvHgfE3OpOITyH7yd28gaUvMdKISeg3NQ8Gu5MFogo6saj4EmBrl/BRScFsF5xl/6jSWVmns28Q/tFAADA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" alt="Lelê Inox" style="height:58px;width:58px;border-radius:10px;object-fit:cover;border:2px solid #C9A84C;">
+        <div class="logo-text"><h1>Lelê Inox</h1><p>Semi Joias</p></div>
+    </a>
+    <nav>
+        <a href="#produtos" onclick="showTab('todos',this)">Ver Todos</a>
+        <span class="nav-sep">|</span>
+        <a href="#produtos" onclick="showTab('brincos',this)">Brincos</a>
+        <a href="#produtos" onclick="showTab('colares',this)">Colares</a>
+        <a href="#produtos" onclick="showTab('pulseiras',this)">Pulseiras</a>
+        <span class="nav-sep">|</span>
+        <a href="#produtos" onclick="showTab('correntes',this)">Correntes Masc.</a>
+        <a href="#produtos" onclick="showTab('pulseiras_masc',this)">Pulseiras Masc.</a>
+        <span class="nav-sep">|</span>
+        <a href="#produtos" onclick="showTab('aneis',this)">Anéis</a>
+        <a href="#produtos" onclick="showTab('infantil',this)">Infantil</a>
+        <a href="#produtos" onclick="showTab('tornozeleiras',this)">Tornozeleiras</a>
+        <span class="nav-sep">|</span>
+        <a href="javascript:void(0)" onclick="showPage('quemsomos')">Quem Somos</a>
+        <a href="javascript:void(0)" onclick="showPage('envios')">Envios</a>
+        <a href="javascript:void(0)" onclick="showPage('trocas')">Trocas</a>
+        <a href="javascript:void(0)" onclick="showPage('garantia')">Garantia</a>
+    </nav>
+    <div class="header-icons">
+        <button onclick="abrirConta()" style="background:none;border:2px solid #C9A84C;color:#C9A84C;padding:5px 12px;border-radius:20px;cursor:pointer;font-size:0.72rem;font-weight:700;transition:all 0.3s;white-space:nowrap;" onmouseover="this.style.background='#C9A84C';this.style.color='white'" onmouseout="this.style.background='none';this.style.color='#C9A84C'">👤 Minha Conta</button>
+        <button class="cart-btn" onclick="toggleCart()">🛒<span class="cart-count" id="cartCount">0</span></button>
+        <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- ===== MENU MOBILE ===== -->
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mob-section">Produtos</div>
+    <a href="#produtos" onclick="showTab('todos',this);closeMobileMenu()">✨ Ver Todos</a>
+    <a href="#produtos" onclick="showTab('brincos',this);closeMobileMenu()">💎 Brincos</a>
+    <a href="#produtos" onclick="showTab('colares',this);closeMobileMenu()">📿 Colares</a>
+    <a href="#produtos" onclick="showTab('pulseiras',this);closeMobileMenu()">✨ Pulseiras Femininas</a>
+    <a href="#produtos" onclick="showTab('aneis',this);closeMobileMenu()">💍 Anéis</a>
+    <a href="#produtos" onclick="showTab('tornozeleiras',this);closeMobileMenu()">🦶 Tornozeleiras</a>
+    <a href="#produtos" onclick="showTab('infantil',this);closeMobileMenu()">👶 Infantil</a>
+    <div class="mob-section">Masculino</div>
+    <a href="#produtos" onclick="showTab('correntes',this);closeMobileMenu()">⛓️ Correntes Masculinas</a>
+    <a href="#produtos" onclick="showTab('pulseiras_masc',this);closeMobileMenu()">🔗 Pulseiras Masculinas</a>
+    <div class="mob-section">Promoções</div>
+    <a href="#produtos" onclick="showTab('lancamentos',this);closeMobileMenu()">🆕 Lançamentos</a>
+    <a href="#produtos" onclick="showTab('promocoes',this);closeMobileMenu()">🔥 Promoções</a>
+    <div class="mob-section">Informações</div>
+    <a href="javascript:void(0)" onclick="showPage('quemsomos');closeMobileMenu()">👥 Quem Somos</a>
+    <a href="javascript:void(0)" onclick="showPage('envios');closeMobileMenu()">🚚 Prazos de Envio</a>
+    <a href="javascript:void(0)" onclick="showPage('trocas');closeMobileMenu()">🔄 Trocas e Devoluções</a>
+    <a href="javascript:void(0)" onclick="showPage('garantia');closeMobileMenu()">🛡️ Garantia e Cuidados</a>
+    <div class="mob-section">Conta</div>
+    <a href="javascript:void(0)" onclick="abrirConta();closeMobileMenu()">👤 Minha Conta</a>
+</div>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Elegância que <span>Brilha</span><br>em Cada Momento</h1>
+        <p>Semi joias em aço inoxidável hipoalergênico. Peças exclusivas que transformam seu estilo.</p>
+        <a href="#produtos" class="btn-primary">✨ Explorar Coleção</a>
+    </div>
+</section>
+
+<!-- BANNER BENEFÍCIOS -->
+<section style="background:#f9f6ef; padding:32px 40px; border-bottom:1px solid #e8d5a3;">
+  <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:20px; text-align:center;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px;">
+      <div style="width:60px;height:60px;background:#1a1a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;">🚚</div>
+      <div style="font-weight:800;font-size:0.95rem;color:#1a1a1a;letter-spacing:0.5px;">FRETE GRÁTIS</div>
+      <div style="font-size:0.82rem;color:#666;line-height:1.5;">Acima de R$ 300,00<br>para todo o Brasil</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px;border-left:1px solid #e8d5a3;border-right:1px solid #e8d5a3;">
+      <div style="width:60px;height:60px;background:#1a1a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;">💳</div>
+      <div style="font-weight:800;font-size:0.95rem;color:#1a1a1a;letter-spacing:0.5px;">3X SEM JUROS</div>
+      <div style="font-size:0.82rem;color:#666;line-height:1.5;">Parcelado no<br>Cartão de Crédito</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px;">
+      <div style="width:60px;height:60px;background:#1a1a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;">💰</div>
+      <div style="font-weight:800;font-size:0.95rem;color:#1a1a1a;letter-spacing:0.5px;">10% DE DESCONTO</div>
+      <div style="font-size:0.82rem;color:#666;line-height:1.5;">Pagando via<br>PIX ou Boleto</div>
+    </div>
+  </div>
+</section>
+
+<section id="produtos">
+    <div class="section-title">
+        <h2>Nossa <span>Coleção</span></h2>
+        <p>Escolha a categoria e encontre a peça perfeita para você</p>
+    </div>
+    <div class="category-tabs">
+        <button class="tab-btn active" onclick="showTab('todos',this)">Ver Todos</button>
+        <button class="tab-btn" onclick="showTab('brincos',this)">💎 Brincos</button>
+        <button class="tab-btn" onclick="showTab('colares',this)">📿 Colares</button>
+        <button class="tab-btn" onclick="showTab('pulseiras',this)">✨ Pulseiras</button>
+        <button class="tab-btn" onclick="showTab('correntes',this)">⛓️ Correntes Masc.</button>
+        <button class="tab-btn" onclick="showTab('pulseiras_masc',this)">🔗 Pulseiras Masc.</button>
+        <button class="tab-btn" onclick="showTab('aneis',this)">💍 Anéis</button>
+        <button class="tab-btn" onclick="showTab('infantil',this)">👶 Infantil</button>
+        <button class="tab-btn" onclick="showTab('tornozeleiras',this)">🦶 Tornozeleiras</button>
+        <button class="tab-btn" onclick="showTab('lancamentos',this)">🆕 Lançamentos</button>
+        <button class="tab-btn" onclick="showTab('promocoes',this)">🔥 Promoções</button>
+    </div>
+    <div id="todos" class="tab-content active"><div class="products-grid" id="grid-todos"></div></div>
+    <div id="brincos" class="tab-content"><div class="products-grid" id="grid-brincos"></div></div>
+    <div id="colares" class="tab-content"><div class="products-grid" id="grid-colares"></div></div>
+    <div id="pulseiras" class="tab-content"><div class="products-grid" id="grid-pulseiras"></div></div>
+    <div id="correntes" class="tab-content"><div class="products-grid" id="grid-correntes"></div></div>
+    <div id="pulseiras_masc" class="tab-content"><div class="products-grid" id="grid-pulseiras_masc"></div></div>
+    <div id="aneis" class="tab-content"><div class="products-grid" id="grid-aneis"></div></div>
+    <div id="infantil" class="tab-content"><div class="products-grid" id="grid-infantil"></div></div>
+    <div id="tornozeleiras" class="tab-content"><div class="products-grid" id="grid-tornozeleiras"></div></div>
+    <div id="lancamentos" class="tab-content"><div class="products-grid" id="grid-lancamentos"></div></div>
+    <div id="promocoes" class="tab-content"><div class="products-grid" id="grid-promocoes"></div></div>
+</section>
+
+<!-- Cart -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header"><h3>🛒 Meu Carrinho</h3><button class="close-cart" onclick="toggleCart()">✕</button></div>
+    <div class="cart-items" id="cartItems"><div class="cart-empty">Seu carrinho está vazio 🛒</div></div>
+    <div class="cart-footer">
+        <div class="cart-total"><span>Total:</span><span id="cartTotal">R$ 0,00</span></div>
+        <button class="whatsapp-btn" onclick="sendWhatsApp()">💬 Finalizar pelo WhatsApp</button>
+    </div>
+</div>
+
+<!-- Modal produto -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" id="modal">
+        <button class="modal-close" onclick="closeModalDirect()">✕</button>
+        <img id="modalImg" src="" alt="">
+        <div class="modal-body">
+            <div class="modal-name" id="modalName"></div>
+            <div class="modal-price" id="modalPrice"></div>
+            <div class="modal-desc" id="modalDesc"></div>
+            <button class="modal-add-btn" id="modalAddBtn">🛒 Adicionar ao Carrinho</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal LGPD -->
+<div class="modal-overlay" id="lgpdOverlay" onclick="if(event.target===this)closeLGPD()" style="z-index:400;">
+    <div class="modal" style="max-width:700px;max-height:85vh;overflow-y:auto;border-radius:16px;">
+        <button class="modal-close" onclick="closeLGPD()">✕</button>
+        <div class="modal-body" style="padding:30px 35px;">
+            <div style="text-align:center;margin-bottom:20px;"><div style="font-size:2.5rem;">🔒</div>
+            <h2 style="color:#C9A84C;font-size:1.5rem;margin-top:8px;">Política de Privacidade</h2>
+            <p style="color:#666;font-size:0.85rem;">Última atualização: fevereiro de 2025</p></div>
+            <p style="color:#444;line-height:1.7;margin-bottom:14px;">A <strong>Lelê Inox Semi Joias</strong> respeita sua privacidade em conformidade com a <strong>LGPD (Lei nº 13.709/2018)</strong>.</p>
+            <h3 style="color:#C9A84C;margin:16px 0 6px;">1. Dados Coletados</h3><p style="color:#444;line-height:1.7;">Nome, telefone, endereço de entrega e histórico de pedidos.</p>
+            <h3 style="color:#C9A84C;margin:16px 0 6px;">2. Finalidade</h3><p style="color:#444;line-height:1.7;">Processar pedidos, comunicar promoções (com consentimento) e cumprir obrigações legais.</p>
+            <h3 style="color:#C9A84C;margin:16px 0 6px;">3. Compartilhamento</h3><p style="color:#444;line-height:1.7;">Dados <strong>não são vendidos</strong>. Compartilhados apenas com serviços de entrega, sob confidencialidade.</p>
+            <h3 style="color:#C9A84C;margin:16px 0 6px;">4. Seus Direitos (Art. 18 LGPD)</h3><p style="color:#444;line-height:1.7;">Acesso, correção, exclusão e revogação de consentimento dos seus dados a qualquer momento.</p>
+            <h3 style="color:#C9A84C;margin:16px 0 6px;">5. Segurança</h3><p style="color:#444;line-height:1.7;">Adotamos medidas técnicas para proteger seus dados contra acesso não autorizado.</p>
+            <h3 style="color:#C9A84C;margin:16px 0 6px;">6. Contato</h3>
+            <div style="background:#f9f6ef;border-left:4px solid #C9A84C;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:16px;">
+                <p style="color:#444;margin:0;">📱 <strong>WhatsApp:</strong> +55 11 96950-8486<br>🏪 Lelê Inox Semi Joias — São Paulo, SP</p>
+            </div>
+            <div style="text-align:center;padding:14px;background:#1a1a1a;border-radius:10px;">
+                <p style="color:#C9A84C;font-weight:600;margin:0;">Comprometida com sua privacidade ✨</p>
+                <p style="color:rgba(255,255,255,0.6);font-size:0.8rem;margin:4px 0 0;">Lei nº 13.709/2018 — LGPD</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="https://wa.me/5511969508486" target="_blank" class="whatsapp-float">💬</a>
+
+<footer>
+    <p>© 2025 <span>Lelê Inox Semi Joias</span> — Todos os direitos reservados</p>
+    <p style="margin-top:8px;">Aço Inoxidável Hipoalergênico | Pagamento via PIX</p>
+    <div style="display:flex;justify-content:center;gap:24px;margin-top:16px;align-items:center;">
+        <a href="https://www.instagram.com/lele_inoxsemijoias?utm_source=qr&igsh=dHQ5OHB6bG1jcmNw" target="_blank" style="color:#C9A84C;text-decoration:none;font-size:0.9rem;display:flex;align-items:center;gap:6px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#C9A84C"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Instagram
+        </a>
+        <a href="https://www.tiktok.com/@leleinoxsemijoais?_r=1&_t=ZS-947KhwlK6k4" target="_blank" style="color:#C9A84C;text-decoration:none;font-size:0.9rem;display:flex;align-items:center;gap:6px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#C9A84C"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.56V6.81a4.85 4.85 0 01-1.07-.12z"/></svg>
+            TikTok
+        </a>
+    </div>
+    <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:16px;">
+        <button onclick="showPage('quemsomos')" style="background:none;border:none;color:rgba(255,255,255,0.65);cursor:pointer;font-size:0.82rem;text-decoration:underline;padding:0;">👥 Quem Somos</button>
+        <button onclick="showPage('envios')" style="background:none;border:none;color:rgba(255,255,255,0.65);cursor:pointer;font-size:0.82rem;text-decoration:underline;padding:0;">🚚 Prazos de Envio</button>
+        <button onclick="showPage('trocas')" style="background:none;border:none;color:rgba(255,255,255,0.65);cursor:pointer;font-size:0.82rem;text-decoration:underline;padding:0;">🔄 Trocas e Devoluções</button>
+        <button onclick="showPage('garantia')" style="background:none;border:none;color:rgba(255,255,255,0.65);cursor:pointer;font-size:0.82rem;text-decoration:underline;padding:0;">🛡️ Garantia e Cuidados</button>
+        <button onclick="document.getElementById('lgpdOverlay').style.display='flex'" style="background:none;border:none;color:rgba(255,255,255,0.65);cursor:pointer;font-size:0.82rem;text-decoration:underline;padding:0;">🔒 Privacidade (LGPD)</button>
+    </div>
+    <p style="margin-top:16px;">
+        <button onclick="openAdminLogin()" style="background:#C9A84C;border:none;color:#1a1a1a;cursor:pointer;font-size:0.85rem;font-weight:700;padding:10px 22px;border-radius:20px;letter-spacing:1px;transition:all 0.3s;" onmouseover="this.style.background='#a8893d';this.style.color='white'" onmouseout="this.style.background='#C9A84C';this.style.color='#1a1a1a'">
+            ⚙️ Área Administrativa
+        </button>
+    </p>
+</footer>
+
+<!-- ===== MINHA CONTA OVERLAY ===== -->
+<div id="contaOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;display:none;align-items:center;justify-content:center;padding:16px;">
+  <div style="background:#fff;border-radius:20px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;position:relative;">
+    <button onclick="closeContaOverlay()" style="position:absolute;top:14px;right:14px;background:rgba(0,0,0,0.1);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1.1rem;z-index:1;">✕</button>
+    <!-- LOGIN FORM -->
+    <div id="contaLogin" style="padding:36px 32px;text-align:center;">
+      <div style="font-size:2.2rem;margin-bottom:4px;">👤</div>
+      <h2 style="color:#C9A84C;font-size:1.5rem;margin-bottom:6px;">Minha Conta</h2>
+      <p style="color:#888;font-size:0.85rem;margin-bottom:24px;">Entre para ver seus pedidos</p>
+      <input id="loginEmail" type="email" placeholder="Seu e-mail" style="width:100%;padding:11px 14px;border:2px solid #eee;border-radius:10px;font-size:0.95rem;margin-bottom:10px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#C9A84C'" onblur="this.style.borderColor='#eee'">
+      <input id="loginSenha" type="password" placeholder="Senha" style="width:100%;padding:11px 14px;border:2px solid #eee;border-radius:10px;font-size:0.95rem;margin-bottom:14px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#C9A84C'" onblur="this.style.borderColor='#eee'" onkeydown="if(event.key==='Enter')fazerLogin()">
+      <div id="loginErr" style="color:#e53935;font-size:0.82rem;margin-bottom:10px;display:none;">E-mail ou senha incorretos.</div>
+      <button onclick="fazerLogin()" style="width:100%;padding:12px;background:#1a1a1a;color:white;border:none;border-radius:10px;font-size:0.95rem;font-weight:700;cursor:pointer;margin-bottom:12px;transition:background 0.3s;" onmouseover="this.style.background='#C9A84C'" onmouseout="this.style.background='#1a1a1a'">Entrar</button>
+      <button onclick="showCadastro()" style="width:100%;padding:11px;background:none;color:#C9A84C;border:2px solid #C9A84C;border-radius:10px;font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.3s;" onmouseover="this.style.background='#C9A84C';this.style.color='white'" onmouseout="this.style.background='none';this.style.color='#C9A84C'">Criar conta gratuita ✨</button>
+    </div>
+    <!-- CADASTRO FORM -->
+    <div id="contaCadastro" style="padding:36px 32px;text-align:center;display:none;">
+      <div style="font-size:2.2rem;margin-bottom:4px;">✨</div>
+      <h2 style="color:#C9A84C;font-size:1.5rem;margin-bottom:6px;">Criar Conta</h2>
+      <p style="color:#888;font-size:0.85rem;margin-bottom:20px;">Cadastre-se e acompanhe seus pedidos</p>
+      <input id="cadNome" type="text" placeholder="Seu nome completo" style="width:100%;padding:11px 14px;border:2px solid #eee;border-radius:10px;font-size:0.9rem;margin-bottom:10px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#C9A84C'" onblur="this.style.borderColor='#eee'">
+      <input id="cadEmail" type="email" placeholder="Seu e-mail" style="width:100%;padding:11px 14px;border:2px solid #eee;border-radius:10px;font-size:0.9rem;margin-bottom:10px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#C9A84C'" onblur="this.style.borderColor='#eee'">
+      <input id="cadWhats" type="tel" placeholder="WhatsApp (ex: 11999999999)" style="width:100%;padding:11px 14px;border:2px solid #eee;border-radius:10px;font-size:0.9rem;margin-bottom:10px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#C9A84C'" onblur="this.style.borderColor='#eee'">
+      <input id="cadSenha" type="password" placeholder="Crie uma senha" style="width:100%;padding:11px 14px;border:2px solid #eee;border-radius:10px;font-size:0.9rem;margin-bottom:14px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#C9A84C'" onblur="this.style.borderColor='#eee'">
+      <div id="cadErr" style="color:#e53935;font-size:0.82rem;margin-bottom:10px;display:none;"></div>
+      <button onclick="fazerCadastro()" style="width:100%;padding:12px;background:#C9A84C;color:white;border:none;border-radius:10px;font-size:0.95rem;font-weight:700;cursor:pointer;margin-bottom:12px;" onmouseover="this.style.background='#a8893d'" onmouseout="this.style.background='#C9A84C'">Cadastrar ✨</button>
+      <button onclick="showLogin()" style="background:none;border:none;color:#888;cursor:pointer;font-size:0.85rem;">← Já tenho conta</button>
+    </div>
+    <!-- PAINEL DO CLIENTE -->
+    <div id="contaPainel" style="padding:28px;display:none;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid #f5f5f5;">
+        <div style="width:52px;height:52px;background:#C9A84C;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1.4rem;font-weight:700;" id="clienteAvatar">?</div>
+        <div><div style="font-weight:700;font-size:1rem;" id="clienteNomeEl">—</div><div style="color:#888;font-size:0.8rem;" id="clienteEmailEl">—</div></div>
+        <button onclick="fazerLogout()" style="margin-left:auto;background:none;border:1px solid #ddd;padding:6px 12px;border-radius:8px;color:#888;cursor:pointer;font-size:0.8rem;">Sair</button>
+      </div>
+      <h3 style="font-size:1rem;font-weight:700;color:#1a1a1a;margin-bottom:14px;">📦 Meus Pedidos</h3>
+      <div id="listaPedidos" style="max-height:340px;overflow-y:auto;"></div>
+      <div style="margin-top:16px;padding-top:16px;border-top:2px solid #f5f5f5;text-align:center;">
+        <button onclick="closeContaOverlay()" style="background:#C9A84C;color:white;border:none;padding:11px 28px;border-radius:20px;font-weight:700;cursor:pointer;font-size:0.9rem;" onmouseover="this.style.background='#a8893d'" onmouseout="this.style.background='#C9A84C'">✨ Explorar Produtos</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== INFO PAGES OVERLAY ===== -->
+<div id="infoPageOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:600;display:none;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;">
+  <div style="background:#fff;border-radius:20px;width:100%;max-width:780px;position:relative;margin:auto;">
+    <button onclick="closeInfoPage()" style="position:sticky;top:14px;float:right;margin:14px 14px 0 0;background:rgba(0,0,0,0.15);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1.1rem;z-index:1;">✕</button>
+    <div id="infoPageContent" style="padding:40px 40px 36px;clear:both;"></div>
+  </div>
+</div>
+
+<!-- ===== ADMIN LOGIN ===== -->
+<div id="adminLoginOverlay">
+    <div class="admin-login-box">
+        <div style="font-size:2.5rem;margin-bottom:6px;">💎</div>
+        <h2>Área Admin</h2>
+        <p>Lelê Inox — Gestão de Produtos</p>
+        <input type="password" id="adminPwd" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')checkAdminLogin()">
+        <button class="admin-login-btn" onclick="checkAdminLogin()">🔓 Entrar</button>
+        <div class="admin-login-err" id="adminErr">Senha incorreta. Tente novamente.</div>
+        <br><button class="admin-login-close" onclick="closeAdminLogin()">Cancelar</button>
+    </div>
+</div>
+
+<!-- ===== ADMIN PANEL ===== -->
+<div id="adminPanel">
+    <div class="admin-topbar">
+        <h2>💎 Admin — Lelê Inox Semi Joias</h2>
+        <div class="admin-topbar-actions">
+            <span style="color:#aaa;font-size:0.8rem;" id="adminSaveStatus"></span>
+            <button class="admin-btn admin-btn-gold" onclick="exportJSON()">⬇️ Exportar JSON</button>
+            <button class="admin-btn" style="background:#e53935;color:white;" onclick="if(confirm('Resetar todos os produtos para o padrão original?')){localStorage.removeItem(\'lele_produtos_v2\');produtos=JSON.parse(JSON.stringify(produtosBase));saveProdutos();renderAdminStats();renderAdminTable();renderGrids();showToast(\'✅ Produtos resetados!\');}">🔄 Resetar</button>
+            <button class="admin-btn admin-btn-white" onclick="closeAdmin()">✕ Fechar</button>
+        </div>
+    </div>
+    <div class="admin-content">
+        <div class="admin-stats">
+            <div class="admin-stat-card"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Total Produtos</div></div>
+            <div class="admin-stat-card"><div class="stat-num" id="statBrincos">0</div><div class="stat-label">Brincos</div></div>
+            <div class="admin-stat-card"><div class="stat-num" id="statColares">0</div><div class="stat-label">Colares</div></div>
+            <div class="admin-stat-card"><div class="stat-num" id="statPulseiras">0</div><div class="stat-label">Pulseiras</div></div>
+            <div class="admin-stat-card"><div class="stat-num" id="statCorrentes">0</div><div class="stat-label">Correntes Masc.</div></div>
+            <div class="admin-stat-card"><div class="stat-num" id="statPulsMasc">0</div><div class="stat-label">Puls. Masc.</div></div>
+            <div class="admin-stat-card"><div class="stat-num" id="statAneis">0</div><div class="stat-label">Anéis</div></div>
+            <div class="admin-stat-card"><div class="stat-num" id="statInfantil">0</div><div class="stat-label">Infantil</div></div>
+            <div class="admin-stat-card"><div class="stat-num" id="statTornozeleiras">0</div><div class="stat-label">Tornozeleiras</div></div>
+        </div>
+        <div class="admin-section">
+            <div class="admin-section-title">➕ Adicionar Novo Produto</div>
+            <div class="admin-form-grid">
+                <div class="admin-form-group"><label>Nome do Produto *</label><input class="admin-form-input" id="newName" placeholder="Ex: Brinco Argola Dourada"></div>
+                <div class="admin-form-group"><label>Categoria *</label><select class="admin-form-input" id="newCat"><option value="brincos">Brincos</option><option value="colares">Colares</option><option value="pulseiras">Pulseiras</option><option value="correntes">Correntes Masc.</option><option value="pulseiras_masc">Pulseiras Masc.</option><option value="aneis">Anéis</option><option value="infantil">Infantil</option><option value="tornozeleiras">Tornozeleiras</option></select></div>
+                <div class="admin-form-group"><label>Preço (R$) *</label><input class="admin-form-input" id="newPrice" type="number" step="0.01" placeholder="29.90"></div>
+                <div class="admin-form-group"><label>Badge</label><select class="admin-form-input" id="newBadge"><option value="">Nenhum</option><option value="new">🆕 Novo</option><option value="promo">🔥 Promoção</option></select></div>
+                <div class="admin-form-group admin-form-full">
+                  <label>🖼️ Imagem do Produto — Cole o link de qualquer site ou do Google Drive</label>
+                  <div id="pasteZone" onclick="document.getElementById('newImg').focus()" style="border:2px dashed #C9A84C;border-radius:12px;padding:14px 16px;background:#fffdf5;cursor:text;transition:border-color 0.2s;margin-bottom:8px;">
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                      <span style="font-size:1.4rem;">📋</span>
+                      <span style="font-size:0.82rem;color:#888;line-height:1.4;">Clique com botão direito em qualquer imagem na internet → <strong style="color:#C9A84C;">Copiar endereço da imagem</strong> → Cole aqui</span>
+                    </div>
+                    <input class="admin-form-input" id="newImg" placeholder="Cole o link da imagem aqui (Ctrl+V)..." oninput="previewNewImg()" onpaste="setTimeout(previewNewImg,50)" style="margin-bottom:0;">
+                  </div>
+                  <div id="newImgPreviewWrap" style="display:none;background:#f9f6ef;border-radius:12px;padding:12px;text-align:center;border:1px solid #e8d5a3;">
+                    <img id="newImgPreview" class="admin-preview-img" alt="Prévia" style="max-height:180px;border-radius:8px;display:block;margin:0 auto 8px;">
+                    <span id="newImgPreviewStatus" style="font-size:0.8rem;color:#2e7d32;font-weight:700;">✅ Imagem carregada!</span>
+                  </div>
+                </div>
+                <div class="admin-form-group admin-form-full"><label>Descrição</label><input class="admin-form-input" id="newDesc" placeholder="Descrição do produto"></div>
+                <button class="admin-add-btn" onclick="addProduct()">➕ Adicionar Produto ao Catálogo</button>
+            </div>
+        </div>
+        <div class="admin-section">
+            <div class="admin-section-title">📦 Gerenciar Produtos <span style="font-size:0.8rem;font-weight:400;color:#888;">Edite na tabela e clique 💾</span></div>
+            <div class="admin-filters">
+                <input class="admin-search" id="adminSearch" placeholder="🔍 Buscar produto..." oninput="filterAdminTable()">
+                <select class="admin-cat-filter" id="adminCatFilter" onchange="filterAdminTable()"><option value="">Todas</option><option value="brincos">Brincos</option><option value="colares">Colares</option><option value="pulseiras">Pulseiras</option><option value="correntes">Correntes Masc.</option><option value="pulseiras_masc">Pulseiras Masc.</option><option value="aneis">Anéis</option><option value="infantil">Infantil</option><option value="tornozeleiras">Tornozeleiras</option></select>
+            </div>
+            <div style="overflow-x:auto;">
+                <table class="admin-table" id="adminTable">
+                    <thead><tr><th>Foto</th><th>Nome</th><th>Cat.</th><th>Preço</th><th>Badge</th><th>URL Imagem</th><th>Ações</th></tr></thead>
+                    <tbody id="adminTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="admin-toast" id="adminToast"></div>
+
+
+<script>
+const ADMIN_PASSWORD = 'lele2025';
+const cart = [];  // ← carrinho de compras
+
+function getImgSrc(url) {
+    if (!url) return '';
+    // Google Drive: ?id=XXX
+    var m = url.match(/[?&]id=([^&"'\s]+)/);
+    if (m) return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w600';
+    // Google Drive: /file/d/XXX/
+    var m2 = url.match(/\/file\/d\/([^\/]+)/);
+    if (m2) return 'https://drive.google.com/thumbnail?id=' + m2[1] + '&sz=w600';
+    // Base64 (imagem colada direto)
+    if (url.startsWith('data:image')) return url;
+    // URL direta de qualquer site (mitiendanube, instagram, etc.)
+    if (url.startsWith('http') || url.startsWith('//')) return url;
+    return url;
+}
+function closeLGPD() { document.getElementById('lgpdOverlay').style.display = 'none'; }
+
+const produtosBase = [
+            {id:1, name:"Brinco Argola com Cristal Rosa", category:"brincos", price:22.80, badge:"new", image:"https://drive.google.com/thumbnail?id=1cfi-E085CdmEHR305u1h_mGz1PFGsFvI&sz=w800", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Brinco argola com cristal rosa strass hipoalergênico"},
+            {id:2, name:"Brinco Argolinha Árvore da Vida", category:"brincos", price:18.00, image:"https://drive.google.com/thumbnail?id=1alpYLXx6sOzP0QnHY2-KoZESzH-A6maw&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Argolinha com pingente Árvore da Vida em aço inox"},
+            {id:3, name:"Brinco Borboleta", category:"brincos", price:21.00, image:"https://drive.google.com/thumbnail?id=1Wonz-Gla_U2Oiy21RGJWO8L6a8DLiA8-&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco borboleta grande em aço inox"},
+            {id:4, name:"Brinco Argola com Cristal Vermelho", category:"brincos", price:22.80, image:"https://drive.google.com/thumbnail?id=1WUHP4MDukYbE_az7L9E2ziaCLIgr-JIB&sz=w800", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Brinco argola com cristal vermelho strass"},
+            {id:5, name:"Brinco Argola Torcida", category:"brincos", price:18.60, image:"https://drive.google.com/thumbnail?id=1BC0F_YyU5na56WNBAV0_AR43EdLurvSB&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco argola torcida aço inox hipoalergênico"},
+            {id:6, name:"Brinco Argola com Cristal Verde", category:"brincos", price:22.80, image:"https://drive.google.com/thumbnail?id=1lXa4Itp1adxFDtNImEZKK-C1dJr8kdNA&sz=w800", colors:["#228B22"], colorsNames:["Verde"], description:"Brinco argola com cristal verde strass"},
+            {id:7, name:"Brinco Argola com Cristal Azul", category:"brincos", price:22.80, badge:"new", image:"https://drive.google.com/thumbnail?id=1gI4gaBc-9m-5t5zeJph0jFUPWNV3iqMm&sz=w800", colors:["#0000CD"], colorsNames:["Azul"], description:"Brinco argola com cristal azul strass"},
+            {id:8, name:"Brinco Argola Coração", category:"brincos", price:20.00, image:"https://drive.google.com/thumbnail?id=1JMKrBFOOLexA-W1akAtngEUj98c96gz5&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco argola coração aço inox"},
+            {id:9, name:"Brinco Argola Fio Fechada", category:"brincos", price:18.00, image:"https://drive.google.com/thumbnail?id=1Oqt3dZlSU-SpJ16Cd2HverodGvdpN6aR&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco argola fio fechada 50mm aço inox"},
+            {id:10, name:"Brinco Argola Abaulada", category:"brincos", price:15.00, image:"https://drive.google.com/thumbnail?id=1ScIG016j7Icq8dLDc4i2P0wiLM-k15PO&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco argola abaulada aço inox"},
+            {id:11, name:"Brinco Galeria Ametista", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1j_xYy181xLQPPIVC6O8B-9s6MaRwpzrv&sz=w800", colors:["#9B30FF"], colorsNames:["Ametista"], description:"Brinco galeria 3 cristais ametista 6mm"},
+            {id:12, name:"Brinco Galeria Boreal", category:"brincos", price:35.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1JRJ9d4DSe2BVM_xkfTTpHf6b8XD93g-G&sz=w800", colors:["multi"], colorsNames:["Boreal"], description:"Brinco galeria boreal 3 cristais 6mm"},
+            {id:13, name:"Brinco Galeria Cristal", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1J7Rko7_GFXoUcfZ_AkJW0DD9lSGuGZpO&sz=w800", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Brinco galeria cristal 3 cristais 6mm"},
+            {id:14, name:"Brinco Argola Cristal", category:"brincos", price:22.80, badge:"new", image:"https://drive.google.com/thumbnail?id=1eskvuzjh2nznA-pfjmuov9h2gcK1HsrV&sz=w800", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Brinco argola cristal"},
+            {id:15, name:"Brinco Galeria Arco-Íris", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1R4NvVFyZYMFVuBBGBU-MMxnlx8jfCTeo&sz=w800", colors:["multi"], colorsNames:["Arco-Íris"], description:"Brinco galeria arco-íris 3 cristais 6mm"},
+            {id:16, name:"Brinco Galeria Preto", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1rIuB78_1mgoYWfuvdBz5XrSfEUe92HGo&sz=w800", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Brinco galeria preto 3 cristais 6mm"},
+            {id:17, name:"Brinco Argola Colorida", category:"brincos", price:28.00, image:"https://drive.google.com/thumbnail?id=1LQDgYTkx_hPrNa85wZnJwa-ZzJYvDlar&sz=w800", colors:["multi"], colorsNames:["Colorido"], description:"Brinco argola colorida"},
+            {id:18, name:"Brinco Coração Pequeno", category:"brincos", price:16.20, image:"https://drive.google.com/thumbnail?id=1TYVblhKu2ntEzkxHyzscCJWd-ZkZVkLZ&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco coração pequeno aço inox"},
+            {id:20, name:"Brinco Galeria Lilás", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1S7SyP1atCEcT5LwOXghxNiUzPjRfKjIs&sz=w800", colors:["#9370DB"], colorsNames:["Lilás"], description:"Brinco galeria lilás 3 cristais 6mm"},
+            {id:21, name:"Brinco Galeria Azul", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1sCsi2IQLdk8XAZMbt0hLOa0_D5bNhRXk&sz=w800", colors:["#0000CD"], colorsNames:["Azul"], description:"Brinco galeria azul 3 cristais 6mm"},
+            {id:22, name:"Brinco Galeria Vermelho", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=11TJmfrucRTOQZMF2Slr3zh5GzMA3CTWl&sz=w800", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Brinco galeria vermelho"},
+            {id:23, name:"Brinco Galeria Rosa", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1MdvAwO6HNFTZqWOvHNsiq4fRPlFRHaQF&sz=w800", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Brinco galeria rosa"},
+            {id:24, name:"Brinco Grace Verde", category:"brincos", price:23.50, badge:"new", image:"https://drive.google.com/thumbnail?id=1piUgVyBhwulI_idLy322cuvUBnT_c8Fr&sz=w800", colors:["#228B22"], colorsNames:["Verde"], description:"Brinco grace verde"},
+            {id:25, name:"Brinco Grace Strass", category:"brincos", price:23.50, image:"https://drive.google.com/thumbnail?id=11JQOF_bxZSdHtAkvjtK0ykcbyk6P9jYF&sz=w800", colors:["#C0C0C0"], colorsNames:["Strass"], description:"Brinco grace strass"},
+            {id:26, name:"Brinco Grace Boreal", category:"brincos", price:23.50, image:"https://drive.google.com/thumbnail?id=1U5ESZ7z_1E9YA3hgPkxR7--9JKpi5Mq7&sz=w800", colors:["multi"], colorsNames:["Boreal"], description:"Brinco grace boreal"},
+            {id:27, name:"Brinco Grace Azul", category:"brincos", price:23.50, image:"https://drive.google.com/thumbnail?id=1z2IbSIOoDAxjAmPukr4_JXR9ou6chjj2&sz=w800", colors:["#0000CD"], colorsNames:["Azul"], description:"Brinco grace azul"},
+            {id:29, name:"Brinco Grace Cristal", category:"brincos", price:23.50, image:"https://drive.google.com/thumbnail?id=1zdGlamrj9o1y3g_VI_ohURj-WSJqixvL&sz=w800", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Brinco grace cristal"},
+            {id:30, name:"Brinco Grace Rosa", category:"brincos", price:23.50, image:"https://drive.google.com/thumbnail?id=1PzrgmD4XNYMNTSfDMDBPGoaW_oPGZGo5&sz=w800", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Brinco grace rosa"},
+            {id:31, name:"Brinco Grace Vermelho", category:"brincos", price:23.50, image:"https://drive.google.com/thumbnail?id=1Hz2I9OKzMH_OFhD0eESkCxPFXPbgYe82&sz=w800", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Brinco grace vermelho"},
+            {id:32, name:"Brinco Argola Cristal Preto", category:"brincos", price:22.80, image:"https://drive.google.com/thumbnail?id=1ETyJuy_vQ3X7bZ4KDt89Tv638CWkftSW&sz=w800", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Brinco argola cristal preto"},
+            {id:33, name:"Brinco Quadrado", category:"brincos", price:13.50, image:"https://drive.google.com/thumbnail?id=1cgPw9Ijn0CdWYhEZOft55FbFTY7qIOK_&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco quadrado aço inox"},
+            {id:34, name:"Brinco Solitário", category:"brincos", price:10.00, image:"https://drive.google.com/thumbnail?id=1dDG9ZfMAEUUS6hk8EIfmJEEGzE-ur9zM&sz=w800", colors:["#FFFFFF"], colorsNames:["Zircônia"], description:"Brinco solitário zircônia"},
+            {id:50, name:"Colar Duas Voltas Branca", category:"colares", price:37.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1ZgRkB0sxNoYSCWoj_Cvf8S48arwQvWoF&sz=w800", colors:["#FFFFFF"], colorsNames:["Branca"], description:"Colar duas voltas branca"},
+            {id:51, name:"Colar Duas Voltas Preta", category:"colares", price:37.00, image:"https://drive.google.com/thumbnail?id=18iatYwF9X88WzT7Yplmt5OngkhDeUE7d&sz=w800", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Colar duas voltas preta"},
+            {id:52, name:"Colar Duas Voltas Verde", category:"colares", price:37.00, image:"https://drive.google.com/thumbnail?id=1I3WxlY42ZGDQvtUviflPfc4Boi24CLCh&sz=w800", colors:["#228B22"], colorsNames:["Verde"], description:"Colar duas voltas verde"},
+            {id:60, name:"Gargantilha Galeria Arco-Íris", category:"colares", price:45.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1ER5visTMcAjnPJuPk5RWuLU_lbZq9xwY&sz=w800", colors:["multi"], colorsNames:["Arco-Íris"], description:"Gargantilha galeria arco-íris"},
+            {id:61, name:"Gargantilha Galeria Esmeralda", category:"colares", price:45.00, badge:"promo", image:"https://drive.google.com/thumbnail?id=1tRODcBOc9FYuHctViYBVBNKL5xeJ7qN6&sz=w800", colors:["#228B22"], colorsNames:["Verde"], description:"Gargantilha galeria esmeralda"},
+            {id:62, name:"Gargantilha Galeria Aquamarine", category:"colares", price:45.00, image:"https://drive.google.com/thumbnail?id=1jUhbd_9XgJmho2WMD0KnGaKa_u12LnVE&sz=w800", colors:["#7FFFD4"], colorsNames:["Aquamarine"], description:"Gargantilha galeria aquamarine"},
+            {id:63, name:"Gargantilha Galeria Azul", category:"colares", price:45.00, image:"https://drive.google.com/thumbnail?id=1Nzpwtat_9UWNUFmJNm78rqotVDtFLwWT&sz=w800", colors:["#0000CD"], colorsNames:["Azul"], description:"Gargantilha galeria azul"},
+            {id:64, name:"Gargantilha Galeria Vermelho", category:"colares", price:45.00, badge:"new", image:"https://drive.google.com/thumbnail?id=17B-y5lKDebd8I2r2vDnz9JyQvwgQ7o3p&sz=w800", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Gargantilha galeria vermelho"},
+            {id:65, name:"Gargantilha Galeria Boreal", category:"colares", price:45.00, image:"https://drive.google.com/thumbnail?id=14YpPZVKgd90RJeEQit_rjra331UHm7o1&sz=w800", colors:["multi"], colorsNames:["Boreal"], description:"Gargantilha galeria boreal"},
+            {id:66, name:"Gargantilha Nylon Preto", category:"colares", price:28.00, image:"https://drive.google.com/thumbnail?id=1PtYWaCRi48ne3GeHUX9vGZ0s0uvdCNFQ&sz=w800", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Gargantilha nylon preto"},
+            {id:67, name:"Gargantilha Nylon Cristal", category:"colares", price:28.00, image:"https://drive.google.com/thumbnail?id=1J7Dg6eRfyqPaFGezhS8sVIT6F5ClUzGS&sz=w800", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Gargantilha nylon cristal"},
+            {id:68, name:"Gargantilha Nylon Vermelho", category:"colares", price:28.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1ARIugQ_-bcHgG5edr-H8GZyCJMj4eApK&sz=w800", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Gargantilha nylon vermelho"},
+            {id:69, name:"Gargantilha de Nylon Verde", category:"colares", price:28.00, image:"https://drive.google.com/thumbnail?id=1StvsTEChp_2pUGH39j5O55ChO-GGWwgd&sz=w800", colors:["#228B22"], colorsNames:["Verde"], description:"Gargantilha nylon verde"},
+            {id:70, name:"Gargantilha de Nylon Rosa", category:"colares", price:28.00, image:"https://drive.google.com/thumbnail?id=1RDruzTm21g-h6P9MzP1LA16ur0dbGrKc&sz=w800", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Gargantilha nylon rosa"},
+            {id:71, name:"Gargantilha Nylon Azul", category:"colares", price:28.00, image:"https://drive.google.com/thumbnail?id=1EugUkYCW9D_vrfkxjKhKw7z2C7A8dEfB&sz=w800", colors:["#0000CD"], colorsNames:["Azul"], description:"Gargantilha nylon azul"},
+            {id:72, name:"Gargantilha Galeria Lilás", category:"colares", price:45.00, image:"https://drive.google.com/thumbnail?id=1GSQiEJvCWxFXyQJmNdAReNUkG35AeILC&sz=w800", colors:["#9370DB"], colorsNames:["Lilás"], description:"Gargantilha galeria lilás"},
+            {id:73, name:"Gargantilha Galeria Ametista", category:"colares", price:45.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1Q2t_hlxkoUJXWWA8LbGBmKxNcLvKv5o_&sz=w800", colors:["#9B30FF"], colorsNames:["Ametista"], description:"Gargantilha galeria ametista"},
+            {id:74, name:"Gargantilha Rosa Laser", category:"colares", price:35.00, image:"https://drive.google.com/thumbnail?id=1sXjFWV7MU_yPKPZS2pBUu-CCwh8ObJwq&sz=w800", colors:["#FFB6C1"], colorsNames:["Strass"], description:"Gargantilha rosa laser"},
+            {id:75, name:"Gargantilha Galeria Rosa", category:"colares", price:45.00, image:"https://drive.google.com/thumbnail?id=17Cz6SpI0MEbeKte-DJr8uyEs0PJ4jhyt&sz=w800", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Gargantilha galeria rosa"},
+            {id:76, name:"Gargantilha Galeria Cristal", category:"colares", price:45.00, image:"https://drive.google.com/thumbnail?id=15dFo-MTAmEJ8Gq3cjMWnEisTK5TSM69Z&sz=w800", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Gargantilha galeria cristal"},
+            {id:77, name:"Gargantilha Galeria Preto", category:"colares", price:45.00, badge:"promo", image:"https://drive.google.com/thumbnail?id=1uDRGC8z9l-A4ktGDroIPdM07joRcsdIk&sz=w800", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Gargantilha galeria preto"},
+            {id:80, name:"Pulseira Galeria 6mm Azul", category:"pulseiras", price:36.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1v0HOky9l20ObPaXNLmziDYBWjHBeeP95&sz=w800", colors:["#0000CD"], colorsNames:["Azul"], description:"Pulseira galeria 6mm azul"},
+            {id:81, name:"Pulseira Galeria 6mm Rosa", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=1KUr8DmAP7kQyfF5rtuRbxYb9xFUI0ACW&sz=w800", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Pulseira galeria 6mm rosa"},
+            {id:82, name:"Pulseira Galeria 6mm Ametista", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=1AF0yntNxh6eOCU0hmd_DdD8iS2Z-xIMa&sz=w800", colors:["#9B30FF"], colorsNames:["Ametista"], description:"Pulseira galeria 6mm ametista"},
+            {id:83, name:"Pulseira Galeria 6mm Aquamarine", category:"pulseiras", price:36.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1L_hpVtzLeg8icneJM0LLfVn5SuazsjPL&sz=w800", colors:["#7FFFD4"], colorsNames:["Aquamarine"], description:"Pulseira galeria 6mm aquamarine"},
+            {id:84, name:"Pulseira Galeria 6mm Arco-Íris", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=13vD8w712NU1WP8KP5KY0Zk8iBaxEQt0x&sz=w800", colors:["multi"], colorsNames:["Arco-Íris"], description:"Pulseira galeria 6mm arco-íris"},
+            {id:85, name:"Pulseira Galeria 6mm Cristal", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=1ZrIMmTozg9lyC9y_mewmOGjBnNDKEF50&sz=w800", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Pulseira galeria 6mm cristal"},
+            {id:86, name:"Pulseira Galeria 6mm Preto", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=1cNoQuDixm4kIHRZcdP5RgzOwv6e53OFh&sz=w800", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Pulseira galeria 6mm preto"},
+            {id:87, name:"Pulseira Galeria 6mm Lilás", category:"pulseiras", price:36.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1ij1H0gqyh8GSvRP7Rd95EE5FhzoBTDy5&sz=w800", colors:["#9370DB"], colorsNames:["Lilás"], description:"Pulseira galeria 6mm lilás"},
+            {id:88, name:"Pulseira Galeria 6mm Verde Esmeralda", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=1ZIK7o0npTchwnE6IVMJqsZPBQL66atAs&sz=w800", colors:["#228B22"], colorsNames:["Esmeralda"], description:"Pulseira galeria 6mm verde esmeralda"},
+            {id:89, name:"Pulseira Galeria 6mm Vermelho", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=1rQoCJ1tILlia3OIxEqsvEwZTukDBN5V0&sz=w800", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Pulseira galeria 6mm vermelho"},
+            {id:90, name:"Pulseira Galeria 6mm Boreal", category:"pulseiras", price:36.00, badge:"new", image:"https://drive.google.com/thumbnail?id=16Wde4tArw7YWkrhpBjnqTSQjC1Cg9Ufe&sz=w800", colors:["multi"], colorsNames:["Boreal"], description:"Pulseira galeria 6mm boreal"}
+        ];
+
+function loadProdutos() {
+    const saved = localStorage.getItem('lele_produtos_v2');
+    if (saved) {
+        try {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+                // Ensure all products have required fields
+                return parsed.map(p => ({
+                    colors: ['#C0C0C0'],
+                    colorsNames: ['Aço Inox'],
+                    description: '',
+                    badge: undefined,
+                    oldPrice: undefined,
+                    ...p,
+                    price: parseFloat(p.price) || 0
+                }));
+            }
+        } catch(e) {
+            localStorage.removeItem('lele_produtos_v2');
+        }
+    }
+    return JSON.parse(JSON.stringify(produtosBase));
+}
+function saveProdutos() {
+    localStorage.setItem('lele_produtos_v2', JSON.stringify(produtos));
+    const el = document.getElementById('adminSaveStatus');
+    if(el) el.textContent = '✅ Salvo ' + new Date().toLocaleTimeString();
+}
+let produtos = loadProdutos();
+
+function formatPrice(v) {
+    return 'R$ ' + parseFloat(v).toFixed(2).replace('.', ',');
+}
+
+function renderCard(p) {
+    const badge = p.badge ? `<div class="product-badge badge-${p.badge}">${p.badge === 'new' ? '🆕 Novo' : '🔥 Promo'}</div>` : '';
+    const oldPrice = p.oldPrice ? `<span class="price-old">${formatPrice(p.oldPrice)}</span>` : '';
+    const colors = (p.colors||[]).map((c,i) => 
+        c === 'multi' ? `<div class="color-dot multi" title="Colorido"></div>` : 
+        `<div class="color-dot" style="background:${c}" title="${(p.colorsNames||[])[i]||''}"></div>`
+    ).join('');
+    const _src = getImgSrc(p.image);
+    const img = _src ? 
+        `<img class="product-img" src="${_src}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex'">
+         <div class="product-img-placeholder" style="display:none">💎</div>` :
+        `<div class="product-img-placeholder">💎</div>`;
+    return `
+    <div class="product-card" onclick="openModal(${p.id})">
+        ${img}
+        <div class="product-info">
+            ${badge}
+            <div class="product-name">${p.name}</div>
+            <div class="product-price">
+                <span class="price-current">${formatPrice(p.price)}</span>
+                ${oldPrice}
+            </div>
+            <div class="product-colors">${colors}</div>
+            <button class="add-cart-btn" onclick="addToCartBtn(event,${p.id})">+ Adicionar ao Carrinho</button>
+        </div>
+    </div>`;
+}
+
+function renderGrids() {
+    const grids = { todos: '', brincos: '', colares: '', pulseiras: '', correntes: '', pulseiras_masc: '', aneis: '', infantil: '', tornozeleiras: '', lancamentos: '', promocoes: '' };
+    produtos.forEach(p => {
+        const card = renderCard(p);
+        grids.todos += card;
+        grids[p.category] += card;
+        if (p.badge === 'new') grids.lancamentos += card;
+        if (p.badge === 'promo') grids.promocoes += card;
+    });
+    Object.keys(grids).forEach(k => {
+        const el = document.getElementById('grid-' + k);
+        if (el) el.innerHTML = grids[k] || '<p style="text-align:center;color:#999;padding:40px">Nenhum produto nesta categoria</p>';
+    });
+}
+
+function showTab(tab, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    const el = document.getElementById(tab);
+    if (el) el.classList.add('active');
+    if (btn) btn.classList.add('active');
+    // Fallback: highlight matching button by text
+    if (!btn) {
+        const _tm = { todos: 'ver todos', brincos: 'brincos', colares: 'colares', pulseiras: 'pulseiras', correntes: 'correntes', pulseiras_masc: 'masc', aneis: 'anéis', infantil: 'infantil', tornozeleiras: 'tornozeleiras', lancamentos: 'lança', promocoes: 'promo' };
+        const _kw = (_tm[tab] || tab).toLowerCase();
+        document.querySelectorAll('.tab-btn').forEach(b => { if (b.textContent.toLowerCase().includes(_kw)) b.classList.add('active'); });
+    }
+}
+
+function openModal(id) {
+    const p = produtos.find(x => x.id === id);
+    if (!p) return;
+    const _msrc = getImgSrc(p.image);
+    document.getElementById('modalImg').src = _msrc || '';
+    document.getElementById('modalImg').style.display = _msrc ? 'block' : 'none';
+    document.getElementById('modalName').textContent = p.name;
+    document.getElementById('modalPrice').textContent = formatPrice(p.price);
+    document.getElementById('modalDesc').textContent = p.description;
+    document.getElementById('modalAddBtn').onclick = () => { addToCart(id); closeModalDirect(); };
+    document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal(e) { if (e.target === document.getElementById('modalOverlay')) closeModalDirect(); }
+function closeModalDirect() { document.getElementById('modalOverlay').classList.remove('open'); }
+
+function addToCartBtn(e, id) {
+    e.stopPropagation();
+    addToCart(id);
+    // Visual feedback on button
+    const btn = e.target;
+    const orig = btn.textContent;
+    btn.textContent = '✅ Adicionado!';
+    btn.style.background = '#2e7d32';
+    setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 1200);
+}
+
+function addToCart(id) {
+    const p = produtos.find(x => x.id === id);
+    if (!p) return;
+    cart.push(p);
+    updateCart();
+    document.getElementById('cartCount').style.transform = 'scale(1.5)';
+    setTimeout(() => document.getElementById('cartCount').style.transform = 'scale(1)', 300);
+}
+
+function removeFromCart(idx) {
+    cart.splice(idx, 1);
+    updateCart();
+}
+
+function updateCart() {
+    document.getElementById('cartCount').textContent = cart.length;
+    const total = cart.reduce((s, p) => s + p.price, 0);
+    document.getElementById('cartTotal').textContent = formatPrice(total);
+    const items = document.getElementById('cartItems');
+    if (cart.length === 0) {
+        items.innerHTML = '<div class="cart-empty">Seu carrinho está vazio 🛒</div>';
+        return;
+    }
+    items.innerHTML = cart.map((p, i) => `
+        <div class="cart-item">
+            <img src="${getImgSrc(p.image)}" alt="${p.name}" onerror="this.src=''">
+            <div class="cart-item-info">
+                <div class="cart-item-name">${p.name}</div>
+                <div class="cart-item-price">${formatPrice(p.price)}</div>
+            </div>
+            <button class="cart-item-remove" onclick="removeFromCart(${i})">✕</button>
+        </div>`).join('');
+}
+
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('hamburgerBtn');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+function closeMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('hamburgerBtn');
+    menu.classList.remove('open');
+    btn.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+function toggleCart() {
+    document.getElementById('cartSidebar').classList.toggle('open');
+    document.getElementById('cartOverlay').classList.toggle('open');
+}
+
+function sendWhatsApp() {
+    if (cart.length === 0) { alert('Adicione produtos ao carrinho primeiro!'); return; }
+    const total = cart.reduce((s, p) => s + p.price, 0);
+    let msg = '🛍️ *Pedido - Lelê Inox Semi Joias*\n\n';
+    cart.forEach((p, i) => { msg += `${i+1}. ${p.name} - ${formatPrice(p.price)}\n`; });
+    msg += `\n💰 *Total: ${formatPrice(total)}*\n\nGostaria de finalizar meu pedido!`;
+    window.open('https://wa.me/5511969508486?text=' + encodeURIComponent(msg), '_blank');
+}
+
+function openAdminLogin() {
+    document.getElementById('adminLoginOverlay').classList.add('open');
+    document.getElementById('adminPwd').value = '';
+    document.getElementById('adminErr').style.display = 'none';
+    setTimeout(() => document.getElementById('adminPwd').focus(), 200);
+}
+function closeAdminLogin() { document.getElementById('adminLoginOverlay').classList.remove('open'); }
+function checkAdminLogin() {
+    if (document.getElementById('adminPwd').value === ADMIN_PASSWORD) {
+        closeAdminLogin(); openAdmin();
+    } else {
+        document.getElementById('adminErr').style.display = 'block';
+        document.getElementById('adminPwd').value = '';
+        document.getElementById('adminPwd').focus();
+    }
+}
+function openAdmin() {
+    document.getElementById('adminPanel').classList.add('open');
+    renderAdminStats(); renderAdminTable();
+}
+function closeAdmin() {
+    document.getElementById('adminPanel').classList.remove('open');
+    renderGrids();
+}
+function showToast(msg) {
+    const t = document.getElementById('adminToast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+}
+function renderAdminStats() {
+    document.getElementById('statTotal').textContent = produtos.length;
+    document.getElementById('statBrincos').textContent = produtos.filter(p => p.category === 'brincos').length;
+    document.getElementById('statColares').textContent = produtos.filter(p => p.category === 'colares').length;
+    document.getElementById('statPulseiras').textContent = produtos.filter(p => p.category === 'pulseiras').length;
+    document.getElementById('statCorrentes').textContent = produtos.filter(p => p.category === 'correntes').length;
+    document.getElementById('statPulsMasc').textContent = produtos.filter(p => p.category === 'pulseiras_masc').length;
+    document.getElementById('statAneis').textContent = produtos.filter(p => p.category === 'aneis').length;
+    document.getElementById('statInfantil').textContent = produtos.filter(p => p.category === 'infantil').length;
+    document.getElementById('statTornozeleiras').textContent = produtos.filter(p => p.category === 'tornozeleiras').length;
+}
+function renderAdminTable(filter, catFilter) {
+    filter = filter || ''; catFilter = catFilter || '';
+    const body = document.getElementById('adminTableBody');
+    const filtered = produtos.filter(p => {
+        const matchName = !filter || p.name.toLowerCase().includes(filter.toLowerCase());
+        const matchCat = !catFilter || p.category === catFilter;
+        return matchName && matchCat;
+    });
+    body.innerHTML = filtered.map(p => {
+        const imgSrc = getImgSrc(p.image);
+        return `<tr data-id="${p.id}">
+            <td><img src="${imgSrc}" alt="" onerror="this.src=''"></td>
+            <td><input class="admin-name-edit" value="${(p.name||'').replace(/"/g,'&quot;')}" onchange="queueSave(${p.id},'name',this.value)"></td>
+            <td><select class="badge-select" onchange="queueSave(${p.id},'category',this.value)">
+                <option value="brincos" ${p.category==='brincos'?'selected':''}>Brincos</option>
+                <option value="colares" ${p.category==='colares'?'selected':''}>Colares</option>
+                <option value="pulseiras" ${p.category==='pulseiras'?'selected':''}>Pulseiras</option>
+                <option value="correntes" ${p.category==='correntes'?'selected':''}>Correntes Masc.</option>
+                <option value="pulseiras_masc" ${p.category==='pulseiras_masc'?'selected':''}>Puls. Masc.</option>
+                <option value="aneis" ${p.category==='aneis'?'selected':''}>Anéis</option>
+                <option value="infantil" ${p.category==='infantil'?'selected':''}>Infantil</option>
+                <option value="tornozeleiras" ${p.category==='tornozeleiras'?'selected':''}>Tornozeleiras</option>
+            </select></td>
+            <td><input class="admin-inline-edit" type="number" step="0.01" value="${parseFloat(p.price).toFixed(2)}" onchange="queueSave(${p.id},'price',this.value)"></td>
+            <td><select class="badge-select" onchange="queueSave(${p.id},'badge',this.value)">
+                <option value="" ${!p.badge?'selected':''}>—</option>
+                <option value="new" ${p.badge==='new'?'selected':''}>🆕 Novo</option>
+                <option value="promo" ${p.badge==='promo'?'selected':''}>🔥 Promo</option>
+            </select></td>
+            <td style="position:relative;">
+              <input class="admin-img-edit" value="${(p.image||'').replace(/"/g,'&quot;')}" placeholder="Cole URL da imagem..." 
+                oninput="previewTableImg(this,${p.id})" 
+                onpaste="const el=this;setTimeout(()=>previewTableImg(el,${p.id}),50)"
+                onchange="queueSave(${p.id},'image',this.value)"
+                onfocus="showTableImgPreview(this)"
+                onblur="hideTableImgPreview(this)">
+              <div class="table-img-preview" style="display:none;position:absolute;right:0;bottom:44px;background:#fff;border:2px solid #C9A84C;border-radius:10px;padding:6px;z-index:50;box-shadow:0 4px 20px rgba(0,0,0,0.15);">
+                <img src="${getImgSrc(p.image)}" style="width:120px;height:120px;object-fit:cover;border-radius:6px;display:block;" onerror="this.src=''">
+                <div style="font-size:0.7rem;color:#2e7d32;text-align:center;margin-top:4px;font-weight:700;">✅ Preview</div>
+              </div>
+            </td>
+            <td><button class="admin-save-row" onclick="saveRow(${p.id})">💾</button>&nbsp;<button class="admin-del-btn" onclick="deleteProduct(${p.id})">🗑️</button></td>
+        </tr>`;
+    }).join('');
+}
+const pendingChanges = {};
+function queueSave(id, field, value) {
+    if (!pendingChanges[id]) pendingChanges[id] = {};
+    pendingChanges[id][field] = value;
+    const el = document.getElementById('adminSaveStatus');
+    if(el) el.textContent = '⏳ Pendente...';
+}
+function saveRow(id) {
+    const p = produtos.find(x => x.id === id);
+    if (!p) return;
+    if (pendingChanges[id]) {
+        Object.assign(p, pendingChanges[id]);
+        if (pendingChanges[id].price !== undefined) p.price = parseFloat(pendingChanges[id].price);
+        delete pendingChanges[id];
+    }
+    saveProdutos(); renderAdminStats();
+    const row = document.querySelector(`tr[data-id="${id}"]`);
+    if (row) { const img = row.querySelector('td:first-child img'); if(img) img.src = getImgSrc(p.image); }
+    showToast('✅ Produto salvo!');
+}
+function deleteProduct(id) {
+    const p = produtos.find(x => x.id === id);
+    if (!p || !confirm(`Excluir "${p.name}"?`)) return;
+    produtos = produtos.filter(x => x.id !== id);
+    saveProdutos(); renderAdminStats();
+    filterAdminTable(); showToast('🗑️ Excluído!');
+}
+function filterAdminTable() {
+    renderAdminTable(document.getElementById('adminSearch').value, document.getElementById('adminCatFilter').value);
+}
+function previewNewImg() {
+    const url = document.getElementById('newImg').value.trim();
+    const wrap = document.getElementById('newImgPreviewWrap');
+    const prev = document.getElementById('newImgPreview');
+    const status = document.getElementById('newImgPreviewStatus');
+    const src = getImgSrc(url);
+    if (src) {
+        prev.src = src;
+        prev.style.display = 'block';
+        wrap.style.display = 'block';
+        status.textContent = '⏳ Carregando imagem...';
+        status.style.color = '#888';
+        prev.onload = () => { status.textContent = '✅ Imagem carregada!'; status.style.color = '#2e7d32'; };
+        prev.onerror = () => { status.textContent = '⚠️ Imagem não carregou — verifique se o link está público'; status.style.color = '#e65100'; };
+    } else {
+        wrap.style.display = 'none';
+    }
+}
+function addProduct() {
+    const name = document.getElementById('newName').value.trim();
+    const cat = document.getElementById('newCat').value;
+    const price = parseFloat(document.getElementById('newPrice').value);
+    const badge = document.getElementById('newBadge').value;
+    const img = document.getElementById('newImg').value.trim();
+    const desc = document.getElementById('newDesc').value.trim();
+    if (!name) { alert('Preencha o nome.'); return; }
+    if (!price || isNaN(price)) { alert('Preencha o preço.'); return; }
+    const newId = Math.max(...produtos.map(p => p.id), 0) + 1;
+    const newProd = {id:newId, name, category:cat, price, image:img||'', colors:['#C0C0C0'], colorsNames:['Aço Inox'], description:desc};
+    if (badge) newProd.badge = badge;
+    produtos.push(newProd);
+    saveProdutos(); renderAdminStats(); renderAdminTable();
+    document.getElementById('newName').value = '';
+    document.getElementById('newPrice').value = '';
+    document.getElementById('newBadge').value = '';
+    document.getElementById('newImg').value = '';
+    document.getElementById('newDesc').value = '';
+    document.getElementById('newImgPreviewWrap').style.display = 'none';
+    showToast('✅ Produto adicionado!');
+}
+function exportJSON() {
+    const blob = new Blob([JSON.stringify(produtos, null, 2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'lele_produtos_' + new Date().toISOString().slice(0,10) + '.json';
+    a.click();
+    showToast('📥 JSON exportado!');
+}
+
+// ===== MINHA CONTA =====
+function getClientes() { try { return JSON.parse(localStorage.getItem('lele_clientes')||'{}'); } catch(e) { return {}; } }
+function saveClientes(c) { localStorage.setItem('lele_clientes', JSON.stringify(c)); }
+function getClienteLogado() { try { return JSON.parse(sessionStorage.getItem('lele_cliente_logado')||'null'); } catch(e) { return null; } }
+function setClienteLogado(c) { sessionStorage.setItem('lele_cliente_logado', JSON.stringify(c)); }
+
+function abrirConta() {
+    const logado = getClienteLogado();
+    document.getElementById('contaOverlay').style.display = 'flex';
+    if (logado) { showPainel(logado); } else { showLogin(); }
+}
+function closeContaOverlay() { document.getElementById('contaOverlay').style.display = 'none'; }
+function showLogin() {
+    document.getElementById('contaLogin').style.display='block';
+    document.getElementById('contaCadastro').style.display='none';
+    document.getElementById('contaPainel').style.display='none';
+    document.getElementById('loginErr').style.display='none';
+}
+function showCadastro() {
+    document.getElementById('contaLogin').style.display='none';
+    document.getElementById('contaCadastro').style.display='block';
+    document.getElementById('contaPainel').style.display='none';
+    document.getElementById('cadErr').style.display='none';
+}
+function showPainel(cliente) {
+    document.getElementById('contaLogin').style.display='none';
+    document.getElementById('contaCadastro').style.display='none';
+    document.getElementById('contaPainel').style.display='block';
+    document.getElementById('clienteNomeEl').textContent = cliente.nome;
+    document.getElementById('clienteEmailEl').textContent = cliente.email;
+    document.getElementById('clienteAvatar').textContent = cliente.nome.charAt(0).toUpperCase();
+    renderPedidosCliente(cliente.email);
+}
+function fazerLogin() {
+    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    const senha = document.getElementById('loginSenha').value;
+    const clientes = getClientes();
+    if (!clientes[email] || clientes[email].senha !== senha) {
+        document.getElementById('loginErr').style.display = 'block'; return;
+    }
+    setClienteLogado(clientes[email]);
+    showPainel(clientes[email]);
+}
+function fazerCadastro() {
+    const nome = document.getElementById('cadNome').value.trim();
+    const email = document.getElementById('cadEmail').value.trim().toLowerCase();
+    const whats = document.getElementById('cadWhats').value.trim();
+    const senha = document.getElementById('cadSenha').value;
+    const errEl = document.getElementById('cadErr');
+    if (!nome || !email || !senha) { errEl.textContent='Preencha nome, e-mail e senha.'; errEl.style.display='block'; return; }
+    if (!email.includes('@')) { errEl.textContent='E-mail inválido.'; errEl.style.display='block'; return; }
+    if (senha.length < 6) { errEl.textContent='Senha deve ter ao menos 6 caracteres.'; errEl.style.display='block'; return; }
+    const clientes = getClientes();
+    if (clientes[email]) { errEl.textContent='E-mail já cadastrado.'; errEl.style.display='block'; return; }
+    const novoCliente = { nome, email, whats, senha, pedidos: [], cadastro: new Date().toLocaleDateString('pt-BR') };
+    clientes[email] = novoCliente;
+    saveClientes(clientes);
+    setClienteLogado(novoCliente);
+    showPainel(novoCliente);
+}
+function fazerLogout() {
+    sessionStorage.removeItem('lele_cliente_logado');
+    showLogin();
+}
+function renderPedidosCliente(email) {
+    const clientes = getClientes();
+    const cliente = clientes[email];
+    const div = document.getElementById('listaPedidos');
+    if (!cliente || !cliente.pedidos || cliente.pedidos.length === 0) {
+        div.innerHTML = '<div style="text-align:center;color:#aaa;padding:28px 0;font-size:0.9rem;">Você ainda não fez nenhum pedido.<br><span style="font-size:1.5rem;">🛍️</span></div>'; return;
+    }
+    div.innerHTML = [...cliente.pedidos].reverse().map((p, i) => `
+        <div style="border:1px solid #f0f0f0;border-radius:12px;padding:14px 16px;margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span style="font-weight:700;font-size:0.85rem;color:#C9A84C;">Pedido #${String(cliente.pedidos.length - i).padStart(4,'0')}</span>
+                <span style="font-size:0.78rem;color:#aaa;">${p.data}</span>
+            </div>
+            ${p.itens.map(it => `<div style="font-size:0.83rem;color:#555;display:flex;justify-content:space-between;padding:3px 0;"><span>${it.nome}</span><span style="color:#C9A84C;font-weight:600;">${formatPrice(it.preco)}</span></div>`).join('')}
+            <div style="margin-top:8px;padding-top:8px;border-top:1px dashed #eee;display:flex;justify-content:space-between;font-weight:700;font-size:0.9rem;"><span>Total</span><span style="color:#C9A84C;">${formatPrice(p.total)}</span></div>
+        </div>`).join('');
+}
+
+// Override sendWhatsApp to save order for logged-in customers
+const _origSend = window.sendWhatsApp;
+window.sendWhatsApp = function() {
+    if (cart.length === 0) { alert('Adicione produtos ao carrinho primeiro!'); return; }
+    const total = cart.reduce((s, p) => s + parseFloat(p.price), 0);
+    const logado = getClienteLogado();
+    if (logado) {
+        const clientes = getClientes();
+        const c = clientes[logado.email];
+        if (c) {
+            if (!c.pedidos) c.pedidos = [];
+            c.pedidos.push({ data: new Date().toLocaleDateString('pt-BR') + ' ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}), itens: cart.map(p => ({ nome: p.name, preco: p.price })), total });
+            saveClientes(clientes);
+            setClienteLogado(c);
+        }
+    }
+    let msg = '🛍️ *Pedido - Lelê Inox Semi Joias*\n\n';
+    cart.forEach((p, i) => { msg += `${i+1}. ${p.name} - ${formatPrice(p.price)}\n`; });
+    msg += `\n💰 *Total: ${formatPrice(total)}*\n\nGostaria de finalizar meu pedido!`;
+    window.open('https://wa.me/5511969508486?text=' + encodeURIComponent(msg), '_blank');
+};
+
+// Admin: show all clients
+function renderClientesAdmin() {
+    const clientes = getClientes();
+    const arr = Object.values(clientes).sort((a,b) => (b.pedidos||[]).length - (a.pedidos||[]).length);
+    const div = document.getElementById('adminClientesBody');
+    if (!div) return;
+    if (arr.length === 0) { div.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#aaa;padding:20px;">Nenhum cliente cadastrado ainda.</td></tr>'; return; }
+    div.innerHTML = arr.map(c => `<tr>
+        <td style="padding:10px 12px;">${c.nome}</td>
+        <td style="padding:10px 12px;">${c.email}</td>
+        <td style="padding:10px 12px;">${c.whats||'—'}</td>
+        <td style="padding:10px 12px;text-align:center;"><strong style="color:#C9A84C;">${(c.pedidos||[]).length}</strong></td>
+        <td style="padding:10px 12px;">${c.cadastro||'—'}</td>
+    </tr>`).join('');
+}
+
+// ===== INFO PAGES =====
+const pagesContent = {
+    quemsomos: `<div style="text-align:center;margin-bottom:28px;"><div style="font-size:3rem;margin-bottom:8px;">💎</div><h2 style="color:#C9A84C;font-size:1.8rem;font-weight:700;">Quem Somos</h2><div style="width:60px;height:3px;background:#C9A84C;margin:12px auto 0;border-radius:2px;"></div></div><p style="color:#444;line-height:1.8;margin-bottom:18px;font-size:0.97rem;">A <strong>Lelê Inox Semi Joias</strong> nasceu da paixão por elegância acessível e da vontade de oferecer peças bonitas, duráveis e hipoalergênicas para todas as mulheres — e também para a família inteira.</p><p style="color:#444;line-height:1.8;margin-bottom:18px;font-size:0.97rem;">Trabalhamos exclusivamente com <strong>aço inoxidável de alta qualidade</strong>, material que não escurece, não mancha a pele e mantém o brilho por muito mais tempo do que as joias folheadas tradicionais.</p><p style="color:#444;line-height:1.8;margin-bottom:18px;font-size:0.97rem;">Aqui você encontra desde brincos delicados até conjuntos infantis, pulseiras masculinas, correntes, anéis e muito mais — tudo com preços justos, atendimento humanizado e entrega para todo o Brasil.</p><div style="background:linear-gradient(135deg,#1a1a1a,#2d2d2d);border-radius:16px;padding:24px;margin-top:24px;text-align:center;"><p style="color:#C9A84C;font-size:1.1rem;font-weight:700;margin-bottom:6px;">✨ Nosso Compromisso</p><p style="color:rgba(255,255,255,0.8);font-size:0.9rem;line-height:1.7;">Beleza, qualidade e confiança em cada peça que você recebe. Porque você merece se sentir especial todos os dias.</p></div><div style="margin-top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:center;"><div style="background:#f9f6ef;border-radius:12px;padding:18px 12px;"><div style="font-size:1.8rem;">🏆</div><div style="font-weight:700;font-size:0.85rem;margin-top:6px;color:#1a1a1a;">Qualidade</div><div style="font-size:0.78rem;color:#888;margin-top:3px;">Aço inox premium</div></div><div style="background:#f9f6ef;border-radius:12px;padding:18px 12px;"><div style="font-size:1.8rem;">🚚</div><div style="font-weight:700;font-size:0.85rem;margin-top:6px;color:#1a1a1a;">Entrega</div><div style="font-size:0.78rem;color:#888;margin-top:3px;">Todo o Brasil</div></div><div style="background:#f9f6ef;border-radius:12px;padding:18px 12px;"><div style="font-size:1.8rem;">💬</div><div style="font-weight:700;font-size:0.85rem;margin-top:6px;color:#1a1a1a;">Atendimento</div><div style="font-size:0.78rem;color:#888;margin-top:3px;">Via WhatsApp</div></div></div>`,
+    envios: `<div style="text-align:center;margin-bottom:28px;"><div style="font-size:3rem;margin-bottom:8px;">🚚</div><h2 style="color:#C9A84C;font-size:1.8rem;font-weight:700;">Prazos de Envio</h2><div style="width:60px;height:3px;background:#C9A84C;margin:12px auto 0;border-radius:2px;"></div></div><div style="background:#f9f6ef;border-radius:14px;padding:20px 22px;margin-bottom:20px;"><p style="font-weight:700;color:#1a1a1a;margin-bottom:8px;">📦 Como funciona o envio?</p><p style="color:#555;line-height:1.7;font-size:0.92rem;">Todos os pedidos são enviados via <strong>Correios (PAC ou SEDEX)</strong>, dependendo do destino e valor do frete escolhido.</p></div><div style="background:#fff;border:1px solid #f0f0f0;border-radius:14px;overflow:hidden;margin-bottom:20px;"><div style="background:#1a1a1a;padding:12px 20px;"><span style="color:#C9A84C;font-weight:700;">⏱️ Prazo de Postagem</span></div><div style="padding:16px 20px;"><p style="color:#444;font-size:0.9rem;line-height:1.8;">O prazo de envio do pedido é de <strong>até 3 dias úteis, dependendo da região</strong>. Esse prazo começa a contar a partir da data da compensação do pagamento do seu pedido — ou seja, seu produto será preparado para envio após nosso sistema identificar o pagamento.</p><p style="color:#444;font-size:0.9rem;line-height:1.8;margin-top:10px;">Por exemplo: se o pedido foi efetuado em uma <strong>sexta-feira</strong> e o pagamento foi confirmado no <strong>sábado</strong>, o prazo começa a contar a partir da <strong>segunda-feira</strong>, pois será a data de envio.</p><div style="background:#fff3e0;border-left:3px solid #e65100;padding:10px 14px;border-radius:0 8px 8px 0;margin-top:12px;"><p style="color:#e65100;font-size:0.85rem;font-weight:700;margin-bottom:3px;">⚠️ Atenção</p><p style="color:#555;font-size:0.85rem;">Sábado, domingo e feriados <strong>não contam como dias úteis</strong>. Para que possamos atender todos os nossos clientes com excelência e qualidade, o prazo deve ser respeitado.</p></div><p style="color:#888;font-size:0.82rem;margin-top:12px;text-align:right;font-style:italic;">— Equipe Lelê Inox · Aço Inox.</p></div></div><div style="background:#fff;border:1px solid #f0f0f0;border-radius:14px;overflow:hidden;margin-bottom:20px;"><div style="background:#1a1a1a;padding:12px 20px;"><span style="color:#C9A84C;font-weight:700;">📬 Prazos de Entrega</span></div><table style="width:100%;border-collapse:collapse;font-size:0.88rem;"><tr style="background:#f9f6ef;"><td style="padding:10px 20px;font-weight:700;color:#555;">Modalidade</td><td style="padding:10px 20px;font-weight:700;color:#555;">Prazo</td></tr><tr><td style="padding:10px 20px;border-top:1px solid #f0f0f0;">PAC</td><td style="padding:10px 20px;color:#C9A84C;font-weight:600;border-top:1px solid #f0f0f0;">8 a 20 dias úteis</td></tr><tr><td style="padding:10px 20px;border-top:1px solid #f0f0f0;">SEDEX</td><td style="padding:10px 20px;color:#C9A84C;font-weight:600;border-top:1px solid #f0f0f0;">2 a 5 dias úteis</td></tr></table></div><div style="background:#e8f5e9;border-left:4px solid #2e7d32;border-radius:0 12px 12px 0;padding:14px 18px;margin-bottom:16px;"><p style="color:#2e7d32;font-weight:700;margin-bottom:4px;">🎉 Frete Grátis</p><p style="color:#444;font-size:0.9rem;">Pedidos acima de <strong>R$ 300,00</strong> ganham frete grátis para todo o Brasil!</p></div><div style="background:#fff3e0;border-left:4px solid #e65100;border-radius:0 12px 12px 0;padding:14px 18px;"><p style="color:#e65100;font-weight:700;margin-bottom:4px;">⚠️ Dúvidas?</p><p style="color:#444;font-size:0.88rem;">WhatsApp: <strong>(11) 96950-8486</strong></p></div><div style="background:#f9f6ef;border-left:4px solid #C9A84C;border-radius:0 12px 12px 0;padding:14px 18px;margin-top:12px;"><p style="color:#C9A84C;font-weight:700;margin-bottom:4px;">🛒 Pedido Mínimo</p><p style="color:#444;font-size:0.9rem;">O valor mínimo para realizar um pedido é de <strong>R$ 200,00</strong>.</p></div>`,
+    trocas: `<div style="text-align:center;margin-bottom:28px;"><div style="font-size:3rem;margin-bottom:8px;">🔄</div><h2 style="color:#C9A84C;font-size:1.8rem;font-weight:700;">Trocas e Devoluções</h2><div style="width:60px;height:3px;background:#C9A84C;margin:12px auto 0;border-radius:2px;"></div></div><p style="color:#444;line-height:1.7;font-size:0.92rem;margin-bottom:20px;">A <strong>Lelê Inox Semi Joias</strong> preza pela sua satisfação. Em caso de problemas, estamos aqui para resolver!</p><div style="background:#fff;border:1px solid #f0f0f0;border-radius:14px;overflow:hidden;margin-bottom:16px;"><div style="background:#1a1a1a;padding:12px 20px;"><span style="color:#C9A84C;font-weight:700;">✅ Quando você pode trocar ou devolver?</span></div><div style="padding:16px 20px;"><ul style="color:#444;font-size:0.9rem;line-height:1.8;list-style:none;padding:0;"><li style="padding:4px 0;border-bottom:1px solid #f5f5f5;">✔️ Produto com defeito de fabricação</li><li style="padding:4px 0;border-bottom:1px solid #f5f5f5;">✔️ Produto diferente do pedido</li><li style="padding:4px 0;border-bottom:1px solid #f5f5f5;">✔️ Produto danificado no transporte</li><li style="padding:4px 0;">✔️ Desistência em até <strong>7 dias corridos</strong> do recebimento (CDC)</li></ul></div></div><div style="background:#fff;border:1px solid #f0f0f0;border-radius:14px;overflow:hidden;margin-bottom:16px;"><div style="background:#1a1a1a;padding:12px 20px;"><span style="color:#C9A84C;font-weight:700;">❌ O que não é aceito?</span></div><div style="padding:16px 20px;"><ul style="color:#444;font-size:0.9rem;line-height:1.8;list-style:none;padding:0;"><li style="padding:4px 0;border-bottom:1px solid #f5f5f5;">✖️ Produto com sinais de uso ou mau uso</li><li style="padding:4px 0;border-bottom:1px solid #f5f5f5;">✖️ Produto sem embalagem original</li><li style="padding:4px 0;">✖️ Solicitações após 7 dias do recebimento</li></ul></div></div><div style="background:#f9f6ef;border-radius:14px;padding:20px;margin-bottom:16px;"><p style="font-weight:700;color:#1a1a1a;margin-bottom:10px;">📋 Como solicitar?</p><ol style="color:#444;font-size:0.9rem;line-height:1.8;padding-left:18px;"><li>Entre em contato pelo WhatsApp: <strong>(11) 96950-8486</strong></li><li>Informe o número do pedido e o motivo</li><li>Envie fotos do produto</li><li>Aguarde análise em até <strong>2 dias úteis</strong></li><li>Após aprovação, enviaremos instruções</li></ol></div>`,
+    garantia: `<div style="text-align:center;margin-bottom:28px;"><div style="font-size:3rem;margin-bottom:8px;">🛡️</div><h2 style="color:#C9A84C;font-size:1.8rem;font-weight:700;">Garantia e Cuidados com as Peças</h2><div style="width:60px;height:3px;background:#C9A84C;margin:12px auto 0;border-radius:2px;"></div></div>
+<p style="color:#444;line-height:1.7;font-size:0.95rem;margin-bottom:22px;">Na <strong>Lelê Inox</strong>, a qualidade é nosso compromisso. Por isso, oferecemos:</p>
+<div style="background:#f9f6ef;border-radius:14px;padding:22px 24px;margin-bottom:20px;">
+  <p style="font-weight:700;color:#C9A84C;font-size:1rem;margin-bottom:14px;">🏆 Nossa Garantia</p>
+  <ul style="list-style:none;padding:0;color:#444;font-size:0.93rem;line-height:1.9;">
+    <li style="padding:6px 0;border-bottom:1px solid #f0e8d0;display:flex;align-items:center;gap:10px;"><span style="color:#C9A84C;font-size:1.1rem;">✦</span><span><strong>Garantia vitalícia</strong> para o metal.</span></li>
+    <li style="padding:6px 0;display:flex;align-items:center;gap:10px;"><span style="color:#C9A84C;font-size:1.1rem;">✦</span><span><strong>Garantia de 90 dias</strong> para soldas, a contar da data da compra.</span></li>
+  </ul>
+</div>
+<div style="background:#fff;border:1px solid #f0e8d0;border-radius:14px;overflow:hidden;margin-bottom:16px;">
+  <div style="background:#1a1a1a;padding:12px 20px;"><span style="color:#C9A84C;font-weight:700;">✨ Cuidados de Conservação</span></div>
+  <div style="padding:18px 20px;">
+    <p style="color:#555;font-size:0.9rem;margin-bottom:14px;">Para preservar o brilho e a qualidade original das suas peças:</p>
+    <div style="display:grid;gap:10px;">
+      <div style="background:#f9f6ef;border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;"><span style="font-size:1.4rem;flex-shrink:0;">💧</span><div><strong style="color:#1a1a1a;font-size:0.9rem;">Evite produtos químicos</strong><p style="color:#666;font-size:0.85rem;margin-top:3px;">Retire as joias antes de usar perfumes, cremes, cloro e produtos de limpeza.</p></div></div>
+      <div style="background:#f9f6ef;border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;"><span style="font-size:1.4rem;flex-shrink:0;">🛡️</span><div><strong style="color:#1a1a1a;font-size:0.9rem;">Proteja contra quedas e impactos</strong><p style="color:#666;font-size:0.85rem;margin-top:3px;">Guarde as peças em local seguro, evitando batidas e pressão excessiva.</p></div></div>
+      <div style="background:#f9f6ef;border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;"><span style="font-size:1.4rem;flex-shrink:0;">📦</span><div><strong style="color:#1a1a1a;font-size:0.9rem;">Armazenamento correto</strong><p style="color:#666;font-size:0.85rem;margin-top:3px;">Guarde as peças separadas em saquinhos de veludo ou caixinhas, em local seco.</p></div></div>
+      <div style="background:#f9f6ef;border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;"><span style="font-size:1.4rem;flex-shrink:0;">✨</span><div><strong style="color:#1a1a1a;font-size:0.9rem;">Como limpar</strong><p style="color:#666;font-size:0.85rem;margin-top:3px;">Use pano macio seco ou água morna com sabão neutro e escova suave. Seque bem.</p></div></div>
+    </div>
+  </div>
+</div>
+<div style="background:#fff;border:1px solid #ffcdd2;border-radius:14px;overflow:hidden;margin-bottom:20px;">
+  <div style="background:#c62828;padding:12px 20px;"><span style="color:white;font-weight:700;">❌ O que não está coberto pela garantia</span></div>
+  <div style="padding:18px 20px;">
+    <ul style="list-style:none;padding:0;color:#444;font-size:0.9rem;line-height:1.9;">
+      <li style="padding:5px 0;border-bottom:1px solid #f5f5f5;display:flex;align-items:center;gap:10px;"><span style="color:#e53935;">✖</span> Quebra de correntes, pulseiras e tornozeleiras.</li>
+      <li style="padding:5px 0;border-bottom:1px solid #f5f5f5;display:flex;align-items:center;gap:10px;"><span style="color:#e53935;">✖</span> Pedras coladas na peça.</li>
+      <li style="padding:5px 0;display:flex;align-items:center;gap:10px;"><span style="color:#e53935;">✖</span> Defeitos decorrentes de mau uso.</li>
+    </ul>
+  </div>
+</div>
+<div style="background:linear-gradient(135deg,#1a1a1a,#2d2d2d);border-radius:14px;padding:20px 24px;text-align:center;margin-bottom:16px;">
+  <p style="color:rgba(255,255,255,0.9);font-size:0.93rem;line-height:1.7;margin-bottom:14px;">Nosso objetivo é garantir que você aproveite suas joias inoxidáveis com a mesma <strong style="color:#C9A84C;">beleza e durabilidade</strong> desde o primeiro dia. 💎</p>
+  <a href="https://wa.me/5511969508486" target="_blank" style="display:inline-block;background:#25D366;color:white;padding:10px 24px;border-radius:20px;text-decoration:none;font-weight:700;font-size:0.9rem;">💬 Dúvidas? Fale no WhatsApp</a>
+</div>`
+};
+
+function previewTableImg(input, id) {
+    const url = input.value.trim();
+    const src = getImgSrc(url);
+    const wrap = input.parentElement;
+    const prevEl = wrap.querySelector('.table-img-preview img');
+    if (prevEl && src) {
+        prevEl.src = src;
+        wrap.querySelector('.table-img-preview').style.display = 'block';
+    }
+    queueSave(id, 'image', url);
+    const row = document.querySelector(`tr[data-id="${id}"]`);
+    if (row && src) { const img = row.querySelector('td:first-child img'); if(img) img.src = src; }
+}
+function showTableImgPreview(input) {
+    const wrap = input.parentElement;
+    const prev = wrap.querySelector('.table-img-preview');
+    if (prev && input.value.trim()) prev.style.display = 'block';
+}
+function hideTableImgPreview(input) {
+    setTimeout(() => {
+        const wrap = input.parentElement;
+        const prev = wrap.querySelector('.table-img-preview');
+        if (prev) prev.style.display = 'none';
+    }, 200);
+}
+
+function showPage(page) {
+    const overlay = document.getElementById('infoPageOverlay');
+    const contentEl = document.getElementById('infoPageContent');
+    if (!pagesContent[page] || !overlay || !contentEl) return false;
+    contentEl.innerHTML = pagesContent[page];
+    overlay.style.display = 'flex';
+    overlay.scrollTop = 0;
+    return false;
+}
+function closeInfoPage() {
+    document.getElementById('infoPageOverlay').style.display = 'none';
+}
+
+renderGrids();
+</script>
+</body>
+</html>
