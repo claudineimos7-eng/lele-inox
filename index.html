@@ -601,6 +601,27 @@
 <div class="admin-toast" id="adminToast"></div>
 
 
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, get, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBvox8IQVO7TQ5mQkdS7Hu6yqN4jTL9hIQ",
+  authDomain: "leleinoxsemijoias.firebaseapp.com",
+  databaseURL: "https://leleinoxsemijoias-default-rtdb.firebaseio.com",
+  projectId: "leleinoxsemijoias",
+  storageBucket: "leleinoxsemijoias.firebasestorage.app",
+  messagingSenderId: "457886671982",
+  appId: "1:457886671982:web:26199beba62e0c57c4fb98"
+};
+
+const _app = initializeApp(firebaseConfig);
+const _db = getDatabase(_app);
+
+window.__fb = { db: _db, ref, set, get, onValue, remove };
+<\/script>
+
 <script>
 const ADMIN_PASSWORD = 'lele2025';
 const cart = [];  // ← carrinho de compras
@@ -688,35 +709,79 @@ const produtosBase = [
             {id:90, name:"Pulseira Galeria 6mm Boreal", category:"pulseiras", price:36.00, badge:"new", image:"https://drive.google.com/thumbnail?id=16Wde4tArw7YWkrhpBjnqTSQjC1Cg9Ufe&sz=w800", colors:["multi"], colorsNames:["Boreal"], description:"Pulseira galeria 6mm boreal"}
         ];
 
+// ===== FIREBASE: carregar produtos na inicialização =====
+let produtos = JSON.parse(JSON.stringify(produtosBase));
+
+function normalizarProduto(p) {
+    return {
+        colors: ['#C0C0C0'],
+        colorsNames: ['Aço Inox'],
+        description: '',
+        badge: undefined,
+        oldPrice: undefined,
+        ...p,
+        price: parseFloat(p.price) || 0
+    };
+}
+
 function loadProdutos() {
-    const saved = localStorage.getItem('lele_produtos_v2');
-    if (saved) {
-        try {
-            const parsed = JSON.parse(saved);
-            if (Array.isArray(parsed) && parsed.length > 0) {
-                // Ensure all products have required fields
-                return parsed.map(p => ({
-                    colors: ['#C0C0C0'],
-                    colorsNames: ['Aço Inox'],
-                    description: '',
-                    badge: undefined,
-                    oldPrice: undefined,
-                    ...p,
-                    price: parseFloat(p.price) || 0
-                }));
+    // Tenta carregar do Firebase
+    if (window.__fb) {
+        const dbRef = window.__fb.ref(window.__fb.db, 'produtos');
+        window.__fb.onValue(dbRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data && typeof data === 'object') {
+                const arr = Object.values(data).map(normalizarProduto);
+                if (arr.length > 0) {
+                    produtos = arr.sort((a,b) => a.id - b.id);
+                    renderGrids();
+                    if (document.getElementById('adminPanel').classList.contains('open')) {
+                        renderAdminStats(); renderAdminTable();
+                    }
+                    return;
+                }
             }
-        } catch(e) {
-            localStorage.removeItem('lele_produtos_v2');
-        }
+            // Se Firebase vazio, sobe os produtos base
+            uploadProdutosBase();
+        });
     }
-    return JSON.parse(JSON.stringify(produtosBase));
 }
+
+function uploadProdutosBase() {
+    if (!window.__fb) return;
+    const updates = {};
+    produtosBase.forEach(p => { updates['produtos/' + p.id] = p; });
+    const dbRef = window.__fb.ref(window.__fb.db, '/');
+    window.__fb.set(dbRef, updates).then(() => {
+        console.log('Produtos base enviados ao Firebase!');
+    });
+}
+
 function saveProdutos() {
-    localStorage.setItem('lele_produtos_v2', JSON.stringify(produtos));
-    const el = document.getElementById('adminSaveStatus');
-    if(el) el.textContent = '✅ Salvo ' + new Date().toLocaleTimeString();
+    if (window.__fb) {
+        const updates = {};
+        produtos.forEach(p => { updates['produtos/' + p.id] = p; });
+        const dbRef = window.__fb.ref(window.__fb.db, '/');
+        window.__fb.set(dbRef, updates).then(() => {
+            const el = document.getElementById('adminSaveStatus');
+            if(el) el.textContent = '✅ Salvo na nuvem ' + new Date().toLocaleTimeString();
+        }).catch(err => {
+            console.error('Erro ao salvar:', err);
+            const el = document.getElementById('adminSaveStatus');
+            if(el) el.textContent = '⚠️ Erro ao salvar!';
+        });
+    }
 }
-let produtos = loadProdutos();
+
+// Inicializar Firebase assim que SDK estiver pronto
+function initFirebase() {
+    if (window.__fb) {
+        loadProdutos();
+    } else {
+        setTimeout(initFirebase, 300);
+    }
+}
+setTimeout(initFirebase, 500);
 
 function formatPrice(v) {
     return 'R$ ' + parseFloat(v).toFixed(2).replace('.', ',');
@@ -978,6 +1043,11 @@ function deleteProduct(id) {
     const p = produtos.find(x => x.id === id);
     if (!p || !confirm(`Excluir "${p.name}"?`)) return;
     produtos = produtos.filter(x => x.id !== id);
+    // Remove do Firebase
+    if (window.__fb) {
+        const dbRef = window.__fb.ref(window.__fb.db, 'produtos/' + id);
+        window.__fb.remove(dbRef);
+    }
     saveProdutos(); renderAdminStats();
     filterAdminTable(); showToast('🗑️ Excluído!');
 }
