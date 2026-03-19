@@ -1229,49 +1229,86 @@ function carregarProdutosDaPlanilha() {
         .then(r => r.text())
         .then(csv => {
             const linhas = csv.trim().split('\n');
-            if (linhas.length < 2) return; // Só tem cabeçalho, sem produtos
+            if (linhas.length < 2) return;
             
             const headers = linhas[0].split(',').map(h => h.replace(/"/g,'').trim().toLowerCase());
             const novosProdutos = [];
             
+            // Mapeamento português → inglês
+            const mapa = {
+                'nome': 'name',
+                'preço': 'price',
+                'preco': 'price',
+                'categoria': 'category',
+                'link da foto': 'image',
+                'foto': 'image',
+                'imagem': 'image',
+                'image': 'image',
+                'descrição': 'description',
+                'descricao': 'description',
+                'badge': 'badge',
+                'etiqueta': 'badge',
+                'name': 'name',
+                'price': 'price',
+                'category': 'category',
+                'description': 'description'
+            };
+            
             for (let i = 1; i < linhas.length; i++) {
                 const cols = parseCsvLine(linhas[i]);
-                if (!cols || cols.length < 3) continue;
+                if (!cols || cols.length < 2) continue;
                 
                 const prod = {};
                 headers.forEach((h, idx) => {
-                    prod[h] = (cols[idx] || '').replace(/^"|"$/g, '').trim();
+                    const key = mapa[h] || h;
+                    prod[key] = (cols[idx] || '').replace(/^"|"$/g, '').trim();
                 });
                 
-                if (!prod.name && !prod.nome) continue;
+                if (!prod.name) continue;
+                
+                // Limpar preço — remove R$, espaços, troca vírgula por ponto
+                const precoLimpo = (prod.price || '0')
+                    .replace('R$','').replace(/\s/g,'')
+                    .replace(',','.').replace(/[^0-9.]/g,'');
+                
+                // Mapear categoria
+                const catMap = {
+                    'aneis': 'aneis', 'anéis': 'aneis', 'anel': 'aneis',
+                    'brincos': 'brincos', 'brinco': 'brincos',
+                    'colares': 'colares', 'colar': 'colares',
+                    'pulseiras': 'pulseiras', 'pulseira': 'pulseiras',
+                    'correntes': 'correntes', 'corrente': 'correntes',
+                    'pulseiras_masc': 'pulseiras_masc', 'pulseira masc': 'pulseiras_masc',
+                    'infantil': 'infantil',
+                    'tornozeleiras': 'tornozeleiras', 'tornozeleira': 'tornozeleiras'
+                };
+                const catKey = (prod.category || 'brincos').toLowerCase().trim();
+                const categoria = catMap[catKey] || catKey;
                 
                 const p = {
                     id: 10000 + i,
-                    name: prod.name || prod.nome || '',
-                    category: (prod.category || prod.categoria || 'brincos').toLowerCase().replace(/ /g,'_'),
-                    price: parseFloat((prod.price || prod.preco || '0').replace(',','.')) || 0,
-                    image: prod.image || prod.imagem || prod.foto || '',
-                    badge: prod.badge || prod.etiqueta || '',
-                    description: prod.description || prod.descricao || prod.descrição || '',
+                    name: prod.name,
+                    category: categoria,
+                    price: parseFloat(precoLimpo) || 0,
+                    image: prod.image || '',
+                    description: prod.description || '',
                     colors: ['#C0C0C0'],
                     colorsNames: ['Aço Inox']
                 };
-                
-                if (!p.badge) delete p.badge;
-                if (p.name) novosProdutos.push(p);
+                if (prod.badge) p.badge = prod.badge;
+                novosProdutos.push(p);
             }
             
             if (novosProdutos.length > 0) {
-                // Remove produtos da planilha que já existiam (evita duplicata)
                 produtos = produtos.filter(p => p.id < 10000);
-                // Adiciona os novos
                 produtos = produtos.concat(novosProdutos);
                 renderGrids();
-                console.log('✅ ' + novosProdutos.length + ' produtos carregados da planilha!');
+                console.log('✅ ' + novosProdutos.length + ' produtos da planilha carregados!');
             }
         })
-        .catch(e => console.log('Planilha vazia ou sem conexão:', e.message));
+        .catch(e => console.log('Planilha:', e.message));
 }
+
 
 function parseCsvLine(line) {
     const result = [];
