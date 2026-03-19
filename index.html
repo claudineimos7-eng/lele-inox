@@ -78,14 +78,16 @@
             padding: 0 0 40px;
             justify-content: center;
         }
-        .product-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: var(--sombra); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; width: 200px; }
+        .product-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: var(--sombra); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; width: 200px; display: flex; flex-direction: column; }
+        .product-info { display: flex; flex-direction: column; flex: 1; padding: 15px; }
+        .product-name { flex: 1; }
+        .add-cart-btn { margin-top: auto; }
         @media(max-width: 1090px) { .products-grid { grid-template-columns: repeat(4, 200px); max-width: 864px; } }
         @media(max-width: 870px)  { .products-grid { grid-template-columns: repeat(3, 200px); max-width: 648px; } }
         @media(max-width: 660px)  { .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 100%; } .product-card { width: 100%; } }
         .product-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
         .product-img { width: 100%; aspect-ratio: 1; object-fit: cover; background: #f9f9f9; display: block; }
         .product-img-placeholder { width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, #f5f5f5, #e8e8e8); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #ccc; }
-        .product-info { padding: 15px; }
         .product-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
         .badge-new { background: #e8f5e9; color: #2e7d32; }
         .badge-promo { background: #fff3e0; color: #e65100; }
@@ -541,6 +543,7 @@
         <h2>💎 Admin — Lelê Inox Semi Joias</h2>
         <div class="admin-topbar-actions">
             <span style="color:#aaa;font-size:0.8rem;" id="adminSaveStatus"></span>
+            <button class="admin-btn" style="background:#25D366;color:white;font-weight:700;" onclick="exportarSiteAtualizado()" title="Baixa o site com todos os produtos salvos. Suba no GitHub para publicar!">🚀 Baixar Site Atualizado</button>
             <button class="admin-btn admin-btn-gold" onclick="exportJSON()">⬇️ Exportar JSON</button>
             <button class="admin-btn" style="background:#e53935;color:white;" onclick="if(confirm('Resetar todos os produtos para o padrão original?')){localStorage.removeItem(\'lele_produtos_v2\');produtos=JSON.parse(JSON.stringify(produtosBase));saveProdutos();renderAdminStats();renderAdminTable();renderGrids();showToast(\'✅ Produtos resetados!\');}">🔄 Resetar</button>
             <button class="admin-btn admin-btn-white" onclick="closeAdmin()">✕ Fechar</button>
@@ -559,6 +562,17 @@
             <div class="admin-stat-card"><div class="stat-num" id="statTornozeleiras">0</div><div class="stat-label">Tornozeleiras</div></div>
         </div>
         <div class="admin-section">
+            <div style="background:linear-gradient(135deg,#1a1a1a,#2d2d2d);border-radius:14px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:16px;">
+                <div style="font-size:2rem;">🚀</div>
+                <div>
+                    <div style="color:#C9A84C;font-weight:700;font-size:0.95rem;margin-bottom:4px;">Como publicar produtos para os clientes</div>
+                    <div style="color:rgba(255,255,255,0.75);font-size:0.82rem;line-height:1.6;">
+                        1. Cadastre ou edite os produtos abaixo<br>
+                        2. Clique em <strong style="color:#25D366;">🚀 Baixar Site Atualizado</strong> no topo<br>
+                        3. Suba o arquivo <code style="background:#333;padding:1px 5px;border-radius:4px;">index.html</code> no GitHub → Vercel publica automaticamente em segundos!
+                    </div>
+                </div>
+            </div>
             <div class="admin-section-title">➕ Adicionar Novo Produto</div>
             <div class="admin-form-grid">
                 <div class="admin-form-group"><label>Nome do Produto *</label><input class="admin-form-input" id="newName" placeholder="Ex: Brinco Argola Dourada"></div>
@@ -566,19 +580,19 @@
                 <div class="admin-form-group"><label>Preço (R$) *</label><input class="admin-form-input" id="newPrice" type="number" step="0.01" placeholder="29.90"></div>
                 <div class="admin-form-group"><label>Badge</label><select class="admin-form-input" id="newBadge"><option value="">Nenhum</option><option value="new">🆕 Novo</option><option value="promo">🔥 Promoção</option></select></div>
                 <div class="admin-form-group admin-form-full">
-                  <label>🖼️ Imagem do Produto — Cole o link de qualquer site ou do Google Drive</label>
-                  <div id="pasteZone" onclick="document.getElementById('newImg').focus()" style="border:2px dashed #C9A84C;border-radius:12px;padding:14px 16px;background:#fffdf5;cursor:text;transition:border-color 0.2s;margin-bottom:8px;">
-                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-                      <span style="font-size:1.4rem;">📋</span>
-                      <span style="font-size:0.82rem;color:#888;line-height:1.4;">Clique com botão direito em qualquer imagem na internet → <strong style="color:#C9A84C;">Copiar endereço da imagem</strong> → Cole aqui</span>
-                    </div>
-                    <input class="admin-form-input" id="newImg" placeholder="Cole o link da imagem aqui (Ctrl+V)..." oninput="previewNewImg()" onpaste="setTimeout(previewNewImg,50)" style="margin-bottom:0;">
-                  </div>
-                  <div id="newImgPreviewWrap" style="display:none;background:#f9f6ef;border-radius:12px;padding:12px;text-align:center;border:1px solid #e8d5a3;">
-                    <img id="newImgPreview" class="admin-preview-img" alt="Prévia" style="max-height:180px;border-radius:8px;display:block;margin:0 auto 8px;">
-                    <span id="newImgPreviewStatus" style="font-size:0.8rem;color:#2e7d32;font-weight:700;">✅ Imagem carregada!</span>
-                  </div>
-                </div>
+  <label>🖼️ Imagem — Cole o link de qualquer site ou Google Drive</label>
+  <div style="border:2px dashed #C9A84C;border-radius:12px;padding:14px 16px;background:#fffdf5;margin-bottom:8px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">📋</span>
+      <span style="font-size:0.82rem;color:#888;">Clique direito em qualquer imagem na internet → <strong style="color:#C9A84C;">Copiar endereço da imagem</strong> → Cole aqui</span>
+    </div>
+    <input class="admin-form-input" id="newImg" placeholder="Cole o link da imagem aqui (Ctrl+V)..." oninput="previewNewImg()" onpaste="setTimeout(previewNewImg,50)" style="margin-bottom:0;">
+  </div>
+  <div id="newImgPreviewWrap" style="display:none;background:#f9f6ef;border-radius:12px;padding:12px;text-align:center;border:1px solid #e8d5a3;">
+    <img id="newImgPreview" class="admin-preview-img" alt="Prévia" style="max-height:180px;border-radius:8px;display:block;margin:0 auto 8px;">
+    <span id="newImgPreviewStatus" style="font-size:0.8rem;color:#2e7d32;font-weight:700;">✅ Imagem carregada!</span>
+  </div>
+</div>
                 <div class="admin-form-group admin-form-full"><label>Descrição</label><input class="admin-form-input" id="newDesc" placeholder="Descrição do produto"></div>
                 <button class="admin-add-btn" onclick="addProduct()">➕ Adicionar Produto ao Catálogo</button>
             </div>
@@ -601,42 +615,17 @@
 <div class="admin-toast" id="adminToast"></div>
 
 
-<!-- Firebase SDK -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, get, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey:
-  authDomain: "leleinoxsemijoias.firebaseapp.com",
-  databaseURL: "https://leleinoxsemijoias-default-rtdb.firebaseio.com",
-  projectId: "leleinoxsemijoias",
-  storageBucket: "leleinoxsemijoias.firebasestorage.app",
-  messagingSenderId: "457886671982",
-  appId: "1:457886671982:web:26199beba62e0c57c4fb98"
-};
-
-const _app = initializeApp(firebaseConfig);
-const _db = getDatabase(_app);
-
-window.__fb = { db: _db, ref, set, get, onValue, remove };
-<\/script>
-
 <script>
 const ADMIN_PASSWORD = 'lele2025';
 const cart = [];  // ← carrinho de compras
 
 function getImgSrc(url) {
     if (!url) return '';
-    // Google Drive: ?id=XXX
     var m = url.match(/[?&]id=([^&"'\s]+)/);
     if (m) return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w600';
-    // Google Drive: /file/d/XXX/
     var m2 = url.match(/\/file\/d\/([^\/]+)/);
     if (m2) return 'https://drive.google.com/thumbnail?id=' + m2[1] + '&sz=w600';
-    // Base64 (imagem colada direto)
     if (url.startsWith('data:image')) return url;
-    // URL direta de qualquer site (mitiendanube, instagram, etc.)
     if (url.startsWith('http') || url.startsWith('//')) return url;
     return url;
 }
@@ -709,82 +698,37 @@ const produtosBase = [
             {id:90, name:"Pulseira Galeria 6mm Boreal", category:"pulseiras", price:36.00, badge:"new", image:"https://drive.google.com/thumbnail?id=16Wde4tArw7YWkrhpBjnqTSQjC1Cg9Ufe&sz=w800", colors:["multi"], colorsNames:["Boreal"], description:"Pulseira galeria 6mm boreal"}
         ];
 
-// ===== FIREBASE: carregar produtos na inicialização =====
-let produtos = JSON.parse(JSON.stringify(produtosBase));
-
-function normalizarProduto(p) {
-    return {
-        colors: ['#C0C0C0'],
-        colorsNames: ['Aço Inox'],
-        description: '',
-        badge: undefined,
-        oldPrice: undefined,
-        ...p,
-        price: parseFloat(p.price) || 0
-    };
-}
-
 function loadProdutos() {
-    // Tenta carregar do Firebase
-    if (window.__fb) {
-        const dbRef = window.__fb.ref(window.__fb.db, 'produtos');
-        window.__fb.onValue(dbRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data && typeof data === 'object') {
-                const arr = Object.values(data).map(normalizarProduto);
-                if (arr.length > 0) {
-                    produtos = arr.sort((a,b) => a.id - b.id);
-                    renderGrids();
-                    if (document.getElementById('adminPanel').classList.contains('open')) {
-                        renderAdminStats(); renderAdminTable();
-                    }
-                    return;
-                }
+    // Limpa versões antigas
+    localStorage.removeItem('lele_produtos_v1');
+    localStorage.removeItem('lele_produtos_v2');
+    try {
+        const saved = localStorage.getItem('lele_produtos_v3');
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+                return parsed.map(p => ({
+                    colors: ['#C0C0C0'],
+                    colorsNames: ['Aço Inox'],
+                    description: '',
+                    badge: undefined,
+                    oldPrice: undefined,
+                    ...p,
+                    price: parseFloat(p.price) || 0
+                }));
             }
-            // Se Firebase vazio, sobe os produtos base
-            uploadProdutosBase();
-        });
+        }
+    } catch(e) {
+        localStorage.removeItem('lele_produtos_v3');
     }
+    return JSON.parse(JSON.stringify(produtosBase));
 }
-
-function uploadProdutosBase() {
-    if (!window.__fb) return;
-    const updates = {};
-    produtosBase.forEach(p => { updates['produtos/' + p.id] = p; });
-    const dbRef = window.__fb.ref(window.__fb.db, '/');
-    window.__fb.set(dbRef, updates).then(() => {
-        console.log('Produtos base enviados ao Firebase!');
-    });
-}
-
 function saveProdutos() {
-    if (window.__fb) {
-        const updates = {};
-        produtos.forEach(p => { updates['produtos/' + p.id] = p; });
-        const dbRef = window.__fb.ref(window.__fb.db, '/');
-        window.__fb.set(dbRef, updates).then(() => {
-            const el = document.getElementById('adminSaveStatus');
-            if(el) el.textContent = '✅ Salvo na nuvem ' + new Date().toLocaleTimeString();
-        }).catch(err => {
-            console.error('Erro ao salvar:', err);
-            const el = document.getElementById('adminSaveStatus');
-            if(el) el.textContent = '⚠️ Erro ao salvar!';
-        });
-    }
+    // Produtos ficam em memória — para publicar use "Baixar Site Atualizado"
+    const el = document.getElementById('adminSaveStatus');
+    if(el) el.textContent = '✅ Salvo! Clique em 🚀 Baixar Site Atualizado para publicar.';
 }
-
-// Inicializar Firebase assim que SDK estiver pronto
-function initFirebase() {
-    if (window.__fb) {
-        loadProdutos();
-    } else {
-        setTimeout(initFirebase, 300);
-    }
-}
-// Mostrar produtos base IMEDIATAMENTE
-renderGrids();
-// Depois tenta conectar Firebase
-setTimeout(initFirebase, 800);
+let produtos = loadProdutos();
 
 function formatPrice(v) {
     return 'R$ ' + parseFloat(v).toFixed(2).replace('.', ',');
@@ -1006,18 +950,7 @@ function renderAdminTable(filter, catFilter) {
                 <option value="new" ${p.badge==='new'?'selected':''}>🆕 Novo</option>
                 <option value="promo" ${p.badge==='promo'?'selected':''}>🔥 Promo</option>
             </select></td>
-            <td style="position:relative;">
-              <input class="admin-img-edit" value="${(p.image||'').replace(/"/g,'&quot;')}" placeholder="Cole URL da imagem..." 
-                oninput="previewTableImg(this,${p.id})" 
-                onpaste="const el=this;setTimeout(()=>previewTableImg(el,${p.id}),50)"
-                onchange="queueSave(${p.id},'image',this.value)"
-                onfocus="showTableImgPreview(this)"
-                onblur="hideTableImgPreview(this)">
-              <div class="table-img-preview" style="display:none;position:absolute;right:0;bottom:44px;background:#fff;border:2px solid #C9A84C;border-radius:10px;padding:6px;z-index:50;box-shadow:0 4px 20px rgba(0,0,0,0.15);">
-                <img src="${getImgSrc(p.image)}" style="width:120px;height:120px;object-fit:cover;border-radius:6px;display:block;" onerror="this.src=''">
-                <div style="font-size:0.7rem;color:#2e7d32;text-align:center;margin-top:4px;font-weight:700;">✅ Preview</div>
-              </div>
-            </td>
+            <td><input class="admin-img-edit" value="${(p.image||'').replace(/"/g,'&quot;')}" placeholder="URL imagem" onchange="queueSave(${p.id},'image',this.value)"></td>
             <td><button class="admin-save-row" onclick="saveRow(${p.id})">💾</button>&nbsp;<button class="admin-del-btn" onclick="deleteProduct(${p.id})">🗑️</button></td>
         </tr>`;
     }).join('');
@@ -1046,11 +979,6 @@ function deleteProduct(id) {
     const p = produtos.find(x => x.id === id);
     if (!p || !confirm(`Excluir "${p.name}"?`)) return;
     produtos = produtos.filter(x => x.id !== id);
-    // Remove do Firebase
-    if (window.__fb) {
-        const dbRef = window.__fb.ref(window.__fb.db, 'produtos/' + id);
-        window.__fb.remove(dbRef);
-    }
     saveProdutos(); renderAdminStats();
     filterAdminTable(); showToast('🗑️ Excluído!');
 }
@@ -1065,12 +993,11 @@ function previewNewImg() {
     const src = getImgSrc(url);
     if (src) {
         prev.src = src;
-        prev.style.display = 'block';
         wrap.style.display = 'block';
-        status.textContent = '⏳ Carregando imagem...';
+        status.textContent = '⏳ Carregando...';
         status.style.color = '#888';
         prev.onload = () => { status.textContent = '✅ Imagem carregada!'; status.style.color = '#2e7d32'; };
-        prev.onerror = () => { status.textContent = '⚠️ Imagem não carregou — verifique se o link está público'; status.style.color = '#e65100'; };
+        prev.onerror = () => { status.textContent = '⚠️ Link inválido ou imagem privada'; status.style.color = '#e65100'; };
     } else {
         wrap.style.display = 'none';
     }
@@ -1268,31 +1195,102 @@ const pagesContent = {
 </div>`
 };
 
-function previewTableImg(input, id) {
-    const url = input.value.trim();
-    const src = getImgSrc(url);
-    const wrap = input.parentElement;
-    const prevEl = wrap.querySelector('.table-img-preview img');
-    if (prevEl && src) {
-        prevEl.src = src;
-        wrap.querySelector('.table-img-preview').style.display = 'block';
+function exportarSiteAtualizado() {
+    const el = document.getElementById('adminSaveStatus');
+    if(el) el.textContent = '⏳ Gerando arquivo...';
+    try {
+        const produtosJSON = JSON.stringify(produtos);
+        let html = document.documentElement.outerHTML;
+        // Injeta os produtos atuais no produtosBase
+        html = html.replace(/const produtosBase = \[[\s\S]*?\];/, 'const produtosBase = ' + produtosJSON + ';');
+        const blob = new Blob(['<!DOCTYPE html>' + html], {type: 'text/html;charset=utf-8'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'index.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+        if(el) el.textContent = '✅ Site baixado! Suba no GitHub.';
+        showToast('🚀 Site atualizado! Suba no GitHub para publicar.');
+    } catch(e) {
+        if(el) el.textContent = '⚠️ Erro ao gerar!';
+        alert('Erro ao gerar arquivo: ' + e.message);
     }
-    queueSave(id, 'image', url);
-    const row = document.querySelector(`tr[data-id="${id}"]`);
-    if (row && src) { const img = row.querySelector('td:first-child img'); if(img) img.src = src; }
 }
-function showTableImgPreview(input) {
-    const wrap = input.parentElement;
-    const prev = wrap.querySelector('.table-img-preview');
-    if (prev && input.value.trim()) prev.style.display = 'block';
+
+
+
+// ===== GOOGLE SHEETS INTEGRATION =====
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1z6Y-tOsEJC8cegSk_36x6_EE2XwY98H4qAsF2ckA1eQ/export?format=csv&gid=0";
+
+function carregarProdutosDaPlanilha() {
+    fetch(SHEET_CSV_URL)
+        .then(r => r.text())
+        .then(csv => {
+            const linhas = csv.trim().split('\n');
+            if (linhas.length < 2) return; // Só tem cabeçalho, sem produtos
+            
+            const headers = linhas[0].split(',').map(h => h.replace(/"/g,'').trim().toLowerCase());
+            const novosProdutos = [];
+            
+            for (let i = 1; i < linhas.length; i++) {
+                const cols = parseCsvLine(linhas[i]);
+                if (!cols || cols.length < 3) continue;
+                
+                const prod = {};
+                headers.forEach((h, idx) => {
+                    prod[h] = (cols[idx] || '').replace(/^"|"$/g, '').trim();
+                });
+                
+                if (!prod.name && !prod.nome) continue;
+                
+                const p = {
+                    id: 10000 + i,
+                    name: prod.name || prod.nome || '',
+                    category: (prod.category || prod.categoria || 'brincos').toLowerCase().replace(/ /g,'_'),
+                    price: parseFloat((prod.price || prod.preco || '0').replace(',','.')) || 0,
+                    image: prod.image || prod.imagem || prod.foto || '',
+                    badge: prod.badge || prod.etiqueta || '',
+                    description: prod.description || prod.descricao || prod.descrição || '',
+                    colors: ['#C0C0C0'],
+                    colorsNames: ['Aço Inox']
+                };
+                
+                if (!p.badge) delete p.badge;
+                if (p.name) novosProdutos.push(p);
+            }
+            
+            if (novosProdutos.length > 0) {
+                // Remove produtos da planilha que já existiam (evita duplicata)
+                produtos = produtos.filter(p => p.id < 10000);
+                // Adiciona os novos
+                produtos = produtos.concat(novosProdutos);
+                renderGrids();
+                console.log('✅ ' + novosProdutos.length + ' produtos carregados da planilha!');
+            }
+        })
+        .catch(e => console.log('Planilha vazia ou sem conexão:', e.message));
 }
-function hideTableImgPreview(input) {
-    setTimeout(() => {
-        const wrap = input.parentElement;
-        const prev = wrap.querySelector('.table-img-preview');
-        if (prev) prev.style.display = 'none';
-    }, 200);
+
+function parseCsvLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (ch === '"') { inQuotes = !inQuotes; }
+        else if (ch === ',' && !inQuotes) { result.push(current); current = ''; }
+        else { current += ch; }
+    }
+    result.push(current);
+    return result;
 }
+
+// Carrega da planilha ao abrir o site
+window.addEventListener('load', function() {
+    setTimeout(carregarProdutosDaPlanilha, 1000);
+});
 
 function showPage(page) {
     const overlay = document.getElementById('infoPageOverlay');
