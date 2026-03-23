@@ -724,7 +724,12 @@ function loadProdutos() {
     return JSON.parse(JSON.stringify(produtosBase));
 }
 function saveProdutos() {
-    // Produtos ficam em memória — para publicar use "Baixar Site Atualizado"
+    // Salva no localStorage para persistir entre atualizações de página
+    try {
+        localStorage.setItem('lele_produtos_v3', JSON.stringify(produtos));
+    } catch(e) {
+        console.warn('Erro ao salvar no localStorage:', e);
+    }
     const el = document.getElementById('adminSaveStatus');
     if(el) el.textContent = '✅ Salvo! Clique em 🚀 Baixar Site Atualizado para publicar.';
 }
@@ -1278,12 +1283,24 @@ function carregarProdutosDaPlanilha() {
                     'colares': 'colares', 'colar': 'colares',
                     'pulseiras': 'pulseiras', 'pulseira': 'pulseiras',
                     'correntes': 'correntes', 'corrente': 'correntes',
+                    'correntes masculina': 'correntes', 'correntes masculinas': 'correntes',
+                    'correntes masc': 'correntes', 'corrente masc': 'correntes',
+                    'corrente masculina': 'correntes', 'corrente masculino': 'correntes',
+                    'correntes masculino': 'correntes',
                     'pulseiras_masc': 'pulseiras_masc', 'pulseira masc': 'pulseiras_masc',
+                    'pulseiras masc': 'pulseiras_masc', 'pulseiras masculinas': 'pulseiras_masc',
+                    'pulseiras masculina': 'pulseiras_masc', 'pulseira masculina': 'pulseiras_masc',
                     'infantil': 'infantil',
                     'tornozeleiras': 'tornozeleiras', 'tornozeleira': 'tornozeleiras'
                 };
-                const catKey = (prod.category || 'brincos').toLowerCase().trim();
-                const categoria = catMap[catKey] || catKey;
+                const catKey = (prod.category || '').toLowerCase().trim();
+                // Fallback inteligente: se contém "corrent" vai para correntes, senão brincos
+                let categoria = catMap[catKey];
+                if (!categoria) {
+                    if (catKey.includes('corrent')) categoria = 'correntes';
+                    else if (catKey.includes('masc') && catKey.includes('puls')) categoria = 'pulseiras_masc';
+                    else categoria = 'brincos';
+                }
                 
                 const p = {
                     id: 10000 + i,
