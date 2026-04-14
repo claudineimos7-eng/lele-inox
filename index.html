@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="no-referrer">
     <title>Lelê Inox Semi Joias</title>
     <style>
         :root {
@@ -127,45 +126,15 @@
         /* MODAL */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 300; display: none; align-items: center; justify-content: center; padding: 20px; }
         .modal-overlay.open { display: flex; }
-        .modal { background: white; border-radius: 20px; max-width: 780px; width: 100%; overflow: hidden; position: relative; display: flex; flex-direction: row; max-height: 92vh; }
-        @media(max-width: 640px) { .modal { flex-direction: column; max-height: 95vh; overflow-y: auto; } }
-        .modal-gallery { width: 380px; min-width: 380px; background: #f9f9f9; display: flex; flex-direction: column; }
-        @media(max-width: 640px) { .modal-gallery { width: 100%; min-width: unset; } }
-        .modal-main-img-wrap { position: relative; width: 100%; aspect-ratio: 1; overflow: hidden; background: #f5f5f5; cursor: zoom-in; }
-        .modal-main-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
-        .modal-main-img-wrap:hover img { transform: scale(1.04); }
-        .modal-zoom-icon { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.45); color: white; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 1rem; pointer-events: none; }
-        .modal-thumbnails { display: flex; gap: 8px; padding: 10px; overflow-x: auto; background: #f0f0f0; }
-        .modal-thumb { width: 58px; height: 58px; min-width: 58px; border-radius: 8px; object-fit: cover; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s, transform 0.2s; }
-        .modal-thumb:hover { transform: scale(1.08); }
-        .modal-thumb.active { border-color: var(--dourado); }
-        .modal-body { padding: 22px; flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
-        .modal-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
-        .modal-price { font-size: 1.7rem; font-weight: 700; color: var(--dourado); margin-bottom: 10px; }
-        .modal-desc { color: #666; margin-bottom: 16px; line-height: 1.6; font-size: 0.92rem; flex: 1; }
-        .modal-color-label { font-size: 0.8rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-        .modal-colors-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-        .modal-color-swatch { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #ddd; cursor: pointer; transition: transform 0.2s, border-color 0.2s; position: relative; }
-        .modal-color-swatch:hover { transform: scale(1.2); }
-        .modal-color-swatch.active { border-color: var(--dourado); box-shadow: 0 0 0 2px var(--dourado); }
-        .modal-color-swatch.multi { background: linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #c77dff); }
-        .modal-color-name { font-size: 0.82rem; color: #555; margin-bottom: 14px; font-style: italic; }
-        .modal-close { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 34px; height: 34px; cursor: pointer; font-size: 1rem; z-index: 10; display: flex; align-items: center; justify-content: center; }
-        .modal-add-btn { width: 100%; padding: 13px; background: var(--dourado); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: background 0.3s; }
+        .modal { background: white; border-radius: 20px; max-width: 600px; width: 100%; overflow: hidden; position: relative; }
+        .modal img { width: 100%; max-height: 350px; object-fit: cover; }
+        .modal-body { padding: 25px; }
+        .modal-name { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+        .modal-price { font-size: 1.8rem; font-weight: 700; color: var(--dourado); margin-bottom: 15px; }
+        .modal-desc { color: #666; margin-bottom: 20px; line-height: 1.6; }
+        .modal-close { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.1rem; z-index: 1; }
+        .modal-add-btn { width: 100%; padding: 14px; background: var(--dourado); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: background 0.3s; }
         .modal-add-btn:hover { background: #a8893d; }
-        .modal-share-btn { width: 100%; padding: 11px; background: #25D366; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 0.92rem; font-weight: 700; transition: background 0.3s; margin-top: 9px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .modal-share-btn:hover { background: #128C7E; }
-
-        /* LIGHTBOX */
-        .lightbox-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; display: none; align-items: center; justify-content: center; cursor: zoom-out; }
-        .lightbox-overlay.open { display: flex; }
-        .lightbox-overlay img { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: 8px; box-shadow: 0 0 60px rgba(0,0,0,0.8); }
-        .lightbox-close { position: fixed; top: 18px; right: 22px; background: rgba(255,255,255,0.15); color: white; border: none; border-radius: 50%; width: 42px; height: 42px; cursor: pointer; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; z-index: 1001; transition: background 0.2s; }
-        .lightbox-close:hover { background: rgba(255,255,255,0.3); }
-        .lightbox-nav { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); color: white; border: none; width: 46px; height: 46px; border-radius: 50%; cursor: pointer; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; z-index: 1001; transition: background 0.2s; }
-        .lightbox-nav:hover { background: rgba(255,255,255,0.3); }
-        .lightbox-prev { left: 14px; }
-        .lightbox-next { right: 14px; }
 
         /* WHATSAPP FLOAT */
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; text-decoration: none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); z-index: 150; transition: transform 0.3s; }
@@ -438,34 +407,14 @@
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
     <div class="modal" id="modal">
         <button class="modal-close" onclick="closeModalDirect()">✕</button>
-        <!-- Galeria de imagens -->
-        <div class="modal-gallery">
-            <div class="modal-main-img-wrap" onclick="openLightbox(0)">
-                <img id="modalMainImg" referrerpolicy="no-referrer" src="" alt="">
-                <div class="modal-zoom-icon">🔍</div>
-            </div>
-            <div class="modal-thumb" referrerpolicy="no-referrer"nails" id="modalThumbnails"></div>
-        </div>
-        <!-- Informações do produto -->
+        <img id="modalImg" src="" alt="">
         <div class="modal-body">
             <div class="modal-name" id="modalName"></div>
             <div class="modal-price" id="modalPrice"></div>
             <div class="modal-desc" id="modalDesc"></div>
-            <div class="modal-color-label" id="modalColorLabel" style="display:none">COR</div>
-            <div class="modal-colors-row" id="modalColorsRow"></div>
-            <div class="modal-color-name" id="modalColorName"></div>
             <button class="modal-add-btn" id="modalAddBtn">🛒 Adicionar ao Carrinho</button>
-            <button class="modal-share-btn" id="modalShareBtn">💬 Compartilhar pelo WhatsApp</button>
         </div>
     </div>
-</div>
-
-<!-- Lightbox -->
-<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox(event)">
-    <button class="lightbox-close" onclick="closeLightboxDirect()">✕</button>
-    <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1,event)">‹</button>
-    <img id="lightboxImg" referrerpolicy="no-referrer" src="" alt="">
-    <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1,event)">›</button>
 </div>
 
 <!-- Modal LGPD -->
@@ -596,7 +545,7 @@
             <span style="color:#aaa;font-size:0.8rem;" id="adminSaveStatus"></span>
             <button class="admin-btn" style="background:#25D366;color:white;font-weight:700;" onclick="exportarSiteAtualizado()" title="Baixa o site com todos os produtos salvos. Suba no GitHub para publicar!">🚀 Baixar Site Atualizado</button>
             <button class="admin-btn admin-btn-gold" onclick="exportJSON()">⬇️ Exportar JSON</button>
-            <button class="admin-btn" style="background:#e53935;color:white;" onclick="if(confirm('Resetar todos os produtos para o padrão original?')){localStorage.removeItem(\'lele_produtos_v2\');localStorage.removeItem(\'lele_produtos_v3\');produtos=JSON.parse(JSON.stringify(produtosBase));saveProdutos();renderAdminStats();renderAdminTable();renderGrids();showToast(\'✅ Produtos resetados!\');}">🔄 Resetar</button>
+            <button class="admin-btn" style="background:#e53935;color:white;" onclick="if(confirm('Resetar todos os produtos para o padrão original?')){localStorage.removeItem(\'lele_produtos_v2\');produtos=JSON.parse(JSON.stringify(produtosBase));saveProdutos();renderAdminStats();renderAdminTable();renderGrids();showToast(\'✅ Produtos resetados!\');}">🔄 Resetar</button>
             <button class="admin-btn admin-btn-white" onclick="closeAdmin()">✕ Fechar</button>
         </div>
     </div>
@@ -631,24 +580,17 @@
                 <div class="admin-form-group"><label>Preço (R$) *</label><input class="admin-form-input" id="newPrice" type="number" step="0.01" placeholder="29.90"></div>
                 <div class="admin-form-group"><label>Badge</label><select class="admin-form-input" id="newBadge"><option value="">Nenhum</option><option value="new">🆕 Novo</option><option value="promo">🔥 Promoção</option></select></div>
                 <div class="admin-form-group admin-form-full">
-  <label>🖼️ Imagem Principal — Cole o link de qualquer site ou Google Drive</label>
+  <label>🖼️ Imagem — Cole o link de qualquer site ou Google Drive</label>
   <div style="border:2px dashed #C9A84C;border-radius:12px;padding:14px 16px;background:#fffdf5;margin-bottom:8px;">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
       <span style="font-size:1.3rem;">📋</span>
       <span style="font-size:0.82rem;color:#888;">Clique direito em qualquer imagem na internet → <strong style="color:#C9A84C;">Copiar endereço da imagem</strong> → Cole aqui</span>
     </div>
-    <input class="admin-form-input" id="newImg" placeholder="Cole o link da imagem principal aqui..." oninput="previewNewImg()" onpaste="setTimeout(previewNewImg,50)" style="margin-bottom:0;">
+    <input class="admin-form-input" id="newImg" placeholder="Cole o link da imagem aqui (Ctrl+V)..." oninput="previewNewImg()" onpaste="setTimeout(previewNewImg,50)" style="margin-bottom:0;">
   </div>
   <div id="newImgPreviewWrap" style="display:none;background:#f9f6ef;border-radius:12px;padding:12px;text-align:center;border:1px solid #e8d5a3;">
-    <img id="newImgPreview" class="admin-preview-img" referrerpolicy="no-referrer" alt="Prévia" style="max-height:180px;border-radius:8px;display:block;margin:0 auto 8px;">
+    <img id="newImgPreview" class="admin-preview-img" alt="Prévia" style="max-height:180px;border-radius:8px;display:block;margin:0 auto 8px;">
     <span id="newImgPreviewStatus" style="font-size:0.8rem;color:#2e7d32;font-weight:700;">✅ Imagem carregada!</span>
-  </div>
-</div>
-                <div class="admin-form-group admin-form-full">
-  <label>🖼️🖼️ Imagens Extras (opcional) — Cole um link por linha para galeria de fotos</label>
-  <div style="border:2px dashed #aaa;border-radius:12px;padding:14px 16px;background:#fafafa;">
-    <textarea class="admin-form-input" id="newImgExtras" rows="3" placeholder="Cole aqui outros links de imagens (um por linha) para criar galeria de fotos do produto..." style="resize:vertical;font-size:0.85rem;"></textarea>
-    <div style="font-size:0.78rem;color:#aaa;margin-top:6px;">💡 Cada linha vira uma foto na galeria. O cliente pode ver todas e clicar para ampliar.</div>
   </div>
 </div>
                 <div class="admin-form-group admin-form-full"><label>Descrição</label><input class="admin-form-input" id="newDesc" placeholder="Descrição do produto"></div>
@@ -679,179 +621,112 @@ const cart = [];  // ← carrinho de compras
 
 function getImgSrc(url) {
     if (!url) return '';
-    // Handle Google Drive links
     var m = url.match(/[?&]id=([^&"'\s]+)/);
-    if (m) url = 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w600';
+    if (m) return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w600';
     var m2 = url.match(/\/file\/d\/([^\/]+)/);
-    if (m2) url = 'https://drive.google.com/thumbnail?id=' + m2[1] + '&sz=w600';
-    if (!url.startsWith('http') && !url.startsWith('//')) return url;
+    if (m2) return 'https://drive.google.com/thumbnail?id=' + m2[1] + '&sz=w600';
     if (url.startsWith('data:image')) return url;
-    // Route through proxy to bypass hotlink protection
-    return 'https://images.weserv.nl/?url=' + encodeURIComponent(url) + '&w=600&output=webp&q=85';
+    if (url.startsWith('http') || url.startsWith('//')) return url;
+    return url;
 }
 function closeLGPD() { document.getElementById('lgpdOverlay').style.display = 'none'; }
 
 const produtosBase = [
-            {id:1, name:"Brinco Argola com Cristal Rosa", category:"brincos", price:22.80, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/img_45471-a0b4bd944cd99fcba216899387446305-1024-1024.webp", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Brinco argola com cristal rosa strass hipoalergênico"},
-            {id:2, name:"Brinco Argolinha Árvore da Vida", category:"brincos", price:18.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6228-765f8ef6ce935462e3c17099957991857-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Argolinha com pingente Árvore da Vida em aço inox"},
-            {id:3, name:"Brinco Borboleta", category:"brincos", price:21.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-imagem-acessorios-aline-neves-fotografia-a0-dd3573743993-48786-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco borboleta grande em aço inox"},
-            {id:4, name:"Brinco Argola com Cristal Vermelho", category:"brincos", price:22.80, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6036-263362b6023cb55c6221bb-1024-1024.webp", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Brinco argola com cristal vermelho strass"},
-            {id:5, name:"Brinco Argola Torcida", category:"brincos", price:18.60, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-julho-39-9b1ae299f04849a194216571599822685-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco argola torcida aço inox hipoalergênico"},
-            {id:6, name:"Brinco Argola com Cristal Verde", category:"brincos", price:22.80, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6028-419bb0adcb2bf0c3012917041378113-1024-1024.webp", colors:["#228B22"], colorsNames:["Verde"], description:"Brinco argola com cristal verde strass"},
-            {id:7, name:"Brinco Argola com Cristal Azul", category:"brincos", price:22.80, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6036-25382293d2c2f21f0e1704913070706-1024-1024.webp", colors:["#0000CD"], colorsNames:["Azul"], description:"Brinco argola com cristal azul strass"},
-            {id:8, name:"Brinco Argola Coração", category:"brincos", price:20.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-imagem-acessorios-aline-neves-fotografia-a11-dd3573743993-48786-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco argola coração aço inox"},
-            {id:9, name:"Brinco Argola Fio Fechada", category:"brincos", price:18.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-julho-41-0a00c9baa8fb24d0a04840f218050d617059952865-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco argola fio fechada 50mm aço inox"},
-            {id:10, name:"Brinco Argola Abaulada", category:"brincos", price:15.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6228-765f8ef6ce935462e3c17099957991857-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco argola abaulada aço inox"},
-            {id:11, name:"Brinco Galeria Ametista", category:"brincos", price:35.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6029-52d1213aac9a22997f0bb61370841134-1024-1024.webp", colors:["#9B30FF"], colorsNames:["Ametista"], description:"Brinco galeria 3 cristais ametista 6mm"},
-            {id:12, name:"Brinco Galeria Boreal", category:"brincos", price:35.00, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/5009-7027eb1e1a7e1cd5b9171704913071700-1024-1024.webp", colors:["multi"], colorsNames:["Boreal"], description:"Brinco galeria boreal 3 cristais 6mm"},
-            {id:13, name:"Brinco Galeria Cristal", category:"brincos", price:35.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6032-c2986cd032aa187148c4b1704913092871-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Brinco galeria cristal 3 cristais 6mm"},
-            {id:14, name:"Brinco Argola Cristal", category:"brincos", price:22.80, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-julho-31-39e2999f0849a19421657159982680-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Brinco argola cristal"},
-            {id:15, name:"Brinco Galeria Arco-Íris", category:"brincos", price:35.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/img_7526-f21cce7e449b414ef77575369890296-1024-1024.webp", colors:["multi"], colorsNames:["Arco-Íris"], description:"Brinco galeria arco-íris 3 cristais 6mm"},
-            {id:16, name:"Brinco Galeria Preto", category:"brincos", price:35.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6035-98563a248fcc40afcc8b17704913081676-1024-1024.webp", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Brinco galeria preto 3 cristais 6mm"},
-            {id:17, name:"Brinco Argola Colorida", category:"brincos", price:28.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/img_7526-f21cce7e449b414ef77575369890296-1024-1024.webp", colors:["multi"], colorsNames:["Colorido"], description:"Brinco argola colorida"},
-            {id:18, name:"Brinco Coração Pequeno", category:"brincos", price:16.20, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6034-061619209378727d8d17704913082031-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco coração pequeno aço inox"},
-            {id:20, name:"Brinco Galeria Lilás", category:"brincos", price:35.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6032-c986d032ae187148c4b1704913092817-1024-1024.webp", colors:["#9370DB"], colorsNames:["Lilás"], description:"Brinco galeria lilás 3 cristais 6mm"},
-            {id:21, name:"Brinco Galeria Azul", category:"brincos", price:35.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6036-25382293d2c2f21f0e1704913070706-1024-1024.webp", colors:["#0000CD"], colorsNames:["Azul"], description:"Brinco galeria azul 3 cristais 6mm"},
-            {id:22, name:"Brinco Galeria Vermelho", category:"brincos", price:35.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6036-263362b6023cb55c6221bb-1024-1024.webp", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Brinco galeria vermelho"},
-            {id:23, name:"Brinco Galeria Rosa", category:"brincos", price:35.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6034-061619209378727d8d17704913082031-1024-1024.webp", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Brinco galeria rosa"},
-            {id:24, name:"Brinco Grace Verde", category:"brincos", price:23.50, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6028-419bb0adcb2bf0c3012917041378113-1024-1024.webp", colors:["#228B22"], colorsNames:["Verde"], description:"Brinco grace verde"},
-            {id:25, name:"Brinco Grace Strass", category:"brincos", price:23.50, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6032-c2986cd032aa187148c4b1704913092871-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Strass"], description:"Brinco grace strass"},
-            {id:26, name:"Brinco Grace Boreal", category:"brincos", price:23.50, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/5009-7027eb1e1a7e1cd5b9171704913071700-1024-1024.webp", colors:["multi"], colorsNames:["Boreal"], description:"Brinco grace boreal"},
-            {id:27, name:"Brinco Grace Azul", category:"brincos", price:23.50, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6033-219c8e81fad7e64450e821704913079130-1024-1024.webp", colors:["#0000CD"], colorsNames:["Azul"], description:"Brinco grace azul"},
-            {id:29, name:"Brinco Grace Cristal", category:"brincos", price:23.50, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6032-c2986cd032aa187148c4b1704913092871-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Brinco grace cristal"},
-            {id:30, name:"Brinco Grace Rosa", category:"brincos", price:23.50, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6034-061619209378727d8d17704913082031-1024-1024.webp", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Brinco grace rosa"},
-            {id:31, name:"Brinco Grace Vermelho", category:"brincos", price:23.50, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6036-263362b6023cb55c6221bb-1024-1024.webp", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Brinco grace vermelho"},
-            {id:32, name:"Brinco Argola Cristal Preto", category:"brincos", price:22.80, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6035-98563a248fcc40afcc8b17704913081676-1024-1024.webp", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Brinco argola cristal preto"},
-            {id:33, name:"Brinco Quadrado", category:"brincos", price:13.50, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-julho-2-aline-neves-fotografia-5f9f-4742-a885-1365a4722e981-ea74518991-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco quadrado aço inox"},
-            {id:34, name:"Brinco Solitário", category:"brincos", price:10.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/5075-17b1ad9a2cde1872f1702253431371375-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Zircônia"], description:"Brinco solitário zircônia"},
-            {id:50, name:"Colar Duas Voltas Branca", category:"colares", price:37.00, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-selecinha-aline-neves-fotografia-36-80002957099303a1f566243250034196-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Branca"], description:"Colar duas voltas branca"},
-            {id:51, name:"Colar Duas Voltas Preta", category:"colares", price:37.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6035-98563a248fcc40afcc8b17704913081676-1024-1024.webp", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Colar duas voltas preta"},
-            {id:52, name:"Colar Duas Voltas Verde", category:"colares", price:37.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6028-419bb0adcb2bf0c3012917041378113-1024-1024.webp", colors:["#228B22"], colorsNames:["Verde"], description:"Colar duas voltas verde"},
-            {id:60, name:"Gargantilha Galeria Arco-Íris", category:"colares", price:45.00, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/img_7526-f21cce7e449b414ef77575369890296-1024-1024.webp", colors:["multi"], colorsNames:["Arco-Íris"], description:"Gargantilha galeria arco-íris"},
-            {id:61, name:"Gargantilha Galeria Esmeralda", category:"colares", price:45.00, badge:"promo", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6028-419bb0adcb2bf0c3012917041378113-1024-1024.webp", colors:["#228B22"], colorsNames:["Verde"], description:"Gargantilha galeria esmeralda"},
-            {id:62, name:"Gargantilha Galeria Aquamarine", category:"colares", price:45.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6017-1c34e0598490b5e59871704913081019-1024-1024.webp", colors:["#7FFFD4"], colorsNames:["Aquamarine"], description:"Gargantilha galeria aquamarine"},
-            {id:63, name:"Gargantilha Galeria Azul", category:"colares", price:45.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6036-25382293d2c2f21f0e1704913070706-1024-1024.webp", colors:["#0000CD"], colorsNames:["Azul"], description:"Gargantilha galeria azul"},
-            {id:64, name:"Gargantilha Galeria Vermelho", category:"colares", price:45.00, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6036-263362b6023cb55c6221bb-1024-1024.webp", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Gargantilha galeria vermelho"},
-            {id:65, name:"Gargantilha Galeria Boreal", category:"colares", price:45.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/5009-7027eb1e1a7e1cd5b9171704913071700-1024-1024.webp", colors:["multi"], colorsNames:["Boreal"], description:"Gargantilha galeria boreal"},
-            {id:66, name:"Gargantilha Nylon Preto", category:"colares", price:28.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-selecinha-aline-neves-fotografia-36-80002957099303a1f566243250034196-1024-1024.webp", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Gargantilha nylon preto"},
-            {id:67, name:"Gargantilha Nylon Cristal", category:"colares", price:28.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6032-c2986cd032aa187148c4b1704913092871-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Gargantilha nylon cristal"},
-            {id:68, name:"Gargantilha Nylon Vermelho", category:"colares", price:28.00, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6036-263362b6023cb55c6221bb-1024-1024.webp", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Gargantilha nylon vermelho"},
-            {id:69, name:"Gargantilha de Nylon Verde", category:"colares", price:28.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6028-419bb0adcb2bf0c3012917041378113-1024-1024.webp", colors:["#228B22"], colorsNames:["Verde"], description:"Gargantilha nylon verde"},
-            {id:70, name:"Gargantilha de Nylon Rosa", category:"colares", price:28.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6034-061619209378727d8d17704913082031-1024-1024.webp", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Gargantilha nylon rosa"},
-            {id:71, name:"Gargantilha Nylon Azul", category:"colares", price:28.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6033-219c8e81fad7e64450e821704913079130-1024-1024.webp", colors:["#0000CD"], colorsNames:["Azul"], description:"Gargantilha nylon azul"},
-            {id:72, name:"Gargantilha Galeria Lilás", category:"colares", price:45.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6032-c986d032ae187148c4b1704913092817-1024-1024.webp", colors:["#9370DB"], colorsNames:["Lilás"], description:"Gargantilha galeria lilás"},
-            {id:73, name:"Gargantilha Galeria Ametista", category:"colares", price:45.00, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6029-52d1213aac9a22997f0bb61370841134-1024-1024.webp", colors:["#9B30FF"], colorsNames:["Ametista"], description:"Gargantilha galeria ametista"},
-            {id:74, name:"Gargantilha Rosa Laser", category:"colares", price:35.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6034-061619209378727d8d17704913082031-1024-1024.webp", colors:["#FFB6C1"], colorsNames:["Strass"], description:"Gargantilha rosa laser"},
-            {id:75, name:"Gargantilha Galeria Rosa", category:"colares", price:45.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6034-061619209378727d8d17704913082031-1024-1024.webp", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Gargantilha galeria rosa"},
-            {id:76, name:"Gargantilha Galeria Cristal", category:"colares", price:45.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6032-c2986cd032aa187148c4b1704913092871-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Gargantilha galeria cristal"},
-            {id:77, name:"Gargantilha Galeria Preto", category:"colares", price:45.00, badge:"promo", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6035-98563a248fcc40afcc8b17704913081676-1024-1024.webp", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Gargantilha galeria preto"},
-            {id:80, name:"Pulseira Galeria 6mm Azul", category:"pulseiras", price:36.00, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6036-25382293d2c2f21f0e1704913070706-1024-1024.webp", colors:["#0000CD"], colorsNames:["Azul"], description:"Pulseira galeria 6mm azul"},
-            {id:81, name:"Pulseira Galeria 6mm Rosa", category:"pulseiras", price:36.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6034-061619209378727d8d17704913082031-1024-1024.webp", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Pulseira galeria 6mm rosa"},
-            {id:82, name:"Pulseira Galeria 6mm Ametista", category:"pulseiras", price:36.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6029-52d1213aac9a22997f0bb61370841134-1024-1024.webp", colors:["#9B30FF"], colorsNames:["Ametista"], description:"Pulseira galeria 6mm ametista"},
-            {id:83, name:"Pulseira Galeria 6mm Aquamarine", category:"pulseiras", price:36.00, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6017-1c34e0598490b5e59871704913081019-1024-1024.webp", colors:["#7FFFD4"], colorsNames:["Aquamarine"], description:"Pulseira galeria 6mm aquamarine"},
-            {id:84, name:"Pulseira Galeria 6mm Arco-Íris", category:"pulseiras", price:36.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/img_7526-f21cce7e449b414ef77575369890296-1024-1024.webp", colors:["multi"], colorsNames:["Arco-Íris"], description:"Pulseira galeria 6mm arco-íris"},
-            {id:85, name:"Pulseira Galeria 6mm Cristal", category:"pulseiras", price:36.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6032-c2986cd032aa187148c4b1704913092871-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Pulseira galeria 6mm cristal"},
-            {id:86, name:"Pulseira Galeria 6mm Preto", category:"pulseiras", price:36.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6035-98563a248fcc40afcc8b17704913081676-1024-1024.webp", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Pulseira galeria 6mm preto"},
-            {id:87, name:"Pulseira Galeria 6mm Lilás", category:"pulseiras", price:36.00, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6032-c986d032ae187148c4b1704913092817-1024-1024.webp", colors:["#9370DB"], colorsNames:["Lilás"], description:"Pulseira galeria 6mm lilás"},
-            {id:88, name:"Pulseira Galeria 6mm Verde Esmeralda", category:"pulseiras", price:36.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6028-419bb0adcb2bf0c3012917041378113-1024-1024.webp", colors:["#228B22"], colorsNames:["Esmeralda"], description:"Pulseira galeria 6mm verde esmeralda"},
-            {id:89, name:"Pulseira Galeria 6mm Vermelho", category:"pulseiras", price:36.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6036-263362b6023cb55c6221bb-1024-1024.webp", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Pulseira galeria 6mm vermelho"},
-            {id:90, name:"Pulseira Galeria 6mm Boreal", category:"pulseiras", price:36.00, badge:"new", image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/5009-7027eb1e1a7e1cd5b9171704913071700-1024-1024.webp", colors:["multi"], colorsNames:["Boreal"], description:"Pulseira galeria 6mm boreal"},
-
-            // ===== PRODUTOS DA PLANILHA GOOGLE SHEETS =====
-            {id:1001, name:"Anel Geométrico Com Zircônia em Aço Inox", category:"aneis", price:20.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/img_45471-a0b4bd944cd99fcba216899387446305-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Apresentamos o Anel em Aço Inox com Zircônia, uma peça moderna que une brilho, elegância e alto dur"},
-            {id:1002, name:"Anel Ajustável Duas Voltas Duas Estrelas em Aço Inox", category:"aneis", price:20.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-aline-neves-fotografia-4021-77ba479a77dc-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Anel Ajustável Duas Voltas com Estrelas em Aço Inox, moderno, sofisticado e versátil"},
-            {id:1003, name:"Anel Solitário em Aço Inox Strass Cristal 8mm", category:"aneis", price:20.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/image2-8df92c3b89184d0f516292447174694-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Descubra o Anel Solitário em Aço Inox com Strass, perfeito para quem busca elegância, brilho e durabilidade"},
-            {id:1004, name:"Anel Solitário em Aço Inox Strass Jet 3mm", category:"aneis", price:20.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/image2-8df92c3b89184d0f516292447174844-1024-1024.webp", colors:["#1a1a1a"], colorsNames:["Jet"], description:"Descubra o Anel Solitário em Aço Inox com Strass, perfeito para quem busca elegância, brilho e durabilidade"},
-            {id:1005, name:"Anel Ajustável duas Esferas 4mm em Aço Inox", category:"aneis", price:20.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/image191-84368e8976584ca9516292447631486-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Descubra o Anel Ajustável Duas Esferas 4mm em Aço Inox, com design minimalista, elegante e moderno"},
-            {id:1006, name:"Brinco de Argolinha com Esfera 4mm em Aço Inox", category:"brincos", price:18.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/img_3495-38e3f535b0ac1671617892-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Descubra o Brinco Argolinha em Aço Inox com Esfera 4mm, perfeito para quem busca estilo, praticidade e durabilidade"},
-            {id:1007, name:"Anel Ajustável Folhas em Aço Inox", category:"aneis", price:18.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-aline-neves-fotografia-4021-77ba479a77dc-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Descubra o Anel Ajustável Folhas em Aço Inox, perfeito para quem busca delicadeza, elegância e estilo"},
-            {id:1010, name:"Trio Solitário Colorido 5mm em Aço Inox", category:"brincos", price:25.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/estrela-dois-15b-9b50b6d0a5e5a4317212987248449-1024-1024.webp", colors:["multi"], colorsNames:["Colorido"], description:"Descubra o Trio Solitário Colorido 5mm em Aço Inox, perfeito para quem busca brilho, elegância e versatilidade"},
-            {id:1011, name:"Pulseira com Strass Colorido em Aço Inox", category:"pulseiras", price:30.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-aline-neves-fotografia-3621-ceb16271892e5ec1bf162387455830000-1024-1024.webp", colors:["multi"], colorsNames:["Colorido"], description:"Descubra a Pulseira Feminina com Pingentes Coloridos em Aço Inox, perfeito para quem busca delicadeza"},
-            {id:1012, name:"Gargantilha Strass Cores de Vidro em Aço Inox", category:"colares", price:33.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/i3001-a1de6a7c2b0b4a8ed1627154584930-1024-1024.webp", colors:["multi"], colorsNames:["Colorido"], description:"Descubra a Gargantilha Strass Cores de Vidro em Aço Inox, perfeita para quem busca brilho e estilo"},
-            {id:1013, name:"Gargantilha Strass Cores de Vidro em Aço Inox Coloridas", category:"colares", price:30.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-julho-31-39e2999f0849a19421657159982680-1024-1024.webp", colors:["multi"], colorsNames:["Colorido"], description:"Realize seu estilo com a Gargantilha Strass Cores de Vidro Coloridas em Aço Inox"},
-            {id:1014, name:"Brinco de Argola Fio Redondo em Aço Inox G", category:"brincos", price:22.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-julho-39-9b1ae299f04849a194216571599822685-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Descubra o Brinco Argola Fio Redondo em Aço Inox (G), perfeito para quem busca elegância e estilo"},
-            {id:1015, name:"Brinco de Argola Fio Triangular Médio em Aço Inox M, G", category:"brincos", price:21.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-julho-41-0a00c9baa8fb24d0a04840f218050d617059952865-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Realize seu estilo com o Brinco Argola Fio Triangular 69mm em Aço Inox"},
-            {id:1016, name:"Corrente Masculina Estrela de Davi", category:"correntes", price:36.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/26ab8f24-7628-4f5e-a7e0-f1305b0cbce1-5afb8f503fbcaf2e916839884994914-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Eleve seu estilo com a Corrente Masculina com Pingente Estrela de Davi em Aço Inox"},
-            {id:1017, name:"Pulseira Masculina Groumett de Aço Inox", category:"pulseiras_masc", price:30.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/f51601c6-78f9-4bca-bc69-6c71a8b10f74-1cee1a52b9cfd9116b394416582135417-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Destaque seu estilo com a Pulseira Masculina Groumett de Aço Inox"},
-            {id:1018, name:"Conjunto Infantil Gargantilha Moranginho em Aço Inox", category:"infantil", price:50.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/20210919-wab04212-1394239185-1024-1024.webp", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"A Corrente Infantil Gargantilha com Pingente Moranginho é a combinação perfeita de charme e delicadeza"},
-            {id:1019, name:"Tornozeleira Trevo Aço Inox", category:"tornozeleiras", price:28.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/img_119-0fef056671c608965617340899262950-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Destaque seu visual com a Tornozeleira Trevo em Aço Inox, perfeita para quem busca delicadeza, elegância e movimento"},
-            {id:1020, name:"Corrente Masculina Com Cruz 2,5cm em Aço Inox", category:"correntes", price:33.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/img_148-2483a3eb-4a08-48cc-85291-17b63534c22a4158089930588744-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Destaque seu estilo com a Corrente Masculina Com Cruz 2,5cm em Aço Inox"},
-            {id:1021, name:"Brinco de Argola com Pingente de Asa em Aço Inox", category:"brincos", price:21.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-julho-13-0c427a90c694265fbc2169804870331-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Realce sua beleza sem abrirmos de joias exclusivas! Peças de alta qualidade, hipoalergênicas e perfeitas"},
-            {id:1022, name:"Gargantilha Longa com Infinito e Pérolas 8mm branco", category:"colares", price:48.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/f640-1b9f-1ed9-4c74-91ac-2fbac042b4c9-4f37322b4dd1aba413393139378-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Branco"], description:"Elegância sem fim com o Colar em Aço Inox com Pérolas! Delicado, hipoalergênico e perfeito para"},
-            {id:1023, name:"Gargantilha Longa com Infinito e Pérolas 8mm preto", category:"colares", price:48.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/f-1b9f-1ed9-c74-91ac-2fbac042b4c9-4f37322b4dd1aba41339393139378-1024-1024.webp", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Elegância sem fim com o Colar em Aço Inox com Pérolas! Delicado, hipoalergênico e perfeito para"},
-            {id:1024, name:"Anel Ajustável em Aço Inox Zircônia e Pérola 6mm (M)", category:"aneis", price:19.50, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/estrela-dois-26-11-bec7400fdb04522bf3c1626374930085-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Pérola"], description:"Sofisticação e versatilidade em um só anel! O Anel Ajustável com Zircônia e Pérola é hipoalergênico"},
-            {id:1025, name:"Anel Ajustável com Asas em Aço Inox (M P)", category:"aneis", price:21.30, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/estrela-dois-40-bfe98a49c1174465bd06781-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Delicadeza e estilo com o Anel com Asas! Resistente, hipoalergênico, perfeito para todas as ocasiões"},
-            {id:1026, name:"Pulseira com Strass Colorido e Esfera em Aço Inox", category:"pulseiras", price:35.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-aline-neves-fotografia-2-41e343da2fca5f22d64181677209469396-1024-1024.webp", colors:["multi"], colorsNames:["Colorido"], description:"Brilho e estilo em cada detalhe! O Brinco com Strass Colorido é hipoalergênico, resistente e perfeito para"},
-            {id:1027, name:"Pulseira com Três Correntes e Esfera e Pérolas 5mm", category:"pulseiras", price:39.75, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/estrela-dois-22-47a7f1834b3cb80f8934-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Pérola"], description:"Sofisticação e estilo com a Pulseira com Três Correntes Esferas e Pérolas 5mm! Hipoalergênica"},
-            {id:1028, name:"Pulseira Coração Entrelaçado em Aço Inox", category:"pulseiras", price:32.60, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-aline-neves-fotografia-2-aline-neves-fotografia-601-eed483ab6b694730501681411458836-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Um toque de amor e estilo no seu look! A Pulseira Coração Entrelaçado é hipoalergênica e perfeita para"},
-            {id:1029, name:"Pulseira Feminina Pérolas 3mm em Aço Inox", category:"pulseiras", price:31.80, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-julho-2-aline-neves-fotografia-601-eed483ab6b1414115835-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Pérola"], description:"Delicadeza e elegância com a Pulseira de Pérolas 3mm! Hipoalergênica e perfeita para uso diário"},
-            {id:1030, name:"Pulseira Unissex em Aço Inox", category:"pulseiras", price:25.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-julho-2-aline-neves-fotografia-6778b484-4d4f-4677-194-84270305168141141458836-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Estilo e elegância para todos os momentos! A Pulseira Unissex é uma peça versátil e hipoalergênica"},
-            {id:1031, name:"Pulseira Masculina Figaro 6x1 em Aço Inox", category:"pulseiras_masc", price:33.30, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-julho-2-aline-neves-fotografia-5f9f-4742-a885-1365a4722e981-ea74518991-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Estilo clássico com atitude! A Pulseira Masculina Figaro em Aço Inox é resistente, hipoalergênica e perfeita"},
-            {id:1032, name:"Pulseira Feminina em Aço Inox com Zircônia 5mm", category:"pulseiras", price:40.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/estrela-dois-26-1-121f-2c5476db16b421-5437322b4dd1aba4133939393139378-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Zircônia"], description:"Pulseira Feminina em Aço Inox com Zircônia de alta qualidade, hipoalergênica e perfeita para uso diário"},
-            {id:1033, name:"Pulseira Mão em Aço Inox", category:"pulseiras", price:21.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-imagem-acessorios-aline-neves-fotografia-6de9e5e43e02b1cf016f6317251612880-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Leveza, estilo e significado em um só acessório! O Brinco Asa traz um design delicado que valoriza"},
-            {id:1034, name:"Pulseira Feminina Canuttilo em Aço Inox", category:"pulseiras", price:27.60, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-imagem-acessorios-aline-neves-fotografia-a11-dd3573743993-1621826145618105-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brilhe com conforto e estilo todos os dias! A Pulseira Canuttilo em Aço Inox é hipoalergênica, resistente"},
-            {id:1035, name:"Brinco de Argola Fio Triangular Médio em Aço Inox", category:"brincos", price:19.50, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-imagem-acessorios-aline-neves-fotografia-a0-dd3573743993-48786-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Impacto e elegância em cada detalhe! O Brinco de Argola Fio Triangular traz um design moderno e impactante"},
-            {id:1036, name:"Anel Solitário em Aço Inox com Zircônia 4,5mm", category:"aneis", price:20.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/estrela-dois-6608-8f894-1309310f993d-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Zircônia"], description:"O clássico que nunca sai de moda! O Anel Solitário com Zircônia traz um brilho sofisticado que valoriza"},
-            {id:1037, name:"Gargantilha Longa Correntes Esferas em Aço Inox", category:"colares", price:36.75, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/estrela-dois-321-3cd6905e3d6db05c316433435472652-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Sofisticação e modernidade com a Gargantilha Longa Correntes Esferas em Aço Inox"},
-            {id:1038, name:"Brinco Argolinha Simples em Aço 6mm Zircônia 5mm", category:"brincos", price:15.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-produtos-321-3cd6905e3db05c316434354724652-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Delicadeza com um toque de brilho! O Brinco Argolinha com Zircônia traz delicadeza e elegância"},
-            {id:1039, name:"Gargantilha Fio e Zircônia 8mm em Aço Inox", category:"colares", price:50.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fotos-ensaio-estrela-da-manha-selecinha-aline-neves-fotografia-36-80002957099303a1f566243250034196-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Zircônia"], description:"Brilho e sofisticação na medida certa! A Gargantilha com Zircônia destaca seu visual com um toque de"},
-            {id:1040, name:"Mini Coroa e Zircônia em Aço Inox", category:"aneis", price:15.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fce8899b-c62b-4447-8f8e-516292447131486-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Zircônia"], description:"O Brinco Mini Coroa é delicado, moderno e perfeito para quem ama elegância e personalidade. Hipoalergênico"},
-            {id:1041, name:"Pulseira Duas Voltas em Aço Inox com Pérolas 10mm", category:"pulseiras", price:51.40, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/fce8899b-c62b-4447-8f8e-51629308-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Pérola"], description:"Elegância e feminilidade com a Pulseira Duas Voltas com Pérolas 10mm em Aço Inox. Hipoalergênica"},
-            {id:1042, name:"Brinco Cachinho Galeria em Aço Inox com Strass Arco-Íris", category:"brincos", price:32.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/img_7526-f21cce7e449b414ef77575369890296-1024-1024.webp", colors:["multi"], colorsNames:["Arco-Íris"], description:"Delicadeza que encanta no primeiro olhar! O Brinco com Strass em formato de cachinho traz um brilho irresistível"},
-            {id:1043, name:"Brinco Cachinho Galeria em Aço Inox com Strass Esmeraldas", category:"brincos", price:32.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6028-419bb0adcb2bf0c3012917041378113-1024-1024.webp", colors:["#228B22"], colorsNames:["Esmeralda"], description:"Delicadeza que encanta no primeiro olhar! O Brinco com Strass em formato de cachinho traz um brilho irresistível"},
-            {id:1044, name:"Brinco Cachinho Galeria em Aço Inox com Strass Amélia", category:"brincos", price:32.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6029-52d1213aac9a22997f0bb61370841134-1024-1024.webp", colors:["#9B30FF"], colorsNames:["Ametista"], description:"Delicadeza que encanta no primeiro olhar! O Brinco com Strass em formato de cachinho traz um brilho irresistível"},
-            {id:1045, name:"Brinco Cachinho Galeria em Aço Inox com Strass Aquamarine", category:"brincos", price:32.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6017-1c34e0598490b5e59871704913081019-1024-1024.webp", colors:["#7FFFD4"], colorsNames:["Aquamarine"], description:"Delicadeza que encanta no primeiro olhar! O Brinco com Strass em formato de cachinho traz um brilho irresistível"},
-            {id:1046, name:"Brinco Cachinho Galeria em Aço Inox com Strass Boreal", category:"brincos", price:32.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/5009-7027eb1e1a7e1cd5b9171704913071700-1024-1024.webp", colors:["multi"], colorsNames:["Boreal"], description:"Delicadeza que encanta no primeiro olhar! O Brinco com Strass em formato de cachinho traz um brilho irresistível"},
-            {id:1047, name:"Brinco Cachinho Galeria em Aço Inox com Strass Azul", category:"brincos", price:32.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6036-25382293d2c2f21f0e1704913070706-1024-1024.webp", colors:["#0000CD"], colorsNames:["Azul"], description:"Delicadeza que encanta no primeiro olhar! O Brinco com Strass em formato de cachinho traz um brilho irresistível"},
-            {id:1048, name:"Brinco Cachinho Galeria em Aço Inox com Strass Vermelho Rubi", category:"brincos", price:32.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6036-263362b6023cb55c6221bb-1024-1024.webp", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Delicadeza que encanta no primeiro olhar! O Brinco com Strass em formato de cachinho traz um brilho irresistível"},
-            {id:1049, name:"Brinco Cachinho Galeria em Aço Inox com Strass Azul", category:"brincos", price:32.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6033-219c8e81fad7e64450e821704913079130-1024-1024.webp", colors:["#0000CD"], colorsNames:["Azul Marinho"], description:"Delicadeza que encanta no primeiro olhar! O Brinco com Strass em formato de cachinho traz um brilho irresistível"},
-            {id:1050, name:"Brinco Cachinho Galeria em Aço Inox com Strass Lilás", category:"brincos", price:32.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6032-c986d032ae187148c4b1704913092817-1024-1024.webp", colors:["#9370DB"], colorsNames:["Lilás"], description:"Delicadeza que encanta no primeiro olhar! O Brinco com Strass em formato de cachinho traz um brilho irresistível"},
-            {id:1051, name:"Brinco Cachinho Galeria em Aço Inox com Strass Preto", category:"brincos", price:32.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6035-98563a248fcc40afcc8b17704913081676-1024-1024.webp", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Delicadeza que encanta no primeiro olhar! O Brinco com Strass em formato de cachinho traz um brilho irresistível"},
-            {id:1052, name:"Brinco Cachinho Galeria em Aço Inox com Strass Cristal", category:"brincos", price:32.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6032-c2986cd032aa187148c4b1704913092871-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Delicadeza que encanta no primeiro olhar! O Brinco com Strass em formato de cachinho traz um brilho irresistível"},
-            {id:1053, name:"Brinco Cachinho Galeria em Aço Inox com Strass Rosa", category:"brincos", price:32.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6034-061619209378727d8d17704913082031-1024-1024.webp", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Delicadeza que encanta no primeiro olhar! O Brinco com Strass em formato de cachinho traz um brilho irresistível"},
-            {id:1054, name:"Anel Falange Estrela em Aço Inox e Zircônia 3mm", category:"aneis", price:15.00, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/5075-17b1ad9a2cde1872f1702253431371375-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Zircônia"], description:"Um detalhe que faz toda a diferença! O Anel Falange Estrela com Zircônia é hipoalergênico e perfeito"},
-            {id:1055, name:"Brinco Argolinha Chapa Quadrada com Zircônia 4,5mm", category:"brincos", price:18.60, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/6228-765f8ef6ce935462e3c17099957991857-1024-1024.webp", colors:["#FFFFFF"], colorsNames:["Zircônia"], description:"Brinco sofisticado com design moderno! O Brinco Argolinha Chapa Quadrada com Zircônia destaca seu"},
-            {id:1056, name:"Bracelete Fio Chato em Aço Inox", category:"pulseiras", price:31.50, image:"https://acdn-us.mitiendanube.com/stores/001/113/368/products/astraeladsengha-032-3d91ec3d36179334ab17212238419340-1024-1024.webp", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Minimalismo com personalidade! O Bracelete Fio Chato em Aço Inox traz um design moderno e sofisticado"},
+            {id:1, name:"Brinco Argola com Cristal Rosa", category:"brincos", price:22.80, badge:"new", image:"https://drive.google.com/thumbnail?id=1cfi-E085CdmEHR305u1h_mGz1PFGsFvI&sz=w800", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Brinco argola com cristal rosa strass hipoalergênico"},
+            {id:2, name:"Brinco Argolinha Árvore da Vida", category:"brincos", price:18.00, image:"https://drive.google.com/thumbnail?id=1alpYLXx6sOzP0QnHY2-KoZESzH-A6maw&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Argolinha com pingente Árvore da Vida em aço inox"},
+            {id:3, name:"Brinco Borboleta", category:"brincos", price:21.00, image:"https://drive.google.com/thumbnail?id=1Wonz-Gla_U2Oiy21RGJWO8L6a8DLiA8-&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco borboleta grande em aço inox"},
+            {id:4, name:"Brinco Argola com Cristal Vermelho", category:"brincos", price:22.80, image:"https://drive.google.com/thumbnail?id=1WUHP4MDukYbE_az7L9E2ziaCLIgr-JIB&sz=w800", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Brinco argola com cristal vermelho strass"},
+            {id:5, name:"Brinco Argola Torcida", category:"brincos", price:18.60, image:"https://drive.google.com/thumbnail?id=1BC0F_YyU5na56WNBAV0_AR43EdLurvSB&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco argola torcida aço inox hipoalergênico"},
+            {id:6, name:"Brinco Argola com Cristal Verde", category:"brincos", price:22.80, image:"https://drive.google.com/thumbnail?id=1lXa4Itp1adxFDtNImEZKK-C1dJr8kdNA&sz=w800", colors:["#228B22"], colorsNames:["Verde"], description:"Brinco argola com cristal verde strass"},
+            {id:7, name:"Brinco Argola com Cristal Azul", category:"brincos", price:22.80, badge:"new", image:"https://drive.google.com/thumbnail?id=1gI4gaBc-9m-5t5zeJph0jFUPWNV3iqMm&sz=w800", colors:["#0000CD"], colorsNames:["Azul"], description:"Brinco argola com cristal azul strass"},
+            {id:8, name:"Brinco Argola Coração", category:"brincos", price:20.00, image:"https://drive.google.com/thumbnail?id=1JMKrBFOOLexA-W1akAtngEUj98c96gz5&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco argola coração aço inox"},
+            {id:9, name:"Brinco Argola Fio Fechada", category:"brincos", price:18.00, image:"https://drive.google.com/thumbnail?id=1Oqt3dZlSU-SpJ16Cd2HverodGvdpN6aR&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco argola fio fechada 50mm aço inox"},
+            {id:10, name:"Brinco Argola Abaulada", category:"brincos", price:15.00, image:"https://drive.google.com/thumbnail?id=1ScIG016j7Icq8dLDc4i2P0wiLM-k15PO&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco argola abaulada aço inox"},
+            {id:11, name:"Brinco Galeria Ametista", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1j_xYy181xLQPPIVC6O8B-9s6MaRwpzrv&sz=w800", colors:["#9B30FF"], colorsNames:["Ametista"], description:"Brinco galeria 3 cristais ametista 6mm"},
+            {id:12, name:"Brinco Galeria Boreal", category:"brincos", price:35.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1JRJ9d4DSe2BVM_xkfTTpHf6b8XD93g-G&sz=w800", colors:["multi"], colorsNames:["Boreal"], description:"Brinco galeria boreal 3 cristais 6mm"},
+            {id:13, name:"Brinco Galeria Cristal", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1J7Rko7_GFXoUcfZ_AkJW0DD9lSGuGZpO&sz=w800", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Brinco galeria cristal 3 cristais 6mm"},
+            {id:14, name:"Brinco Argola Cristal", category:"brincos", price:22.80, badge:"new", image:"https://drive.google.com/thumbnail?id=1eskvuzjh2nznA-pfjmuov9h2gcK1HsrV&sz=w800", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Brinco argola cristal"},
+            {id:15, name:"Brinco Galeria Arco-Íris", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1R4NvVFyZYMFVuBBGBU-MMxnlx8jfCTeo&sz=w800", colors:["multi"], colorsNames:["Arco-Íris"], description:"Brinco galeria arco-íris 3 cristais 6mm"},
+            {id:16, name:"Brinco Galeria Preto", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1rIuB78_1mgoYWfuvdBz5XrSfEUe92HGo&sz=w800", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Brinco galeria preto 3 cristais 6mm"},
+            {id:17, name:"Brinco Argola Colorida", category:"brincos", price:28.00, image:"https://drive.google.com/thumbnail?id=1LQDgYTkx_hPrNa85wZnJwa-ZzJYvDlar&sz=w800", colors:["multi"], colorsNames:["Colorido"], description:"Brinco argola colorida"},
+            {id:18, name:"Brinco Coração Pequeno", category:"brincos", price:16.20, image:"https://drive.google.com/thumbnail?id=1TYVblhKu2ntEzkxHyzscCJWd-ZkZVkLZ&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco coração pequeno aço inox"},
+            {id:20, name:"Brinco Galeria Lilás", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1S7SyP1atCEcT5LwOXghxNiUzPjRfKjIs&sz=w800", colors:["#9370DB"], colorsNames:["Lilás"], description:"Brinco galeria lilás 3 cristais 6mm"},
+            {id:21, name:"Brinco Galeria Azul", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1sCsi2IQLdk8XAZMbt0hLOa0_D5bNhRXk&sz=w800", colors:["#0000CD"], colorsNames:["Azul"], description:"Brinco galeria azul 3 cristais 6mm"},
+            {id:22, name:"Brinco Galeria Vermelho", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=11TJmfrucRTOQZMF2Slr3zh5GzMA3CTWl&sz=w800", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Brinco galeria vermelho"},
+            {id:23, name:"Brinco Galeria Rosa", category:"brincos", price:35.00, image:"https://drive.google.com/thumbnail?id=1MdvAwO6HNFTZqWOvHNsiq4fRPlFRHaQF&sz=w800", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Brinco galeria rosa"},
+            {id:24, name:"Brinco Grace Verde", category:"brincos", price:23.50, badge:"new", image:"https://drive.google.com/thumbnail?id=1piUgVyBhwulI_idLy322cuvUBnT_c8Fr&sz=w800", colors:["#228B22"], colorsNames:["Verde"], description:"Brinco grace verde"},
+            {id:25, name:"Brinco Grace Strass", category:"brincos", price:23.50, image:"https://drive.google.com/thumbnail?id=11JQOF_bxZSdHtAkvjtK0ykcbyk6P9jYF&sz=w800", colors:["#C0C0C0"], colorsNames:["Strass"], description:"Brinco grace strass"},
+            {id:26, name:"Brinco Grace Boreal", category:"brincos", price:23.50, image:"https://drive.google.com/thumbnail?id=1U5ESZ7z_1E9YA3hgPkxR7--9JKpi5Mq7&sz=w800", colors:["multi"], colorsNames:["Boreal"], description:"Brinco grace boreal"},
+            {id:27, name:"Brinco Grace Azul", category:"brincos", price:23.50, image:"https://drive.google.com/thumbnail?id=1z2IbSIOoDAxjAmPukr4_JXR9ou6chjj2&sz=w800", colors:["#0000CD"], colorsNames:["Azul"], description:"Brinco grace azul"},
+            {id:29, name:"Brinco Grace Cristal", category:"brincos", price:23.50, image:"https://drive.google.com/thumbnail?id=1zdGlamrj9o1y3g_VI_ohURj-WSJqixvL&sz=w800", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Brinco grace cristal"},
+            {id:30, name:"Brinco Grace Rosa", category:"brincos", price:23.50, image:"https://drive.google.com/thumbnail?id=1PzrgmD4XNYMNTSfDMDBPGoaW_oPGZGo5&sz=w800", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Brinco grace rosa"},
+            {id:31, name:"Brinco Grace Vermelho", category:"brincos", price:23.50, image:"https://drive.google.com/thumbnail?id=1Hz2I9OKzMH_OFhD0eESkCxPFXPbgYe82&sz=w800", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Brinco grace vermelho"},
+            {id:32, name:"Brinco Argola Cristal Preto", category:"brincos", price:22.80, image:"https://drive.google.com/thumbnail?id=1ETyJuy_vQ3X7bZ4KDt89Tv638CWkftSW&sz=w800", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Brinco argola cristal preto"},
+            {id:33, name:"Brinco Quadrado", category:"brincos", price:13.50, image:"https://drive.google.com/thumbnail?id=1cgPw9Ijn0CdWYhEZOft55FbFTY7qIOK_&sz=w800", colors:["#C0C0C0"], colorsNames:["Aço Inox"], description:"Brinco quadrado aço inox"},
+            {id:34, name:"Brinco Solitário", category:"brincos", price:10.00, image:"https://drive.google.com/thumbnail?id=1dDG9ZfMAEUUS6hk8EIfmJEEGzE-ur9zM&sz=w800", colors:["#FFFFFF"], colorsNames:["Zircônia"], description:"Brinco solitário zircônia"},
+            {id:50, name:"Colar Duas Voltas Branca", category:"colares", price:37.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1ZgRkB0sxNoYSCWoj_Cvf8S48arwQvWoF&sz=w800", colors:["#FFFFFF"], colorsNames:["Branca"], description:"Colar duas voltas branca"},
+            {id:51, name:"Colar Duas Voltas Preta", category:"colares", price:37.00, image:"https://drive.google.com/thumbnail?id=18iatYwF9X88WzT7Yplmt5OngkhDeUE7d&sz=w800", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Colar duas voltas preta"},
+            {id:52, name:"Colar Duas Voltas Verde", category:"colares", price:37.00, image:"https://drive.google.com/thumbnail?id=1I3WxlY42ZGDQvtUviflPfc4Boi24CLCh&sz=w800", colors:["#228B22"], colorsNames:["Verde"], description:"Colar duas voltas verde"},
+            {id:60, name:"Gargantilha Galeria Arco-Íris", category:"colares", price:45.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1ER5visTMcAjnPJuPk5RWuLU_lbZq9xwY&sz=w800", colors:["multi"], colorsNames:["Arco-Íris"], description:"Gargantilha galeria arco-íris"},
+            {id:61, name:"Gargantilha Galeria Esmeralda", category:"colares", price:45.00, badge:"promo", image:"https://drive.google.com/thumbnail?id=1tRODcBOc9FYuHctViYBVBNKL5xeJ7qN6&sz=w800", colors:["#228B22"], colorsNames:["Verde"], description:"Gargantilha galeria esmeralda"},
+            {id:62, name:"Gargantilha Galeria Aquamarine", category:"colares", price:45.00, image:"https://drive.google.com/thumbnail?id=1jUhbd_9XgJmho2WMD0KnGaKa_u12LnVE&sz=w800", colors:["#7FFFD4"], colorsNames:["Aquamarine"], description:"Gargantilha galeria aquamarine"},
+            {id:63, name:"Gargantilha Galeria Azul", category:"colares", price:45.00, image:"https://drive.google.com/thumbnail?id=1Nzpwtat_9UWNUFmJNm78rqotVDtFLwWT&sz=w800", colors:["#0000CD"], colorsNames:["Azul"], description:"Gargantilha galeria azul"},
+            {id:64, name:"Gargantilha Galeria Vermelho", category:"colares", price:45.00, badge:"new", image:"https://drive.google.com/thumbnail?id=17B-y5lKDebd8I2r2vDnz9JyQvwgQ7o3p&sz=w800", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Gargantilha galeria vermelho"},
+            {id:65, name:"Gargantilha Galeria Boreal", category:"colares", price:45.00, image:"https://drive.google.com/thumbnail?id=14YpPZVKgd90RJeEQit_rjra331UHm7o1&sz=w800", colors:["multi"], colorsNames:["Boreal"], description:"Gargantilha galeria boreal"},
+            {id:66, name:"Gargantilha Nylon Preto", category:"colares", price:28.00, image:"https://drive.google.com/thumbnail?id=1PtYWaCRi48ne3GeHUX9vGZ0s0uvdCNFQ&sz=w800", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Gargantilha nylon preto"},
+            {id:67, name:"Gargantilha Nylon Cristal", category:"colares", price:28.00, image:"https://drive.google.com/thumbnail?id=1J7Dg6eRfyqPaFGezhS8sVIT6F5ClUzGS&sz=w800", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Gargantilha nylon cristal"},
+            {id:68, name:"Gargantilha Nylon Vermelho", category:"colares", price:28.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1ARIugQ_-bcHgG5edr-H8GZyCJMj4eApK&sz=w800", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Gargantilha nylon vermelho"},
+            {id:69, name:"Gargantilha de Nylon Verde", category:"colares", price:28.00, image:"https://drive.google.com/thumbnail?id=1StvsTEChp_2pUGH39j5O55ChO-GGWwgd&sz=w800", colors:["#228B22"], colorsNames:["Verde"], description:"Gargantilha nylon verde"},
+            {id:70, name:"Gargantilha de Nylon Rosa", category:"colares", price:28.00, image:"https://drive.google.com/thumbnail?id=1RDruzTm21g-h6P9MzP1LA16ur0dbGrKc&sz=w800", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Gargantilha nylon rosa"},
+            {id:71, name:"Gargantilha Nylon Azul", category:"colares", price:28.00, image:"https://drive.google.com/thumbnail?id=1EugUkYCW9D_vrfkxjKhKw7z2C7A8dEfB&sz=w800", colors:["#0000CD"], colorsNames:["Azul"], description:"Gargantilha nylon azul"},
+            {id:72, name:"Gargantilha Galeria Lilás", category:"colares", price:45.00, image:"https://drive.google.com/thumbnail?id=1GSQiEJvCWxFXyQJmNdAReNUkG35AeILC&sz=w800", colors:["#9370DB"], colorsNames:["Lilás"], description:"Gargantilha galeria lilás"},
+            {id:73, name:"Gargantilha Galeria Ametista", category:"colares", price:45.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1Q2t_hlxkoUJXWWA8LbGBmKxNcLvKv5o_&sz=w800", colors:["#9B30FF"], colorsNames:["Ametista"], description:"Gargantilha galeria ametista"},
+            {id:74, name:"Gargantilha Rosa Laser", category:"colares", price:35.00, image:"https://drive.google.com/thumbnail?id=1sXjFWV7MU_yPKPZS2pBUu-CCwh8ObJwq&sz=w800", colors:["#FFB6C1"], colorsNames:["Strass"], description:"Gargantilha rosa laser"},
+            {id:75, name:"Gargantilha Galeria Rosa", category:"colares", price:45.00, image:"https://drive.google.com/thumbnail?id=17Cz6SpI0MEbeKte-DJr8uyEs0PJ4jhyt&sz=w800", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Gargantilha galeria rosa"},
+            {id:76, name:"Gargantilha Galeria Cristal", category:"colares", price:45.00, image:"https://drive.google.com/thumbnail?id=15dFo-MTAmEJ8Gq3cjMWnEisTK5TSM69Z&sz=w800", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Gargantilha galeria cristal"},
+            {id:77, name:"Gargantilha Galeria Preto", category:"colares", price:45.00, badge:"promo", image:"https://drive.google.com/thumbnail?id=1uDRGC8z9l-A4ktGDroIPdM07joRcsdIk&sz=w800", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Gargantilha galeria preto"},
+            {id:80, name:"Pulseira Galeria 6mm Azul", category:"pulseiras", price:36.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1v0HOky9l20ObPaXNLmziDYBWjHBeeP95&sz=w800", colors:["#0000CD"], colorsNames:["Azul"], description:"Pulseira galeria 6mm azul"},
+            {id:81, name:"Pulseira Galeria 6mm Rosa", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=1KUr8DmAP7kQyfF5rtuRbxYb9xFUI0ACW&sz=w800", colors:["#FFB6C1"], colorsNames:["Rosa"], description:"Pulseira galeria 6mm rosa"},
+            {id:82, name:"Pulseira Galeria 6mm Ametista", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=1AF0yntNxh6eOCU0hmd_DdD8iS2Z-xIMa&sz=w800", colors:["#9B30FF"], colorsNames:["Ametista"], description:"Pulseira galeria 6mm ametista"},
+            {id:83, name:"Pulseira Galeria 6mm Aquamarine", category:"pulseiras", price:36.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1L_hpVtzLeg8icneJM0LLfVn5SuazsjPL&sz=w800", colors:["#7FFFD4"], colorsNames:["Aquamarine"], description:"Pulseira galeria 6mm aquamarine"},
+            {id:84, name:"Pulseira Galeria 6mm Arco-Íris", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=13vD8w712NU1WP8KP5KY0Zk8iBaxEQt0x&sz=w800", colors:["multi"], colorsNames:["Arco-Íris"], description:"Pulseira galeria 6mm arco-íris"},
+            {id:85, name:"Pulseira Galeria 6mm Cristal", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=1ZrIMmTozg9lyC9y_mewmOGjBnNDKEF50&sz=w800", colors:["#FFFFFF"], colorsNames:["Cristal"], description:"Pulseira galeria 6mm cristal"},
+            {id:86, name:"Pulseira Galeria 6mm Preto", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=1cNoQuDixm4kIHRZcdP5RgzOwv6e53OFh&sz=w800", colors:["#1a1a1a"], colorsNames:["Preto"], description:"Pulseira galeria 6mm preto"},
+            {id:87, name:"Pulseira Galeria 6mm Lilás", category:"pulseiras", price:36.00, badge:"new", image:"https://drive.google.com/thumbnail?id=1ij1H0gqyh8GSvRP7Rd95EE5FhzoBTDy5&sz=w800", colors:["#9370DB"], colorsNames:["Lilás"], description:"Pulseira galeria 6mm lilás"},
+            {id:88, name:"Pulseira Galeria 6mm Verde Esmeralda", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=1ZIK7o0npTchwnE6IVMJqsZPBQL66atAs&sz=w800", colors:["#228B22"], colorsNames:["Esmeralda"], description:"Pulseira galeria 6mm verde esmeralda"},
+            {id:89, name:"Pulseira Galeria 6mm Vermelho", category:"pulseiras", price:36.00, image:"https://drive.google.com/thumbnail?id=1rQoCJ1tILlia3OIxEqsvEwZTukDBN5V0&sz=w800", colors:["#DC143C"], colorsNames:["Vermelho"], description:"Pulseira galeria 6mm vermelho"},
+            {id:90, name:"Pulseira Galeria 6mm Boreal", category:"pulseiras", price:36.00, badge:"new", image:"https://drive.google.com/thumbnail?id=16Wde4tArw7YWkrhpBjnqTSQjC1Cg9Ufe&sz=w800", colors:["multi"], colorsNames:["Boreal"], description:"Pulseira galeria 6mm boreal"}
         ];
 
 function loadProdutos() {
-    // Limpa versões antigas sempre
+    // Limpa versões antigas
     localStorage.removeItem('lele_produtos_v1');
     localStorage.removeItem('lele_produtos_v2');
-    localStorage.removeItem('lele_produtos_v3');
     try {
-        const saved = localStorage.getItem('lele_produtos_v4');
+        const saved = localStorage.getItem('lele_produtos_v3');
         if (saved) {
             const parsed = JSON.parse(saved);
             if (Array.isArray(parsed) && parsed.length > 0) {
-                // SEMPRE sincroniza imagens e dados do código-fonte (evita imagens quebradas do cache)
-                const baseMap = {};
-                produtosBase.forEach(p => { baseMap[p.id] = p; });
-                return parsed.map(p => {
-                    const base = baseMap[p.id];
-                    return {
-                        colors: ['#C0C0C0'],
-                        colorsNames: ['Aço Inox'],
-                        description: '',
-                        badge: undefined,
-                        oldPrice: undefined,
-                        ...p,
-                        // Imagem SEMPRE vem do código-fonte se existir
-                        image: (base && base.image) ? base.image : (p.image || ''),
-                        price: parseFloat(p.price) || 0
-                    };
-                });
+                return parsed.map(p => ({
+                    colors: ['#C0C0C0'],
+                    colorsNames: ['Aço Inox'],
+                    description: '',
+                    badge: undefined,
+                    oldPrice: undefined,
+                    ...p,
+                    price: parseFloat(p.price) || 0
+                }));
             }
         }
     } catch(e) {
-        localStorage.removeItem('lele_produtos_v4');
+        localStorage.removeItem('lele_produtos_v3');
     }
     return JSON.parse(JSON.stringify(produtosBase));
 }
 function saveProdutos() {
     // Salva no localStorage para persistir entre atualizações de página
     try {
-        localStorage.setItem('lele_produtos_v4', JSON.stringify(produtos));
+        localStorage.setItem('lele_produtos_v3', JSON.stringify(produtos));
     } catch(e) {
         console.warn('Erro ao salvar no localStorage:', e);
     }
@@ -873,7 +748,7 @@ function renderCard(p) {
     ).join('');
     const _src = getImgSrc(p.image);
     const img = _src ? 
-        `<img class="product-img" referrerpolicy="no-referrer" src="${_src}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex'">
+        `<img class="product-img" src="${_src}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex'">
          <div class="product-img-placeholder" style="display:none">💎</div>` :
         `<div class="product-img-placeholder">💎</div>`;
     return `
@@ -921,132 +796,21 @@ function showTab(tab, btn) {
     }
 }
 
-// ===== MODAL COM GALERIA =====
-let _currentModalImages = [];
-let _currentLightboxIndex = 0;
-
-function buildProductImages(p) {
-    // Build array of images: primary + extras if product has images array
-    const imgs = [];
-    const main = getImgSrc(p.image);
-    if (main) imgs.push(main);
-    // Support for extra images array (images: [url1, url2, ...])
-    if (p.images && Array.isArray(p.images)) {
-        p.images.forEach(u => { const s = getImgSrc(u); if (s && !imgs.includes(s)) imgs.push(s); });
-    }
-    return imgs;
-}
-
 function openModal(id) {
     const p = produtos.find(x => x.id === id);
     if (!p) return;
-
-    const imgs = buildProductImages(p);
-    _currentModalImages = imgs;
-
-    // Main image
-    const mainImg = document.getElementById('modalMainImg');
-    mainImg.src = imgs[0] || '';
-    mainImg.alt = p.name;
-
-    // Thumbnails
-    const thumbsEl = document.getElementById('modalThumbnails');
-    if (imgs.length > 1) {
-        thumbsEl.innerHTML = imgs.map((src, i) =>
-            `<img referrerpolicy="no-referrer" class="modal-thumb${i===0?' active':''}" src="${src}" alt="${p.name} ${i+1}"
-                  onclick="selectModalImage(${i})" onerror="this.style.display='none'">`
-        ).join('');
-        thumbsEl.style.display = 'flex';
-    } else {
-        thumbsEl.innerHTML = '';
-        thumbsEl.style.display = 'none';
-    }
-
-    // Product info
+    const _msrc = getImgSrc(p.image);
+    document.getElementById('modalImg').src = _msrc || '';
+    document.getElementById('modalImg').style.display = _msrc ? 'block' : 'none';
     document.getElementById('modalName').textContent = p.name;
     document.getElementById('modalPrice').textContent = formatPrice(p.price);
     document.getElementById('modalDesc').textContent = p.description;
-
-    // Colors
-    const colorsRow = document.getElementById('modalColorsRow');
-    const colorLabel = document.getElementById('modalColorLabel');
-    const colorName = document.getElementById('modalColorName');
-    if (p.colors && p.colors.length > 0) {
-        colorLabel.style.display = 'block';
-        colorsRow.innerHTML = p.colors.map((c, i) =>
-            `<div class="modal-color-swatch${i===0?' active':''} ${c==='multi'?'multi':''}"
-                  style="${c!=='multi'?'background:'+c:''}"
-                  title="${(p.colorsNames||[])[i]||''}"
-                  onclick="selectModalColor(this, '${(p.colorsNames||[])[i]||''}')"></div>`
-        ).join('');
-        colorName.textContent = (p.colorsNames||[])[0] || '';
-    } else {
-        colorLabel.style.display = 'none';
-        colorsRow.innerHTML = '';
-        colorName.textContent = '';
-    }
-
     document.getElementById('modalAddBtn').onclick = () => { addToCart(id); closeModalDirect(); };
-    document.getElementById('modalShareBtn').onclick = () => { shareProductWhatsApp(p); };
     document.getElementById('modalOverlay').classList.add('open');
-}
-
-function selectModalImage(idx) {
-    const imgs = document.querySelectorAll('.modal-thumb');
-    imgs.forEach((t, i) => t.classList.toggle('active', i === idx));
-    document.getElementById('modalMainImg').src = _currentModalImages[idx];
-    _currentLightboxIndex = idx;
-}
-
-function selectModalColor(el, name) {
-    document.querySelectorAll('.modal-color-swatch').forEach(s => s.classList.remove('active'));
-    el.classList.add('active');
-    document.getElementById('modalColorName').textContent = name;
 }
 
 function closeModal(e) { if (e.target === document.getElementById('modalOverlay')) closeModalDirect(); }
 function closeModalDirect() { document.getElementById('modalOverlay').classList.remove('open'); }
-
-// ===== LIGHTBOX =====
-function openLightbox(startIdx) {
-    if (!_currentModalImages.length) return;
-    _currentLightboxIndex = startIdx || 0;
-    document.getElementById('lightboxImg').src = _currentModalImages[_currentLightboxIndex];
-    document.getElementById('lightboxOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox(e) {
-    if (e.target === document.getElementById('lightboxOverlay') || e.target === document.getElementById('lightboxImg')) {
-        closeLightboxDirect();
-    }
-}
-function closeLightboxDirect() {
-    document.getElementById('lightboxOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-}
-
-function lightboxNav(dir, e) {
-    e.stopPropagation();
-    if (!_currentModalImages.length) return;
-    _currentLightboxIndex = (_currentLightboxIndex + dir + _currentModalImages.length) % _currentModalImages.length;
-    document.getElementById('lightboxImg').src = _currentModalImages[_currentLightboxIndex];
-    // sync thumbnail
-    selectModalImage(_currentLightboxIndex);
-}
-
-// Keyboard navigation for lightbox
-document.addEventListener('keydown', function(e) {
-    const lb = document.getElementById('lightboxOverlay');
-    if (lb && lb.classList.contains('open')) {
-        if (e.key === 'ArrowLeft') lightboxNav(-1, {stopPropagation:()=>{}});
-        if (e.key === 'ArrowRight') lightboxNav(1, {stopPropagation:()=>{}});
-        if (e.key === 'Escape') closeLightboxDirect();
-    } else {
-        const mo = document.getElementById('modalOverlay');
-        if (mo && mo.classList.contains('open') && e.key === 'Escape') closeModalDirect();
-    }
-});
 
 function addToCartBtn(e, id) {
     e.stopPropagation();
@@ -1084,7 +848,7 @@ function updateCart() {
     }
     items.innerHTML = cart.map((p, i) => `
         <div class="cart-item">
-            <img src="${getImgSrc(p.image)}" alt="${p.name}" referrerpolicy="no-referrer" onerror="this.src=''">
+            <img src="${getImgSrc(p.image)}" alt="${p.name}" onerror="this.src=''">
             <div class="cart-item-info">
                 <div class="cart-item-name">${p.name}</div>
                 <div class="cart-item-price">${formatPrice(p.price)}</div>
@@ -1116,33 +880,10 @@ function toggleCart() {
 function sendWhatsApp() {
     if (cart.length === 0) { alert('Adicione produtos ao carrinho primeiro!'); return; }
     const total = cart.reduce((s, p) => s + p.price, 0);
-    let msg = '💎 *Novo Pedido — Lelê Inox Semi Joias* 💎\n';
-    msg += '━━━━━━━━━━━━━━━━━━━━\n\n';
-    cart.forEach((p, i) => {
-        msg += `📦 *Produto ${i+1}:*\n`;
-        msg += `🏷️ *${p.name}*\n`;
-        msg += `💰 *Preço: ${formatPrice(p.price)}*\n`;
-        if (p.description) msg += `📝 ${p.description}\n`;
-        const imgSrc = getImgSrc(p.image);
-        if (imgSrc && imgSrc.startsWith('http')) msg += `🖼️ ${imgSrc}\n`;
-        msg += '\n';
-    });
-    msg += '━━━━━━━━━━━━━━━━━━━━\n';
-    msg += `💵 *TOTAL: ${formatPrice(total)}*\n\n`;
-    msg += '✅ Gostaria de finalizar meu pedido!';
+    let msg = '🛍️ *Pedido - Lelê Inox Semi Joias*\n\n';
+    cart.forEach((p, i) => { msg += `${i+1}. ${p.name} - ${formatPrice(p.price)}\n`; });
+    msg += `\n💰 *Total: ${formatPrice(total)}*\n\nGostaria de finalizar meu pedido!`;
     window.open('https://wa.me/5511969508486?text=' + encodeURIComponent(msg), '_blank');
-}
-
-function shareProductWhatsApp(p) {
-    const imgSrc = getImgSrc(p.image);
-    let msg = '✨ *Olha que lindo que eu achei!* ✨\n\n';
-    msg += `💎 *${p.name}*\n`;
-    msg += `💰 *${formatPrice(p.price)}*\n`;
-    if (p.description) msg += `📝 ${p.description}\n`;
-    if (imgSrc && imgSrc.startsWith('http')) msg += `\n🖼️ ${imgSrc}\n`;
-    msg += '\n🛍️ *Lelê Inox Semi Joias — Semijoias em Aço Inoxidável*\n';
-    msg += '📱 (11) 96950-8486';
-    window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
 }
 
 function openAdminLogin() {
@@ -1196,7 +937,7 @@ function renderAdminTable(filter, catFilter) {
     body.innerHTML = filtered.map(p => {
         const imgSrc = getImgSrc(p.image);
         return `<tr data-id="${p.id}">
-            <td><img src="${imgSrc}" alt="" referrerpolicy="no-referrer" onerror="this.src=''"></td>
+            <td><img src="${imgSrc}" alt="" onerror="this.src=''"></td>
             <td><input class="admin-name-edit" value="${(p.name||'').replace(/"/g,'&quot;')}" onchange="queueSave(${p.id},'name',this.value)"></td>
             <td><select class="badge-select" onchange="queueSave(${p.id},'category',this.value)">
                 <option value="brincos" ${p.category==='brincos'?'selected':''}>Brincos</option>
@@ -1214,10 +955,7 @@ function renderAdminTable(filter, catFilter) {
                 <option value="new" ${p.badge==='new'?'selected':''}>🆕 Novo</option>
                 <option value="promo" ${p.badge==='promo'?'selected':''}>🔥 Promo</option>
             </select></td>
-            <td>
-              <input class="admin-img-edit" value="${(p.image||'').replace(/"/g,'&quot;')}" placeholder="URL imagem principal" onchange="queueSave(${p.id},'image',this.value)" style="margin-bottom:4px;">
-              <input class="admin-img-edit" value="${(p.images||[]).join('\n').replace(/"/g,'&quot;')}" placeholder="Fotos extras (uma por linha)" onchange="queueSaveImages(${p.id},this.value)" style="font-size:0.78rem;color:#888;" title="Cole links extras aqui, um por linha">
-            </td>
+            <td><input class="admin-img-edit" value="${(p.image||'').replace(/"/g,'&quot;')}" placeholder="URL imagem" onchange="queueSave(${p.id},'image',this.value)"></td>
             <td><button class="admin-save-row" onclick="saveRow(${p.id})">💾</button>&nbsp;<button class="admin-del-btn" onclick="deleteProduct(${p.id})">🗑️</button></td>
         </tr>`;
     }).join('');
@@ -1226,13 +964,6 @@ const pendingChanges = {};
 function queueSave(id, field, value) {
     if (!pendingChanges[id]) pendingChanges[id] = {};
     pendingChanges[id][field] = value;
-    const el = document.getElementById('adminSaveStatus');
-    if(el) el.textContent = '⏳ Pendente...';
-}
-function queueSaveImages(id, value) {
-    const extras = value.split('\n').map(u=>u.trim()).filter(Boolean);
-    if (!pendingChanges[id]) pendingChanges[id] = {};
-    pendingChanges[id]['images'] = extras;
     const el = document.getElementById('adminSaveStatus');
     if(el) el.textContent = '⏳ Pendente...';
 }
@@ -1283,24 +1014,18 @@ function addProduct() {
     const badge = document.getElementById('newBadge').value;
     const img = document.getElementById('newImg').value.trim();
     const desc = document.getElementById('newDesc').value.trim();
-    const extrasRaw = (document.getElementById('newImgExtras')||{value:''}).value.trim();
     if (!name) { alert('Preencha o nome.'); return; }
     if (!price || isNaN(price)) { alert('Preencha o preço.'); return; }
     const newId = Math.max(...produtos.map(p => p.id), 0) + 1;
     const newProd = {id:newId, name, category:cat, price, image:img||'', colors:['#C0C0C0'], colorsNames:['Aço Inox'], description:desc};
     if (badge) newProd.badge = badge;
-    if (extrasRaw) {
-        const extras = extrasRaw.split('\n').map(u=>u.trim()).filter(Boolean);
-        if (extras.length) newProd.images = extras;
-    }
     produtos.push(newProd);
-    saveProdutos(); renderAdminStats(); renderAdminTable(); renderGrids();
+    saveProdutos(); renderAdminStats(); renderAdminTable();
     document.getElementById('newName').value = '';
     document.getElementById('newPrice').value = '';
     document.getElementById('newBadge').value = '';
     document.getElementById('newImg').value = '';
     document.getElementById('newDesc').value = '';
-    if (document.getElementById('newImgExtras')) document.getElementById('newImgExtras').value = '';
     document.getElementById('newImgPreviewWrap').style.display = 'none';
     showToast('✅ Produto adicionado!');
 }
@@ -1395,8 +1120,8 @@ function renderPedidosCliente(email) {
         </div>`).join('');
 }
 
-// Override sendWhatsApp to ALSO save order for logged-in customers (mantém mensagem rica)
-const _origSend = sendWhatsApp;
+// Override sendWhatsApp to save order for logged-in customers
+const _origSend = window.sendWhatsApp;
 window.sendWhatsApp = function() {
     if (cart.length === 0) { alert('Adicione produtos ao carrinho primeiro!'); return; }
     const total = cart.reduce((s, p) => s + parseFloat(p.price), 0);
@@ -1411,8 +1136,10 @@ window.sendWhatsApp = function() {
             setClienteLogado(c);
         }
     }
-    // Usa a função rica com fotos e descrições
-    _origSend();
+    let msg = '🛍️ *Pedido - Lelê Inox Semi Joias*\n\n';
+    cart.forEach((p, i) => { msg += `${i+1}. ${p.name} - ${formatPrice(p.price)}\n`; });
+    msg += `\n💰 *Total: ${formatPrice(total)}*\n\nGostaria de finalizar meu pedido!`;
+    window.open('https://wa.me/5511969508486?text=' + encodeURIComponent(msg), '_blank');
 };
 
 // Admin: show all clients
