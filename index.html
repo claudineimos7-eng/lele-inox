@@ -679,13 +679,15 @@ const cart = [];  // ← carrinho de compras
 
 function getImgSrc(url) {
     if (!url) return '';
+    // Handle Google Drive links
     var m = url.match(/[?&]id=([^&"'\s]+)/);
-    if (m) return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w600';
+    if (m) url = 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w600';
     var m2 = url.match(/\/file\/d\/([^\/]+)/);
-    if (m2) return 'https://drive.google.com/thumbnail?id=' + m2[1] + '&sz=w600';
+    if (m2) url = 'https://drive.google.com/thumbnail?id=' + m2[1] + '&sz=w600';
+    if (!url.startsWith('http') && !url.startsWith('//')) return url;
     if (url.startsWith('data:image')) return url;
-    if (url.startsWith('http') || url.startsWith('//')) return url;
-    return url;
+    // Route through proxy to bypass hotlink protection
+    return 'https://images.weserv.nl/?url=' + encodeURIComponent(url) + '&w=600&output=webp&q=85';
 }
 function closeLGPD() { document.getElementById('lgpdOverlay').style.display = 'none'; }
 
